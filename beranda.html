@@ -1199,6 +1199,19 @@
                     filterTanggal.onchange = () => loadDaily();
                     await loadDaily();
                 }
+                                    else if (namaMenu === 'arsip') {
+                    document.getElementById('pageTitle').textContent = '🗃️ Arsip (Otomatis)';
+                    document.getElementById('menuNormal').style.display = 'block';
+                    document.getElementById('menuTitle').textContent = '🗃️ Arsip Otomatis';
+                    
+                    // Sembunyikan tombol Tambah untuk arsip
+                    document.querySelector('.page-header .btn-tambah').style.display = 'none';
+                    
+                    // Sembunyikan tabs
+                    document.getElementById('menuTabs').style.display = 'none';
+                    
+                    await tampilkanArsip();
+                }
                 else {
                     const config = MENU_CONFIG[namaMenu];
                     if (!config) {
@@ -1866,7 +1879,162 @@
                 console.error('Gagal load statistik:', e);
             }
         }
+        // ⭐ TAMPILKAN ARSIP OTOMATIS
+        async function tampilkanArsip() {
+            const listData = document.getElementById('listData');
+            listData.innerHTML = '<div class="empty-state"><div class="icon-big">⏳</div>Memuat arsip...</div>';
 
+            try {
+                const arsipItems = [];
+
+                // 1️⃣ Dari agenda_todo - yang jenis 'todo' & selesai, atau jenis 'agenda' yang tanggal lewat
+                const snapAgenda = await getDocs(collection(db, 'agenda_todo'));
+                const today = new Date().toISOString().slice(0, 10);
+                snapAgenda.forEach(docSnap => {
+                    const d = docSnap.data();
+                    // To-Do yang selesai
+                    if (d.jenis === 'todo' && d.selesai === true) {
+                        arsipItems.push({
+                            id: docSnap.id,
+                            judul: d.tugas || 'Tanpa Judul',
+                            kategori: 'To-Do',
+                            icon: '✔️',
+                            deskripsi: d.prioritas ? `Prioritas: ${d.prioritas}` : '',
+                            tanggal: d.createdAt?.seconds ? new Date(d.createdAt.seconds * 1000).toLocaleDateString('id-ID') : '-',
+                            sumber: 'agenda_todo',
+                            warna: '#48bb78'
+                        });
+                    }
+                    // Agenda yang tanggal sudah lewat
+                    if (d.jenis === 'agenda' && d.tanggal && d.tanggal < today) {
+                        arsipItems.push({
+                            id: docSnap.id,
+                            judul: d.judul || 'Tanpa Judul',
+                            kategori: 'Agenda',
+                            icon: '📋',
+                            deskripsi: d.lokasi ? `Lokasi: ${d.lokasi}` : '',
+                            tanggal: d.tanggal,
+                            sumber: 'agenda_todo',
+                            warna: '#667eea'
+                        });
+                    }
+                });
+
+                // 2️⃣ Dari pekerjaan - yang jenis 'pekerjaan' / 'tugas' / 'proyek' yang status Selesai
+                const snapKerja = await getDocs(collection(db, 'pekerjaan'));
+                snapKerja.forEach(docSnap => {
+                    const d = docSnap.data();
+                    if (d.status === 'Selesai') {
+                        const jenisLabel = d.jenis === 'tugas' ? 'Tugas' : d.jenis === 'proyek' ? 'Proyek' : 'Pekerjaan';
+                        const icon = d.jenis === 'tugas' ? '📌' : d.jenis === 'proyek' ? '🚀' : '💼';
+                        arsipItems.push({
+                            id: docSnap.id,
+                            judul: d.judul || d.nama || 'Tanpa Judul',
+                            kategori: jenisLabel,
+                            icon: icon,
+                            deskripsi: d.deskripsi || '',
+                            tanggal: d.deadline || d.selesai || '-',
+                            sumber: 'pekerjaan',
+                            warna: '#4facfe'
+                        });
+                    }
+                });
+
+                // 3️⃣ Dari target_habit - yang jenis 'target' & status Selesai
+                const snapTarget = await getDocs(collection(db, 'target_habit'));
+                snapTarget.forEach(docSnap => {
+                    const d = docSnap.data();
+                    if (d.jenis === 'target' && d.status === 'Selesai') {
+                        arsipItems.push({
+                            id: docSnap.id,
+                            judul: d.judul || 'Tanpa Judul',
+                            kategori: 'Target',
+                            icon: '🎯',
+                            deskripsi: d.deskripsi || '',
+                            tanggal: d.deadline || '-',
+                            sumber: 'target_habit',
+                            warna: '#43e97b'
+                        });
+                    }
+                });
+
+                // 4️⃣ Dari arsip manual (yang diinput sendiri)
+                const snapArsip = await getDocs(collection(db, 'arsip'));
+                snapArsip.forEach(docSnap => {
+                    const d = docSnap.data();
+                    arsipItems.push({
+                        id: docSnap.id,
+                        judul: d.judul || 'Tanpa Judul',
+                        kategori: d.kategori || 'Lainnya',
+                        icon: '🗃️',
+                        deskripsi: d.keterangan || '',
+                        tanggal: '-',
+                        sumber: 'arsip',
+                        warna: '#a8edea',
+                        manual: true
+                    });
+                });
+
+                // Sort terbaru dulu
+                arsipItems.sort((a, b) => (b.tanggal || '').localeCompare(a.tanggal || ''));
+
+                if (arsipItems.length === 0) {
+                    listData.innerHTML = `
+                        <div class="empty-state">
+                            <div class="icon-big">📭</div>
+                            <p>Belum ada data di arsip.</p>
+                            <p style="margin-top:10px;font-size:13px;color:#a0aec0;">
+                                Arsip otomatis terisi dari: To-Do yang dicentang ✅, 
+                                Agenda yang sudah lewat, Pekerjaan/Target yang selesai.
+                            </p>
+                        </div>`;
+                    return;
+                }
+
+                listData.innerHTML = `
+                    <div style="background: white; padding: 15px 20px; border-radius: 12px; 
+                                margin-bottom: 15px; box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+                                font-size: 13px; color: #718096;">
+                        📦 Menampilkan <strong>${arsipItems.length}</strong> item arsip otomatis 
+                        (dari To-Do selesai, Agenda lewat, Pekerjaan selesai, Target selesai)
+                    </div>
+                `;
+
+                arsipItems.forEach(item => {
+                    const el = document.createElement('div');
+                    el.className = 'list-item';
+                    el.style.borderLeftColor = item.warna;
+                    el.innerHTML = `
+                        <div class="list-item-info">
+                            <h4>${item.icon} ${escapeHtml(item.judul)}</h4>
+                            ${item.deskripsi ? `<p>${escapeHtml(String(item.deskripsi).substring(0, 100))}</p>` : ''}
+                            <div style="margin-top:6px;font-size:12px;color:#718096;">
+                                🏷️ ${item.kategori} • 📅 ${item.tanggal}
+                            </div>
+                        </div>
+                        <div class="list-item-actions">
+                            <button class="btn-icon btn-hapus" title="Hapus dari sumber">🗑️</button>
+                        </div>
+                    `;
+                    el.querySelector('.btn-hapus').onclick = async () => {
+                        if (confirm('Hapus item ini dari arsip?\n(Ini akan menghapus data aslinya juga)')) {
+                            try {
+                                await deleteDoc(doc(db, item.sumber, item.id));
+                                showToast('🗑️ Item dihapus!');
+                                await tampilkanArsip();
+                            } catch (e) {
+                                showToast('❌ Gagal hapus: ' + e.message, 'error');
+                            }
+                        }
+                    };
+                    listData.appendChild(el);
+                });
+
+            } catch (error) {
+                console.error('Error:', error);
+                listData.innerHTML = `<div class="empty-state"><div class="icon-big">❌</div><p>Gagal memuat arsip: ${error.message}</p></div>`;
+            }
+        }
         loadStatistik();
     </script>
 </body>
