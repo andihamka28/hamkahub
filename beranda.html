@@ -1180,7 +1180,9 @@
                 document.getElementById('menuNormal').style.display = 'none';
                 document.getElementById('menuKeuangan').style.display = 'none';
                 document.getElementById('menuDaily').style.display = 'none';
-
+const tombolTambah = document.querySelector('.page-header .btn-tambah');
+                if (tombolTambah) tombolTambah.style.display = 'block';
+                
                 if (namaMenu === 'keuangan') {
                     document.getElementById('pageTitle').textContent = '💰 Keuangan';
                     document.getElementById('menuKeuangan').style.display = 'block';
