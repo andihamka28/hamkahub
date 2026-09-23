@@ -654,11 +654,11 @@
                     { name: "status", label: "Status", type: "select", options: ["Belum", "Proses", "Selesai"], required: true }
                 ]
             },
-            pemasukan: {
+                       pemasukan: {
                 title: "📥 Pemasukan",
                 fields: [
                     { name: "keterangan", label: "Keterangan", type: "text", required: true },
-                    { name: "jumlah", label: "Jumlah (Rp)", type: "number", required: true },
+                    { name: "jumlah", label: "Jumlah (Rp)", type: "currency", required: true },  // ← UBAH
                     { name: "tanggal", label: "Tanggal", type: "date", required: true },
                     { name: "sumber", label: "Sumber", type: "text", required: false }
                 ]
@@ -667,10 +667,11 @@
                 title: "📤 Pengeluaran",
                 fields: [
                     { name: "keterangan", label: "Keterangan", type: "text", required: true },
-                    { name: "jumlah", label: "Jumlah (Rp)", type: "number", required: true },
+                    { name: "jumlah", label: "Jumlah (Rp)", type: "currency", required: true },  // ← UBAH
                     { name: "tanggal", label: "Tanggal", type: "date", required: true },
                     { name: "kategori", label: "Kategori", type: "select", options: ["Makanan", "Transportasi", "Belanja", "Tagihan", "Lainnya"], required: true }
                 ]
+            },
             },
             link_penting: {
                 title: "⭐ Link Penting",
@@ -844,15 +845,38 @@
                 } else if (field.type === 'select') {
                     const options = field.options.map(o => `<option value="${o}">${o}</option>`).join('');
                     input = `<select name="${field.name}" ${field.required ? 'required' : ''}>${options}</select>`;
+               } else if (field.type === 'currency') {
+                    input = `<input type="text" name="${field.name}" ${field.required ? 'required' : ''} placeholder="Contoh: 800000" class="input-currency">`;
                 } else {
                     input = `<input type="${field.type}" name="${field.name}" ${field.required ? 'required' : ''} placeholder="Masukkan ${field.label.toLowerCase()}...">`;
                 }
                 
                 div.innerHTML = `<label>${field.label}${field.required ? ' *' : ''}</label>${input}`;
                 formFields.appendChild(div);
+            });        // ⭐ AUTO FORMAT CURRENCY (Rp dengan titik otomatis)
+        function aktifkanAutoFormat() {
+            document.querySelectorAll('.input-currency').forEach(input => {
+                input.addEventListener('input', function(e) {
+                    // Hapus semua karakter non-digit
+                    let value = this.value.replace(/\D/g, '');
+                    
+                    // Format dengan titik ribuan
+                    if (value) {
+                        this.value = Number(value).toLocaleString('id-ID');
+                    }
+                });
+                
+                // Simpan nilai asli di data-attribute untuk di-submit
+                input.addEventListener('blur', function() {
+                    let value = this.value.replace(/\D/g, '');
+                    this.dataset.rawValue = value;
+                });
             });
+        }
+        window.simpanData = async function(e));
+            aktifkanAutoFormat();   // ← TAMBAHKAN INI
 
-            document.getElementById('modal').classList.add('active');
+            window.simpanData = async function(e) {);
         };
 
         window.tutupModal = function() {
@@ -869,10 +893,16 @@
             e.preventDefault();
             if (!currentMenu) return;
 
-            const formData = new FormData(e.target);
+                        const formData = new FormData(e.target);
             const data = {};
             formData.forEach((value, key) => {
-                data[key] = value;
+                // Bersihkan titik dari input currency
+                if (key === 'jumlah') {
+                    data[key] = value.replace(/\./g, '');
+                } else {
+                    data[key] = value;
+                }
+            });
             });
 
             try {
@@ -929,7 +959,7 @@
                 formFields.appendChild(div);
             });
 
-            document.getElementById('modal').classList.add('active');
+            window.simpanData = async function(e) {);
         };
 
         // ⭐ HAPUS DATA
