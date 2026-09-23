@@ -1261,12 +1261,11 @@ const tombolTambah = document.querySelector('.page-header .btn-tambah');
 
         // ⭐ TAMPILKAN DATA - DENGAN DUKUNGAN CHECKBOX SELESAI & HABIT
                // ⭐ TAMPILKAN DATA - TANPA PERLU COMPOSITE INDEX
-        async function tampilkanData(koleksi, tab) {
+                async function tampilkanData(koleksi, tab) {
             const listData = document.getElementById('listData');
             listData.innerHTML = '<div class="empty-state"><div class="icon-big">⏳</div>Memuat data...</div>';
 
             try {
-                // ⭐ Ambil SEMUA data (tanpa filter index), lalu filter di JS
                 const snapshot = await getDocs(collection(db, koleksi));
 
                 if (snapshot.empty) {
@@ -1278,16 +1277,13 @@ const tombolTambah = document.querySelector('.page-header .btn-tambah');
                     return;
                 }
 
-                // ⭐ Kumpulkan data + filter berdasarkan tab
                 let items = [];
                 snapshot.forEach(docSnap => {
                     const data = docSnap.data();
-                    // Filter: kalau ada tab, hanya tampilkan yang jenis-nya sesuai
                     if (tab && data.jenis !== tab) return;
                     items.push({ id: docSnap.id, ...data });
                 });
 
-                // ⭐ Sort berdasarkan createdAt (terbaru dulu)
                 items.sort((a, b) => {
                     const ta = a.createdAt?.seconds || 0;
                     const tb = b.createdAt?.seconds || 0;
@@ -1305,7 +1301,7 @@ const tombolTambah = document.querySelector('.page-header .btn-tambah');
 
                 listData.innerHTML = '';
 
-                // ⭐ JIKA TAB HABIT → tampilkan dengan progress bar
+                // ⭐ HABIT TRACKER
                 if (tab === 'habit') {
                     items.forEach(data => {
                         const id = data.id;
@@ -1336,7 +1332,6 @@ const tombolTambah = document.querySelector('.page-header .btn-tambah');
                                 <button class="btn-progress reset" data-action="0">🔄 Reset</button>
                             </div>
                         `;
-
                         card.querySelector('.btn-hapus').onclick = async () => {
                             if (confirm('Hapus habit ini?')) {
                                 await deleteDoc(doc(db, koleksi, id));
@@ -1344,7 +1339,6 @@ const tombolTambah = document.querySelector('.page-header .btn-tambah');
                                 await tampilkanData(koleksi, tab);
                             }
                         };
-
                         card.querySelectorAll('.btn-progress').forEach(btn => {
                             btn.onclick = async () => {
                                 const action = btn.dataset.action;
@@ -1352,19 +1346,57 @@ const tombolTambah = document.querySelector('.page-header .btn-tambah');
                                 if (action === '100') newProgress = 100;
                                 else if (action === '0') newProgress = 0;
                                 else newProgress = Math.max(0, Math.min(100, progress + Number(action)));
-                                
                                 await updateDoc(doc(db, koleksi, id), { progress: newProgress });
                                 await tampilkanData(koleksi, tab);
                                 if (newProgress === 100) showToast('🎉 Mantap! Habit tercapai 100%!');
                             };
                         });
-
                         listData.appendChild(card);
                     });
                     return;
                 }
 
-                // ⭐ JIKA TAB TODO ATAU TUGAS → tampilkan dengan checkbox
+                // ⭐ LINK - BISA DIKLIK
+                if (koleksi === 'link') {
+                    items.forEach(data => {
+                        const id = data.id;
+                        const nama = data.nama || 'Tanpa Nama';
+                        const url = data.url || '#';
+                        const kategori = data.kategori || '';
+                        const catatan = data.catatan || '';
+
+                        const item = document.createElement('div');
+                        item.className = 'list-item';
+                        item.style.borderLeftColor = '#30cfd0';
+                        item.innerHTML = `
+                            <div class="list-item-info" style="cursor: pointer;" onclick="window.open('${escapeHtml(url)}', '_blank')">
+                                <h4 style="color: var(--primary); text-decoration: underline;">🔗 ${escapeHtml(nama)}</h4>
+                                <p style="color: #30cfd0; word-break: break-all;">${escapeHtml(url)}</p>
+                                ${kategori ? `<div style="margin-top:6px;font-size:12px;color:#718096;">🏷️ ${escapeHtml(kategori)}</div>` : ''}
+                                ${catatan ? `<div style="margin-top:6px;font-size:12px;color:#a0aec0;font-style:italic;">📝 ${escapeHtml(catatan)}</div>` : ''}
+                            </div>
+                            <div class="list-item-actions">
+                                <button class="btn-icon" style="background:#dbeafe;color:#1e40af;" title="Buka Link">🔗</button>
+                                <button class="btn-icon btn-edit" title="Edit">✏️</button>
+                                <button class="btn-icon btn-hapus" title="Hapus">🗑️</button>
+                            </div>
+                        `;
+                        item.querySelector('.btn-icon[title="Buka Link"]').onclick = () => window.open(url, '_blank');
+                        item.querySelector('.btn-edit').onclick = () => editData(id, data, koleksi);
+                        item.querySelector('.btn-hapus').onclick = async () => {
+                            if (confirm('Yakin ingin menghapus link ini?')) {
+                                await deleteDoc(doc(db, koleksi, id));
+                                showToast('🗑️ Link berhasil dihapus!');
+                                await tampilkanData(koleksi, tab);
+                                await loadStatistik();
+                            }
+                        };
+                        listData.appendChild(item);
+                    });
+                    return;
+                }
+
+                // ⭐ TO-DO & TUGAS - CHECKBOX
                 const pakaiCheckbox = (tab === 'todo' || tab === 'tugas');
 
                 items.forEach(data => {
@@ -1385,10 +1417,7 @@ const tombolTambah = document.querySelector('.page-header .btn-tambah');
 
                     const item = document.createElement('div');
                     item.className = 'list-item' + (isSelesai ? ' selesai' : '');
-
-                    const checkboxHTML = pakaiCheckbox ? `
-                        <div class="check-selesai ${isSelesai ? 'checked' : ''}" title="Tandai selesai">✓</div>
-                    ` : '';
+                    const checkboxHTML = pakaiCheckbox ? `<div class="check-selesai ${isSelesai ? 'checked' : ''}" title="Tandai selesai">✓</div>` : '';
 
                     item.innerHTML = `
                         ${checkboxHTML}
@@ -1434,7 +1463,6 @@ const tombolTambah = document.querySelector('.page-header .btn-tambah');
                 listData.innerHTML = `<div class="empty-state"><div class="icon-big">❌</div><p>Gagal memuat: ${error.message}</p></div>`;
             }
         }
-
         function escapeHtml(str) {
             const div = document.createElement('div');
             div.textContent = str;
