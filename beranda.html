@@ -1245,16 +1245,14 @@
         };
 
         // ⭐ TAMPILKAN DATA - DENGAN DUKUNGAN CHECKBOX SELESAI & HABIT
+               // ⭐ TAMPILKAN DATA - TANPA PERLU COMPOSITE INDEX
         async function tampilkanData(koleksi, tab) {
             const listData = document.getElementById('listData');
             listData.innerHTML = '<div class="empty-state"><div class="icon-big">⏳</div>Memuat data...</div>';
 
             try {
-                let q = query(collection(db, koleksi), orderBy('createdAt', 'desc'));
-                if (tab) {
-                    q = query(collection(db, koleksi), where('jenis', '==', tab), orderBy('createdAt', 'desc'));
-                }
-                const snapshot = await getDocs(q);
+                // ⭐ Ambil SEMUA data (tanpa filter index), lalu filter di JS
+                const snapshot = await getDocs(collection(db, koleksi));
 
                 if (snapshot.empty) {
                     listData.innerHTML = `
@@ -1265,13 +1263,37 @@
                     return;
                 }
 
+                // ⭐ Kumpulkan data + filter berdasarkan tab
+                let items = [];
+                snapshot.forEach(docSnap => {
+                    const data = docSnap.data();
+                    // Filter: kalau ada tab, hanya tampilkan yang jenis-nya sesuai
+                    if (tab && data.jenis !== tab) return;
+                    items.push({ id: docSnap.id, ...data });
+                });
+
+                // ⭐ Sort berdasarkan createdAt (terbaru dulu)
+                items.sort((a, b) => {
+                    const ta = a.createdAt?.seconds || 0;
+                    const tb = b.createdAt?.seconds || 0;
+                    return tb - ta;
+                });
+
+                if (items.length === 0) {
+                    listData.innerHTML = `
+                        <div class="empty-state">
+                            <div class="icon-big">📭</div>
+                            <p>Belum ada data di tab ini. Klik <strong>"+ Tambah"</strong> untuk membuat.</p>
+                        </div>`;
+                    return;
+                }
+
                 listData.innerHTML = '';
-                
+
                 // ⭐ JIKA TAB HABIT → tampilkan dengan progress bar
                 if (tab === 'habit') {
-                    snapshot.forEach(docSnap => {
-                        const data = docSnap.data();
-                        const id = docSnap.id;
+                    items.forEach(data => {
+                        const id = data.id;
                         const progress = Number(data.progress) || 0;
                         const progressClass = progress >= 80 ? 'high' : progress >= 50 ? 'medium' : progress >= 20 ? '' : 'low';
                         const statusText = progress >= 100 ? '✅ Selesai!' : progress >= 80 ? '🔥 Hampir Selesai' : progress >= 50 ? '💪 Setengah Jalan' : progress >= 20 ? '👍 Mulai Jalan' : '🌱 Baru Mulai';
@@ -1300,7 +1322,6 @@
                             </div>
                         `;
 
-                        // Tombol hapus
                         card.querySelector('.btn-hapus').onclick = async () => {
                             if (confirm('Hapus habit ini?')) {
                                 await deleteDoc(doc(db, koleksi, id));
@@ -1309,7 +1330,6 @@
                             }
                         };
 
-                        // Tombol progress
                         card.querySelectorAll('.btn-progress').forEach(btn => {
                             btn.onclick = async () => {
                                 const action = btn.dataset.action;
@@ -1332,9 +1352,8 @@
                 // ⭐ JIKA TAB TODO ATAU TUGAS → tampilkan dengan checkbox
                 const pakaiCheckbox = (tab === 'todo' || tab === 'tugas');
 
-                snapshot.forEach(docSnap => {
-                    const data = docSnap.data();
-                    const id = docSnap.id;
+                items.forEach(data => {
+                    const id = data.id;
                     let title = data.judul || data.nama || data.keterangan || data.tugas || data.kebiasaan || 'Tanpa Judul';
                     
                     const infoItems = [];
@@ -1352,7 +1371,6 @@
                     const item = document.createElement('div');
                     item.className = 'list-item' + (isSelesai ? ' selesai' : '');
 
-                    // HTML untuk checkbox
                     const checkboxHTML = pakaiCheckbox ? `
                         <div class="check-selesai ${isSelesai ? 'checked' : ''}" title="Tandai selesai">✓</div>
                     ` : '';
@@ -1370,7 +1388,6 @@
                         </div>
                     `;
 
-                    // Handler checkbox
                     if (pakaiCheckbox) {
                         const cb = item.querySelector('.check-selesai');
                         cb.onclick = async (e) => {
@@ -1383,11 +1400,9 @@
                         };
                     }
 
-                    // Handler edit
                     const editBtn = item.querySelector('.btn-edit');
                     if (editBtn) editBtn.onclick = () => editData(id, data, koleksi);
 
-                    // Handler hapus
                     item.querySelector('.btn-hapus').onclick = async () => {
                         if (confirm('Yakin ingin menghapus data ini?')) {
                             await deleteDoc(doc(db, koleksi, id));
