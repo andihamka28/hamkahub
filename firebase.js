@@ -1,9 +1,22 @@
+// =====================================================
+// KONFIGURASI FIREBASE
+// =====================================================
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { 
     getFirestore, 
-    collection, doc, addDoc, setDoc, getDoc, getDocs,
-    updateDoc, deleteDoc, query, where, orderBy,
-    serverTimestamp, onSnapshot
+    collection, 
+    doc, 
+    addDoc, 
+    setDoc,
+    getDoc,
+    getDocs, 
+    updateDoc, 
+    deleteDoc, 
+    query, 
+    where, 
+    orderBy, 
+    serverTimestamp,
+    onSnapshot
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -21,7 +34,8 @@ const db = getFirestore(app);
 console.log("🔥 Firebase siap:", firebaseConfig.projectId);
 
 export { 
-    db, collection, doc, addDoc, setDoc, getDoc, getDocs,
+    db,
+    collection, doc, addDoc, setDoc, getDoc, getDocs,
     updateDoc, deleteDoc, query, where, orderBy,
     serverTimestamp, onSnapshot 
 };
