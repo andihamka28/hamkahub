@@ -18,7 +18,6 @@
         }
         body { background: var(--bg); color: var(--text); min-height: 100vh; display: flex; overflow-x: hidden; }
 
-        /* SIDEBAR */
         .sidebar {
             width: var(--sidebar-width);
             height: 100vh;
@@ -72,7 +71,6 @@
         }
         .menu-item .icon { width: 20px; text-align: center; }
 
-        /* MAIN */
         .main-content { margin-left: var(--sidebar-width); flex: 1; min-height: 100vh; display: flex; flex-direction: column; }
         .topbar {
             background: white;
@@ -103,7 +101,6 @@
             font-size: 13px;
         }
 
-        /* CONTENT */
         .content { padding: 30px; flex: 1; }
         .welcome-banner {
             background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
@@ -191,7 +188,6 @@
         .bg8 { background: linear-gradient(135deg, #ff9a9e, #fecfef); }
         .bg9 { background: linear-gradient(135deg, #c471f5, #fa71cd); }
 
-        /* HALAMAN MENU */
         .page-menu { display: none; }
         .page-menu.active { display: block; }
         .page-header {
@@ -223,15 +219,6 @@
         .list-item-info { flex: 1; }
         .list-item-info h4 { color: var(--text); font-size: 15px; margin-bottom: 5px; }
         .list-item-info p { color: var(--text-light); font-size: 13px; }
-        .list-item-info .badge {
-            display: inline-block;
-            padding: 3px 10px; border-radius: 6px;
-            font-size: 11px; font-weight: 600;
-            margin-top: 6px;
-        }
-        .badge-success { background: #d1fae5; color: #065f46; }
-        .badge-warning { background: #fef3c7; color: #92400e; }
-        .badge-info { background: #dbeafe; color: #1e40af; }
         .list-item-actions { display: flex; gap: 8px; }
         .btn-icon {
             width: 38px; height: 38px;
@@ -252,7 +239,6 @@
         }
         .empty-state .icon-big { font-size: 60px; margin-bottom: 15px; }
 
-        /* MODAL */
         .modal {
             display: none; position: fixed; inset: 0;
             background: rgba(0,0,0,0.6);
@@ -334,12 +320,103 @@
             .hamburger { display: block; }
             .user-info { display: none; }
         }
+
+        /* ============================================
+           TAMPILAN HP - UKURAN LEBIH KECIL & RAPI
+           ============================================ */
         @media (max-width: 600px) {
-            .content { padding: 15px; }
+            .content { padding: 12px; }
             .topbar { padding: 12px 15px; }
-            .welcome-banner { padding: 20px; }
-            .welcome-text h2 { font-size: 18px; }
-            .welcome-icon { font-size: 40px; }
+
+            .welcome-banner {
+                padding: 18px 20px;
+                border-radius: 15px;
+                margin-bottom: 18px;
+            }
+            .welcome-text h2 { font-size: 17px; margin-bottom: 4px; }
+            .welcome-text p { font-size: 12px; }
+            .welcome-icon { font-size: 35px; }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+                margin-bottom: 20px;
+            }
+            .stat-card {
+                padding: 12px;
+                border-radius: 12px;
+                gap: 10px;
+            }
+            .stat-icon {
+                width: 40px;
+                height: 40px;
+                border-radius: 10px;
+                font-size: 18px;
+            }
+            .stat-info h3 { font-size: 16px; margin-bottom: 2px; }
+            .stat-info p { font-size: 11px; }
+
+            .section-title { font-size: 15px; margin-bottom: 12px; }
+            .menu-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+                margin-bottom: 20px;
+            }
+            .menu-card { padding: 14px; border-radius: 12px; }
+            .menu-card-icon {
+                width: 38px;
+                height: 38px;
+                border-radius: 10px;
+                font-size: 18px;
+                margin-bottom: 8px;
+            }
+            .menu-card h4 { font-size: 13px; margin-bottom: 3px; }
+            .menu-card p { font-size: 10.5px; }
+
+            .page-header { padding: 14px 16px; border-radius: 12px; margin-bottom: 15px; }
+            .page-header h2 { font-size: 16px; }
+            .btn-tambah { padding: 9px 16px; font-size: 12px; border-radius: 8px; }
+
+            .list-item { padding: 12px 14px; border-radius: 12px; gap: 10px; }
+            .list-item-info h4 { font-size: 13.5px; }
+            .list-item-info p { font-size: 11.5px; }
+            .btn-icon { width: 32px; height: 32px; font-size: 13px; border-radius: 8px; }
+
+            .sidebar-logo { width: 36px; height: 36px; font-size: 15px; border-radius: 10px; }
+            .sidebar-title h2 { font-size: 14px; }
+            .sidebar-title p { font-size: 10px; }
+            .menu-item { font-size: 12.5px; padding: 9px 18px; }
+            .menu-category { font-size: 10px; padding: 12px 18px 5px; }
+
+            .modal-content { padding: 20px; border-radius: 16px; }
+            .modal-content h2 { font-size: 17px; }
+            .form-group label { font-size: 12px; }
+            .form-group input,
+            .form-group textarea,
+            .form-group select {
+                padding: 10px;
+                font-size: 13px;
+                border-radius: 8px;
+            }
+            .modal-buttons button { padding: 10px; font-size: 13px; }
+
+            .toast {
+                top: 15px; right: 15px; left: 15px;
+                font-size: 12.5px;
+                padding: 12px 16px;
+                transform: translateY(-100px);
+            }
+            .toast.show { transform: translateY(0); }
+        }
+
+        @media (max-width: 380px) {
+            .stats-grid { grid-template-columns: 1fr; gap: 8px; }
+            .menu-grid { grid-template-columns: 1fr; gap: 8px; }
+            .stat-card { padding: 10px; }
+            .stat-info h3 { font-size: 15px; }
+            .menu-card { padding: 12px; }
+            .menu-card-icon { width: 34px; height: 34px; font-size: 16px; }
+            .menu-card h4 { font-size: 12.5px; }
         }
     </style>
 </head>
@@ -347,7 +424,6 @@
 
     <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
 
-    <!-- SIDEBAR -->
     <aside class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <div class="sidebar-logo">AR</div>
@@ -389,7 +465,6 @@
         </nav>
     </aside>
 
-    <!-- MAIN -->
     <main class="main-content">
         <header class="topbar">
             <div class="topbar-left">
@@ -410,7 +485,6 @@
         </header>
 
         <div class="content">
-            <!-- HALAMAN DASHBOARD -->
             <div id="page-dashboard" class="page-menu active">
                 <div class="welcome-banner">
                     <div class="welcome-text">
@@ -486,7 +560,6 @@
                 </div>
             </div>
 
-            <!-- HALAMAN MENU DINAMIS -->
             <div id="page-menu" class="page-menu">
                 <div class="page-header">
                     <h2 id="menuTitle">Menu</h2>
@@ -497,7 +570,6 @@
         </div>
     </main>
 
-    <!-- MODAL FORM -->
     <div class="modal" id="modal">
         <div class="modal-content">
             <h2 id="modalTitle">Tambah Data</h2>
@@ -541,7 +613,7 @@
         const opsi = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
         document.getElementById('currentDate').textContent = now.toLocaleDateString('id-ID', opsi);
 
-        // ⭐ KONFIGURASI SETIAP MENU
+        // ⭐ KONFIGURASI MENU
         const MENU_CONFIG = {
             catatan_pribadi: {
                 title: "📝 Catatan Pribadi",
@@ -654,11 +726,11 @@
                     { name: "status", label: "Status", type: "select", options: ["Belum", "Proses", "Selesai"], required: true }
                 ]
             },
-                       pemasukan: {
+            pemasukan: {
                 title: "📥 Pemasukan",
                 fields: [
                     { name: "keterangan", label: "Keterangan", type: "text", required: true },
-                    { name: "jumlah", label: "Jumlah (Rp)", type: "currency", required: true },  // ← UBAH
+                    { name: "jumlah", label: "Jumlah (Rp)", type: "currency", required: true },
                     { name: "tanggal", label: "Tanggal", type: "date", required: true },
                     { name: "sumber", label: "Sumber", type: "text", required: false }
                 ]
@@ -667,11 +739,10 @@
                 title: "📤 Pengeluaran",
                 fields: [
                     { name: "keterangan", label: "Keterangan", type: "text", required: true },
-                    { name: "jumlah", label: "Jumlah (Rp)", type: "currency", required: true },  // ← UBAH
+                    { name: "jumlah", label: "Jumlah (Rp)", type: "currency", required: true },
                     { name: "tanggal", label: "Tanggal", type: "date", required: true },
                     { name: "kategori", label: "Kategori", type: "select", options: ["Makanan", "Transportasi", "Belanja", "Tagihan", "Lainnya"], required: true }
                 ]
-            },
             },
             link_penting: {
                 title: "⭐ Link Penting",
@@ -705,46 +776,42 @@
 
         // ⭐ BUKA HALAMAN
         window.bukaHalaman = async function(namaMenu, el) {
-            // Update active menu
-            document.querySelectorAll('.menu-item').forEach(m => m.classList.remove('active'));
-            if (el) el.classList.add('active');
-            else {
-                document.querySelectorAll('.menu-item').forEach(m => {
-                    if (m.textContent.trim().toLowerCase().includes(namaMenu.replace(/_/g, ' '))) {
-                        m.classList.add('active');
-                    }
-                });
+            try {
+                if (el) {
+                    document.querySelectorAll('.menu-item').forEach(m => m.classList.remove('active'));
+                    el.classList.add('active');
+                }
+
+                document.querySelectorAll('.page-menu').forEach(p => p.classList.remove('active'));
+
+                if (namaMenu === 'dashboard') {
+                    document.getElementById('page-dashboard').classList.add('active');
+                    document.getElementById('pageTitle').textContent = 'Dashboard';
+                    await loadStatistik();
+                    return;
+                }
+
+                currentMenu = namaMenu;
+                const config = MENU_CONFIG[namaMenu];
+                if (!config) {
+                    showToast('⚠️ Menu belum tersedia', 'error');
+                    return;
+                }
+
+                document.getElementById('page-menu').classList.add('active');
+                document.getElementById('pageTitle').textContent = config.title;
+                document.getElementById('menuTitle').textContent = config.title;
+
+                if (window.innerWidth <= 900) {
+                    document.getElementById('sidebar').classList.remove('active');
+                    document.getElementById('overlay').classList.remove('active');
+                }
+
+                await tampilkanData(namaMenu);
+            } catch (error) {
+                console.error('Error bukaHalaman:', error);
+                showToast('❌ Error: ' + error.message, 'error');
             }
-
-            // Sembunyikan semua halaman
-            document.querySelectorAll('.page-menu').forEach(p => p.classList.remove('active'));
-
-            if (namaMenu === 'dashboard') {
-                document.getElementById('page-dashboard').classList.add('active');
-                document.getElementById('pageTitle').textContent = 'Dashboard';
-                await loadStatistik();
-                return;
-            }
-
-            // Buka halaman menu
-            currentMenu = namaMenu;
-            const config = MENU_CONFIG[namaMenu];
-            if (!config) {
-                showToast('⚠️ Menu belum tersedia', 'error');
-                return;
-            }
-
-            document.getElementById('page-menu').classList.add('active');
-            document.getElementById('pageTitle').textContent = config.title;
-            document.getElementById('menuTitle').textContent = config.title;
-
-            // Tutup sidebar di mobile
-            if (window.innerWidth <= 900) {
-                document.getElementById('sidebar').classList.remove('active');
-                document.getElementById('overlay').classList.remove('active');
-            }
-
-            await tampilkanData(namaMenu);
         };
 
         // ⭐ TAMPILKAN DATA
@@ -765,18 +832,14 @@
                     return;
                 }
 
-                const config = MENU_CONFIG[namaMenu];
                 listData.innerHTML = '';
 
                 snapshot.forEach(docSnap => {
                     const data = docSnap.data();
                     const id = docSnap.id;
 
-                    // Buat preview info
-                    let preview = '';
                     let title = data.judul || data.nama || data.keterangan || data.tugas || data.mapel || data.kebiasaan || 'Tanpa Judul';
                     
-                    // Info tambahan
                     const infoItems = [];
                     if (data.tanggal) infoItems.push(`📅 ${data.tanggal}`);
                     if (data.waktu) infoItems.push(`🕐 ${data.waktu}`);
@@ -786,9 +849,7 @@
                     if (data.prioritas) infoItems.push(`⚡ ${data.prioritas}`);
                     if (data.progress) infoItems.push(`📊 ${data.progress}%`);
                     
-                    preview = infoItems.join(' • ');
-                    
-                    // Deskripsi
+                    const preview = infoItems.join(' • ');
                     let deskripsi = data.isi || data.deskripsi || data.catatan || data.kegiatan || '';
 
                     const item = document.createElement('div');
@@ -823,7 +884,21 @@
             return div.innerHTML;
         }
 
-        // ⭐ MODAL
+        // ⭐ AKTIFKAN AUTO FORMAT CURRENCY
+        function aktifkanAutoFormat() {
+            document.querySelectorAll('.input-currency').forEach(input => {
+                input.addEventListener('input', function() {
+                    let value = this.value.replace(/\D/g, '');
+                    if (value) {
+                        this.value = Number(value).toLocaleString('id-ID');
+                    } else {
+                        this.value = '';
+                    }
+                });
+            });
+        }
+
+        // ⭐ BUKA MODAL
         window.bukaModal = function() {
             if (!currentMenu) return;
             const config = MENU_CONFIG[currentMenu];
@@ -845,38 +920,18 @@
                 } else if (field.type === 'select') {
                     const options = field.options.map(o => `<option value="${o}">${o}</option>`).join('');
                     input = `<select name="${field.name}" ${field.required ? 'required' : ''}>${options}</select>`;
-               } else if (field.type === 'currency') {
-                    input = `<input type="text" name="${field.name}" ${field.required ? 'required' : ''} placeholder="Contoh: 800000" class="input-currency">`;
+                } else if (field.type === 'currency') {
+                    input = `<input type="text" name="${field.name}" ${field.required ? 'required' : ''} placeholder="Contoh: 800000" class="input-currency" inputmode="numeric">`;
                 } else {
                     input = `<input type="${field.type}" name="${field.name}" ${field.required ? 'required' : ''} placeholder="Masukkan ${field.label.toLowerCase()}...">`;
                 }
                 
                 div.innerHTML = `<label>${field.label}${field.required ? ' *' : ''}</label>${input}`;
                 formFields.appendChild(div);
-            });        // ⭐ AUTO FORMAT CURRENCY (Rp dengan titik otomatis)
-        function aktifkanAutoFormat() {
-            document.querySelectorAll('.input-currency').forEach(input => {
-                input.addEventListener('input', function(e) {
-                    // Hapus semua karakter non-digit
-                    let value = this.value.replace(/\D/g, '');
-                    
-                    // Format dengan titik ribuan
-                    if (value) {
-                        this.value = Number(value).toLocaleString('id-ID');
-                    }
-                });
-                
-                // Simpan nilai asli di data-attribute untuk di-submit
-                input.addEventListener('blur', function() {
-                    let value = this.value.replace(/\D/g, '');
-                    this.dataset.rawValue = value;
-                });
             });
-        }
-        window.simpanData = async function(e));
-            aktifkanAutoFormat();   // ← TAMBAHKAN INI
 
-            window.simpanData = async function(e) {);
+            document.getElementById('modal').classList.add('active');
+            aktifkanAutoFormat();
         };
 
         window.tutupModal = function() {
@@ -888,21 +943,19 @@
             if (e.target === this) tutupModal();
         });
 
-        // ⭐ SIMPAN DATA (Tambah / Edit)
+        // ⭐ SIMPAN DATA
         window.simpanData = async function(e) {
             e.preventDefault();
             if (!currentMenu) return;
 
-                        const formData = new FormData(e.target);
+            const formData = new FormData(e.target);
             const data = {};
             formData.forEach((value, key) => {
-                // Bersihkan titik dari input currency
                 if (key === 'jumlah') {
                     data[key] = value.replace(/\./g, '');
                 } else {
                     data[key] = value;
                 }
-            });
             });
 
             try {
@@ -921,6 +974,7 @@
                 }
                 tutupModal();
                 await tampilkanData(currentMenu);
+                await loadStatistik();
             } catch (error) {
                 console.error('Error:', error);
                 showToast('❌ Gagal menyimpan: ' + error.message, 'error');
@@ -951,6 +1005,9 @@
                         `<option value="${o}" ${value === o ? 'selected' : ''}>${o}</option>`
                     ).join('');
                     input = `<select name="${field.name}" ${field.required ? 'required' : ''}>${options}</select>`;
+                } else if (field.type === 'currency') {
+                    const formatted = value ? Number(value).toLocaleString('id-ID') : '';
+                    input = `<input type="text" name="${field.name}" value="${formatted}" ${field.required ? 'required' : ''} class="input-currency" inputmode="numeric">`;
                 } else {
                     input = `<input type="${field.type}" name="${field.name}" value="${escapeHtml(value)}" ${field.required ? 'required' : ''}>`;
                 }
@@ -959,7 +1016,8 @@
                 formFields.appendChild(div);
             });
 
-            window.simpanData = async function(e) {);
+            document.getElementById('modal').classList.add('active');
+            aktifkanAutoFormat();
         };
 
         // ⭐ HAPUS DATA
@@ -969,6 +1027,7 @@
                 await deleteDoc(doc(db, currentMenu, id));
                 showToast('🗑️ Data berhasil dihapus!', 'success');
                 await tampilkanData(currentMenu);
+                await loadStatistik();
             } catch (error) {
                 showToast('❌ Gagal menghapus: ' + error.message, 'error');
             }
@@ -982,7 +1041,7 @@
             }
         };
 
-        // ⭐ LOAD STATISTIK DASHBOARD
+        // ⭐ LOAD STATISTIK
         async function loadStatistik() {
             try {
                 const collections = ['catatan_pribadi', 'agenda', 'todo_list', 'tugas', 'target'];
@@ -1000,7 +1059,6 @@
                 const snapAgenda = await getDocs(collection(db, 'agenda'));
                 document.getElementById('statAgenda').textContent = snapAgenda.size;
 
-                // Hitung keuangan
                 const snapMasuk = await getDocs(collection(db, 'pemasukan'));
                 const snapKeluar = await getDocs(collection(db, 'pengeluaran'));
                 
@@ -1015,7 +1073,6 @@
             }
         }
 
-        // Load statistik awal
         loadStatistik();
     </script>
 </body>
