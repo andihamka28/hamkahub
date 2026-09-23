@@ -1,16 +1,9 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { 
-    getAuth, 
-    signInWithEmailAndPassword, 
-    signOut, 
-    onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import { 
     getFirestore, 
-    collection, 
-    addDoc, 
-    getDocs,
-    serverTimestamp
+    collection, doc, addDoc, setDoc, getDoc, getDocs,
+    updateDoc, deleteDoc, query, where, orderBy,
+    serverTimestamp, onSnapshot
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -23,13 +16,12 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
 const db = getFirestore(app);
 
+console.log("🔥 Firebase siap:", firebaseConfig.projectId);
+
 export { 
-    auth, db, 
-    signInWithEmailAndPassword, 
-    signOut, 
-    onAuthStateChanged,
-    collection, addDoc, getDocs, serverTimestamp 
+    db, collection, doc, addDoc, setDoc, getDoc, getDocs,
+    updateDoc, deleteDoc, query, where, orderBy,
+    serverTimestamp, onSnapshot 
 };
