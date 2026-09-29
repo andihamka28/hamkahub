@@ -259,7 +259,6 @@
         .btn-hapus { background: #fee2e2; }
         .btn-hapus:hover { background: #fecaca; transform: scale(1.05); }
 
-        /* ⭐ CHECKBOX TUGAS SELESAI */
         .check-selesai {
             width: 26px; height: 26px;
             border: 2px solid var(--border);
@@ -273,21 +272,9 @@
             flex-shrink: 0;
         }
         .check-selesai:hover { border-color: var(--green); }
-        .check-selesai.checked {
-            background: var(--green);
-            border-color: var(--green);
-            color: white;
-        }
-        /* Teks tercoret kalau selesai */
-        .selesai-teks {
-            text-decoration: line-through;
-            opacity: 0.5;
-            color: var(--text-light) !important;
-        }
-        .list-item.selesai {
-            border-left-color: var(--green) !important;
-            background: #f9fdfb;
-        }
+        .check-selesai.checked { background: var(--green); border-color: var(--green); color: white; }
+        .selesai-teks { text-decoration: line-through; opacity: 0.5; color: var(--text-light) !important; }
+        .list-item.selesai { border-left-color: var(--green) !important; background: #f9fdfb; }
 
         .empty-state {
             text-align: center; padding: 50px 20px;
@@ -297,7 +284,6 @@
         }
         .empty-state .icon-big { font-size: 60px; margin-bottom: 15px; }
 
-        /* ⭐ HABIT TRACKER PROGRESS */
         .habit-card {
             background: white;
             padding: 22px;
@@ -312,16 +298,8 @@
             margin-bottom: 12px;
             gap: 12px;
         }
-        .habit-header h4 {
-            font-size: 16px;
-            color: var(--text);
-            flex: 1;
-        }
-        .habit-target {
-            font-size: 12px;
-            color: var(--text-light);
-            margin-bottom: 14px;
-        }
+        .habit-header h4 { font-size: 16px; color: var(--text); flex: 1; }
+        .habit-target { font-size: 12px; color: var(--text-light); margin-bottom: 14px; }
         .progress-bar {
             width: 100%;
             height: 12px;
@@ -418,13 +396,7 @@
             top: -80px; right: -50px;
         }
         .saldo-utama .label { font-size: 13px; opacity: 0.9; margin-bottom: 8px; }
-        .saldo-utama .amount {
-            font-size: 36px;
-            font-weight: 700;
-            margin-bottom: 5px;
-            position: relative;
-            z-index: 1;
-        }
+        .saldo-utama .amount { font-size: 36px; font-weight: 700; margin-bottom: 5px; position: relative; z-index: 1; }
         .saldo-utama .periode { font-size: 12px; opacity: 0.8; }
 
         .keuangan-grid {
@@ -441,14 +413,7 @@
         }
         .keuangan-card.masuk { border-left-color: var(--green); }
         .keuangan-card.keluar { border-left-color: var(--red); }
-        .keuangan-card .label {
-            font-size: 12px;
-            color: var(--text-light);
-            margin-bottom: 5px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
+        .keuangan-card .label { font-size: 12px; color: var(--text-light); margin-bottom: 5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
         .keuangan-card .value { font-size: 22px; font-weight: 700; color: var(--text); }
         .keuangan-card.masuk .value { color: var(--green); }
         .keuangan-card.keluar .value { color: var(--red); }
@@ -478,35 +443,12 @@
             height: 100%;
             position: relative;
         }
-        .bar {
-            width: 100%;
-            border-radius: 8px 8px 0 0;
-            transition: all 0.5s;
-            min-height: 5px;
-        }
+        .bar { width: 100%; border-radius: 8px 8px 0 0; transition: all 0.5s; min-height: 5px; }
         .bar.masuk { background: linear-gradient(180deg, #48bb78, #38a169); }
         .bar.keluar { background: linear-gradient(180deg, #fc8181, #e53e3e); }
-        .bar-label {
-            font-size: 12px;
-            color: var(--text-light);
-            margin-top: 8px;
-            font-weight: 600;
-        }
-        .bar-value {
-            position: absolute;
-            top: -22px;
-            font-size: 11px;
-            font-weight: 700;
-            color: var(--text);
-            white-space: nowrap;
-        }
-        .legend {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            font-size: 12px;
-            color: var(--text-light);
-        }
+        .bar-label { font-size: 12px; color: var(--text-light); margin-top: 8px; font-weight: 600; }
+        .bar-value { position: absolute; top: -22px; font-size: 11px; font-weight: 700; color: var(--text); white-space: nowrap; }
+        .legend { display: flex; gap: 20px; justify-content: center; font-size: 12px; color: var(--text-light); }
         .legend span { display: flex; align-items: center; gap: 5px; }
         .dot { width: 12px; height: 12px; border-radius: 3px; }
         .dot.masuk { background: #38a169; }
@@ -532,17 +474,8 @@
             font-weight: 600;
             color: var(--text);
         }
-        .btn-keuangan:hover {
-            transform: translateY(-3px);
-            border-color: var(--primary);
-            box-shadow: 0 10px 25px rgba(102,126,234,0.15);
-        }
-        .btn-keuangan .ico {
-            width: 40px; height: 40px;
-            border-radius: 10px;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 18px;
-        }
+        .btn-keuangan:hover { transform: translateY(-3px); border-color: var(--primary); box-shadow: 0 10px 25px rgba(102,126,234,0.15); }
+        .btn-keuangan .ico { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; }
         .btn-keuangan .ico.masuk { background: linear-gradient(135deg, #d1fae5, #a7f3d0); }
         .btn-keuangan .ico.keluar { background: linear-gradient(135deg, #fee2e2, #fecaca); }
         .btn-keuangan .ico.semua { background: linear-gradient(135deg, #e0e7ff, #c7d2fe); }
@@ -778,6 +711,7 @@
             <div class="menu-category">📅 Kegiatan</div>
             <a class="menu-item" onclick="bukaHalaman('agenda', this)"><span class="icon">📋</span> Agenda & To-Do</a>
             <a class="menu-item" onclick="bukaHalaman('daily', this)"><span class="icon">⏰</span> Daily Scheduling</a>
+            <a class="menu-item" onclick="bukaHalaman('pelajaran', this)"><span class="icon">📚</span> Jadwal Pelajaran</a>
             <a class="menu-item" onclick="bukaHalaman('pengingat', this)"><span class="icon">🔔</span> Pengingat</a>
             <a class="menu-item" onclick="bukaHalaman('pekerjaan', this)"><span class="icon">💼</span> Pekerjaan</a>
 
@@ -1080,6 +1014,20 @@
                     ]
                 }
             },
+            pelajaran: {
+                title: "📚 Jadwal Pelajaran",
+                collection: "pelajaran",
+                tabs: null,
+                fields: [
+                    { name: "mapel", label: "Nama Mata Pelajaran", type: "text", required: true },
+                    { name: "hari", label: "Hari", type: "select", options: ["Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"], required: true },
+                    { name: "jam_mulai", label: "Jam Mulai", type: "time", required: true },
+                    { name: "jam_selesai", label: "Jam Selesai", type: "time", required: false },
+                    { name: "guru", label: "Nama Guru", type: "text", required: false },
+                    { name: "ruang", label: "Ruang/Kelas", type: "text", required: false },
+                    { name: "catatan", label: "Catatan", type: "textarea", required: false }
+                ]
+            },
             pengingat: {
                 title: "🔔 Pengingat",
                 collection: "pengingat",
@@ -1180,9 +1128,10 @@
                 document.getElementById('menuNormal').style.display = 'none';
                 document.getElementById('menuKeuangan').style.display = 'none';
                 document.getElementById('menuDaily').style.display = 'none';
-const tombolTambah = document.querySelector('.page-header .btn-tambah');
+
+                const tombolTambah = document.querySelector('.page-header .btn-tambah');
                 if (tombolTambah) tombolTambah.style.display = 'block';
-                
+
                 if (namaMenu === 'keuangan') {
                     document.getElementById('pageTitle').textContent = '💰 Keuangan';
                     document.getElementById('menuKeuangan').style.display = 'block';
@@ -1201,17 +1150,13 @@ const tombolTambah = document.querySelector('.page-header .btn-tambah');
                     filterTanggal.onchange = () => loadDaily();
                     await loadDaily();
                 }
-                                    else if (namaMenu === 'arsip') {
+                else if (namaMenu === 'arsip') {
                     document.getElementById('pageTitle').textContent = '🗃️ Arsip (Otomatis)';
                     document.getElementById('menuNormal').style.display = 'block';
                     document.getElementById('menuTitle').textContent = '🗃️ Arsip Otomatis';
-                    
-                    // Sembunyikan tombol Tambah untuk arsip
-                    document.querySelector('.page-header .btn-tambah').style.display = 'none';
-                    
-                    // Sembunyikan tabs
+                    const tombol = document.querySelector('.page-header .btn-tambah');
+                    if (tombol) tombol.style.display = 'none';
                     document.getElementById('menuTabs').style.display = 'none';
-                    
                     await tampilkanArsip();
                 }
                 else {
@@ -1259,9 +1204,8 @@ const tombolTambah = document.querySelector('.page-header .btn-tambah');
             }
         };
 
-        // ⭐ TAMPILKAN DATA - DENGAN DUKUNGAN CHECKBOX SELESAI & HABIT
-               // ⭐ TAMPILKAN DATA - TANPA PERLU COMPOSITE INDEX
-                async function tampilkanData(koleksi, tab) {
+        // ⭐ TAMPILKAN DATA
+        async function tampilkanData(koleksi, tab) {
             const listData = document.getElementById('listData');
             listData.innerHTML = '<div class="empty-state"><div class="icon-big">⏳</div>Memuat data...</div>';
 
@@ -1352,6 +1296,78 @@ const tombolTambah = document.querySelector('.page-header .btn-tambah');
                             };
                         });
                         listData.appendChild(card);
+                    });
+                    return;
+                }
+
+                // ⭐ JADWAL PELAJARAN - dikelompokkan per hari
+                if (koleksi === 'pelajaran') {
+                    const hariUrut = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'];
+                    const perHari = {};
+                    hariUrut.forEach(h => perHari[h] = []);
+                    items.forEach(data => {
+                        if (perHari[data.hari]) perHari[data.hari].push(data);
+                    });
+                    hariUrut.forEach(h => {
+                        perHari[h].sort((a, b) => (a.jam_mulai || '').localeCompare(b.jam_mulai || ''));
+                    });
+
+                    hariUrut.forEach(hari => {
+                        const listHari = perHari[hari];
+                        if (listHari.length === 0) return;
+
+                        const header = document.createElement('div');
+                        header.style.cssText = `
+                            background: linear-gradient(135deg, #667eea, #764ba2);
+                            color: white;
+                            padding: 12px 20px;
+                            border-radius: 12px;
+                            font-weight: 700;
+                            font-size: 15px;
+                            margin-bottom: 10px;
+                            margin-top: 15px;
+                            box-shadow: 0 4px 15px rgba(102,126,234,0.3);
+                        `;
+                        header.textContent = `📅 ${hari} (${listHari.length} mapel)`;
+                        listData.appendChild(header);
+
+                        listHari.forEach(data => {
+                            const id = data.id;
+                            const jam = data.jam_selesai 
+                                ? `${data.jam_mulai} - ${data.jam_selesai}` 
+                                : data.jam_mulai;
+                            
+                            const item = document.createElement('div');
+                            item.className = 'list-item';
+                            item.style.borderLeftColor = '#4facfe';
+                            item.style.marginBottom = '8px';
+                            item.innerHTML = `
+                                <div style="display:flex; align-items:center; gap:14px; flex:1;">
+                                    <div style="background:linear-gradient(135deg,#4facfe,#00f2fe); color:white; padding:8px 14px; border-radius:10px; font-weight:700; font-size:13px; white-space:nowrap; min-width:80px; text-align:center;">
+                                        ${jam}
+                                    </div>
+                                    <div class="list-item-info">
+                                        <h4>📚 ${escapeHtml(data.mapel || '-')}</h4>
+                                        ${data.guru ? `<p>👨‍🏫 ${escapeHtml(data.guru)}</p>` : ''}
+                                        ${data.ruang ? `<div style="margin-top:4px;font-size:12px;color:#718096;">🏫 ${escapeHtml(data.ruang)}</div>` : ''}
+                                        ${data.catatan ? `<div style="margin-top:4px;font-size:12px;color:#a0aec0;font-style:italic;">📝 ${escapeHtml(data.catatan)}</div>` : ''}
+                                    </div>
+                                </div>
+                                <div class="list-item-actions">
+                                    <button class="btn-icon btn-edit" title="Edit">✏️</button>
+                                    <button class="btn-icon btn-hapus" title="Hapus">🗑️</button>
+                                </div>
+                            `;
+                            item.querySelector('.btn-edit').onclick = () => editData(id, data, koleksi);
+                            item.querySelector('.btn-hapus').onclick = async () => {
+                                if (confirm('Hapus mata pelajaran ini?')) {
+                                    await deleteDoc(doc(db, koleksi, id));
+                                    showToast('🗑️ Mapel dihapus!');
+                                    await tampilkanData(koleksi, tab);
+                                }
+                            };
+                            listData.appendChild(item);
+                        });
                     });
                     return;
                 }
@@ -1463,6 +1479,7 @@ const tombolTambah = document.querySelector('.page-header .btn-tambah');
                 listData.innerHTML = `<div class="empty-state"><div class="icon-big">❌</div><p>Gagal memuat: ${error.message}</p></div>`;
             }
         }
+
         function escapeHtml(str) {
             const div = document.createElement('div');
             div.textContent = str;
@@ -1620,6 +1637,155 @@ const tombolTambah = document.querySelector('.page-header .btn-tambah');
                 window.location.href = 'index.html';
             }
         };
+
+        // ⭐ TAMPILKAN ARSIP OTOMATIS
+        async function tampilkanArsip() {
+            const listData = document.getElementById('listData');
+            listData.innerHTML = '<div class="empty-state"><div class="icon-big">⏳</div>Memuat arsip...</div>';
+
+            try {
+                const arsipItems = [];
+
+                const snapAgenda = await getDocs(collection(db, 'agenda_todo'));
+                const today = new Date().toISOString().slice(0, 10);
+                snapAgenda.forEach(docSnap => {
+                    const d = docSnap.data();
+                    if (d.jenis === 'todo' && d.selesai === true) {
+                        arsipItems.push({
+                            id: docSnap.id,
+                            judul: d.tugas || 'Tanpa Judul',
+                            kategori: 'To-Do',
+                            icon: '✔️',
+                            deskripsi: d.prioritas ? `Prioritas: ${d.prioritas}` : '',
+                            tanggal: d.createdAt?.seconds ? new Date(d.createdAt.seconds * 1000).toLocaleDateString('id-ID') : '-',
+                            sumber: 'agenda_todo',
+                            warna: '#48bb78'
+                        });
+                    }
+                    if (d.jenis === 'agenda' && d.tanggal && d.tanggal < today) {
+                        arsipItems.push({
+                            id: docSnap.id,
+                            judul: d.judul || 'Tanpa Judul',
+                            kategori: 'Agenda',
+                            icon: '📋',
+                            deskripsi: d.lokasi ? `Lokasi: ${d.lokasi}` : '',
+                            tanggal: d.tanggal,
+                            sumber: 'agenda_todo',
+                            warna: '#667eea'
+                        });
+                    }
+                });
+
+                const snapKerja = await getDocs(collection(db, 'pekerjaan'));
+                snapKerja.forEach(docSnap => {
+                    const d = docSnap.data();
+                    if (d.status === 'Selesai') {
+                        const jenisLabel = d.jenis === 'tugas' ? 'Tugas' : d.jenis === 'proyek' ? 'Proyek' : 'Pekerjaan';
+                        const icon = d.jenis === 'tugas' ? '📌' : d.jenis === 'proyek' ? '🚀' : '💼';
+                        arsipItems.push({
+                            id: docSnap.id,
+                            judul: d.judul || d.nama || 'Tanpa Judul',
+                            kategori: jenisLabel,
+                            icon: icon,
+                            deskripsi: d.deskripsi || '',
+                            tanggal: d.deadline || d.selesai || '-',
+                            sumber: 'pekerjaan',
+                            warna: '#4facfe'
+                        });
+                    }
+                });
+
+                const snapTarget = await getDocs(collection(db, 'target_habit'));
+                snapTarget.forEach(docSnap => {
+                    const d = docSnap.data();
+                    if (d.jenis === 'target' && d.status === 'Selesai') {
+                        arsipItems.push({
+                            id: docSnap.id,
+                            judul: d.judul || 'Tanpa Judul',
+                            kategori: 'Target',
+                            icon: '🎯',
+                            deskripsi: d.deskripsi || '',
+                            tanggal: d.deadline || '-',
+                            sumber: 'target_habit',
+                            warna: '#43e97b'
+                        });
+                    }
+                });
+
+                const snapArsip = await getDocs(collection(db, 'arsip'));
+                snapArsip.forEach(docSnap => {
+                    const d = docSnap.data();
+                    arsipItems.push({
+                        id: docSnap.id,
+                        judul: d.judul || 'Tanpa Judul',
+                        kategori: d.kategori || 'Lainnya',
+                        icon: '🗃️',
+                        deskripsi: d.keterangan || '',
+                        tanggal: '-',
+                        sumber: 'arsip',
+                        warna: '#a8edea',
+                        manual: true
+                    });
+                });
+
+                arsipItems.sort((a, b) => (b.tanggal || '').localeCompare(a.tanggal || ''));
+
+                if (arsipItems.length === 0) {
+                    listData.innerHTML = `
+                        <div class="empty-state">
+                            <div class="icon-big">📭</div>
+                            <p>Belum ada data di arsip.</p>
+                            <p style="margin-top:10px;font-size:13px;color:#a0aec0;">
+                                Arsip otomatis terisi dari: To-Do yang dicentang ✅, 
+                                Agenda yang sudah lewat, Pekerjaan/Target yang selesai.
+                            </p>
+                        </div>`;
+                    return;
+                }
+
+                listData.innerHTML = `
+                    <div style="background: white; padding: 15px 20px; border-radius: 12px; 
+                                margin-bottom: 15px; box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+                                font-size: 13px; color: #718096;">
+                        📦 Menampilkan <strong>${arsipItems.length}</strong> item arsip otomatis
+                    </div>
+                `;
+
+                arsipItems.forEach(item => {
+                    const el = document.createElement('div');
+                    el.className = 'list-item';
+                    el.style.borderLeftColor = item.warna;
+                    el.innerHTML = `
+                        <div class="list-item-info">
+                            <h4>${item.icon} ${escapeHtml(item.judul)}</h4>
+                            ${item.deskripsi ? `<p>${escapeHtml(String(item.deskripsi).substring(0, 100))}</p>` : ''}
+                            <div style="margin-top:6px;font-size:12px;color:#718096;">
+                                🏷️ ${item.kategori} • 📅 ${item.tanggal}
+                            </div>
+                        </div>
+                        <div class="list-item-actions">
+                            <button class="btn-icon btn-hapus" title="Hapus dari sumber">🗑️</button>
+                        </div>
+                    `;
+                    el.querySelector('.btn-hapus').onclick = async () => {
+                        if (confirm('Hapus item ini dari arsip?\n(Ini akan menghapus data aslinya juga)')) {
+                            try {
+                                await deleteDoc(doc(db, item.sumber, item.id));
+                                showToast('🗑️ Item dihapus!');
+                                await tampilkanArsip();
+                            } catch (e) {
+                                showToast('❌ Gagal hapus: ' + e.message, 'error');
+                            }
+                        }
+                    };
+                    listData.appendChild(el);
+                });
+
+            } catch (error) {
+                console.error('Error:', error);
+                listData.innerHTML = `<div class="empty-state"><div class="icon-big">❌</div><p>Gagal memuat arsip: ${error.message}</p></div>`;
+            }
+        }
 
         window.bukaModalKeuangan = function(jenis) {
             editId = null;
@@ -1830,7 +1996,6 @@ const tombolTambah = document.querySelector('.page-header .btn-tambah');
             }
         }
 
-        // Override simpanData untuk daily & keuangan
         const originalSimpan = window.simpanData;
         window.simpanData = async function(e) {
             e.preventDefault();
@@ -1882,7 +2047,7 @@ const tombolTambah = document.querySelector('.page-header .btn-tambah');
 
         async function loadStatistik() {
             try {
-                const collections = ['catatan', 'agenda_todo', 'target_habit', 'pekerjaan', 'jurnal', 'daily'];
+                const collections = ['catatan', 'agenda_todo', 'target_habit', 'pekerjaan', 'jurnal', 'daily', 'pelajaran'];
                 let total = 0;
                 for (const col of collections) {
                     const snap = await getDocs(collection(db, col));
@@ -1909,162 +2074,7 @@ const tombolTambah = document.querySelector('.page-header .btn-tambah');
                 console.error('Gagal load statistik:', e);
             }
         }
-        // ⭐ TAMPILKAN ARSIP OTOMATIS
-        async function tampilkanArsip() {
-            const listData = document.getElementById('listData');
-            listData.innerHTML = '<div class="empty-state"><div class="icon-big">⏳</div>Memuat arsip...</div>';
 
-            try {
-                const arsipItems = [];
-
-                // 1️⃣ Dari agenda_todo - yang jenis 'todo' & selesai, atau jenis 'agenda' yang tanggal lewat
-                const snapAgenda = await getDocs(collection(db, 'agenda_todo'));
-                const today = new Date().toISOString().slice(0, 10);
-                snapAgenda.forEach(docSnap => {
-                    const d = docSnap.data();
-                    // To-Do yang selesai
-                    if (d.jenis === 'todo' && d.selesai === true) {
-                        arsipItems.push({
-                            id: docSnap.id,
-                            judul: d.tugas || 'Tanpa Judul',
-                            kategori: 'To-Do',
-                            icon: '✔️',
-                            deskripsi: d.prioritas ? `Prioritas: ${d.prioritas}` : '',
-                            tanggal: d.createdAt?.seconds ? new Date(d.createdAt.seconds * 1000).toLocaleDateString('id-ID') : '-',
-                            sumber: 'agenda_todo',
-                            warna: '#48bb78'
-                        });
-                    }
-                    // Agenda yang tanggal sudah lewat
-                    if (d.jenis === 'agenda' && d.tanggal && d.tanggal < today) {
-                        arsipItems.push({
-                            id: docSnap.id,
-                            judul: d.judul || 'Tanpa Judul',
-                            kategori: 'Agenda',
-                            icon: '📋',
-                            deskripsi: d.lokasi ? `Lokasi: ${d.lokasi}` : '',
-                            tanggal: d.tanggal,
-                            sumber: 'agenda_todo',
-                            warna: '#667eea'
-                        });
-                    }
-                });
-
-                // 2️⃣ Dari pekerjaan - yang jenis 'pekerjaan' / 'tugas' / 'proyek' yang status Selesai
-                const snapKerja = await getDocs(collection(db, 'pekerjaan'));
-                snapKerja.forEach(docSnap => {
-                    const d = docSnap.data();
-                    if (d.status === 'Selesai') {
-                        const jenisLabel = d.jenis === 'tugas' ? 'Tugas' : d.jenis === 'proyek' ? 'Proyek' : 'Pekerjaan';
-                        const icon = d.jenis === 'tugas' ? '📌' : d.jenis === 'proyek' ? '🚀' : '💼';
-                        arsipItems.push({
-                            id: docSnap.id,
-                            judul: d.judul || d.nama || 'Tanpa Judul',
-                            kategori: jenisLabel,
-                            icon: icon,
-                            deskripsi: d.deskripsi || '',
-                            tanggal: d.deadline || d.selesai || '-',
-                            sumber: 'pekerjaan',
-                            warna: '#4facfe'
-                        });
-                    }
-                });
-
-                // 3️⃣ Dari target_habit - yang jenis 'target' & status Selesai
-                const snapTarget = await getDocs(collection(db, 'target_habit'));
-                snapTarget.forEach(docSnap => {
-                    const d = docSnap.data();
-                    if (d.jenis === 'target' && d.status === 'Selesai') {
-                        arsipItems.push({
-                            id: docSnap.id,
-                            judul: d.judul || 'Tanpa Judul',
-                            kategori: 'Target',
-                            icon: '🎯',
-                            deskripsi: d.deskripsi || '',
-                            tanggal: d.deadline || '-',
-                            sumber: 'target_habit',
-                            warna: '#43e97b'
-                        });
-                    }
-                });
-
-                // 4️⃣ Dari arsip manual (yang diinput sendiri)
-                const snapArsip = await getDocs(collection(db, 'arsip'));
-                snapArsip.forEach(docSnap => {
-                    const d = docSnap.data();
-                    arsipItems.push({
-                        id: docSnap.id,
-                        judul: d.judul || 'Tanpa Judul',
-                        kategori: d.kategori || 'Lainnya',
-                        icon: '🗃️',
-                        deskripsi: d.keterangan || '',
-                        tanggal: '-',
-                        sumber: 'arsip',
-                        warna: '#a8edea',
-                        manual: true
-                    });
-                });
-
-                // Sort terbaru dulu
-                arsipItems.sort((a, b) => (b.tanggal || '').localeCompare(a.tanggal || ''));
-
-                if (arsipItems.length === 0) {
-                    listData.innerHTML = `
-                        <div class="empty-state">
-                            <div class="icon-big">📭</div>
-                            <p>Belum ada data di arsip.</p>
-                            <p style="margin-top:10px;font-size:13px;color:#a0aec0;">
-                                Arsip otomatis terisi dari: To-Do yang dicentang ✅, 
-                                Agenda yang sudah lewat, Pekerjaan/Target yang selesai.
-                            </p>
-                        </div>`;
-                    return;
-                }
-
-                listData.innerHTML = `
-                    <div style="background: white; padding: 15px 20px; border-radius: 12px; 
-                                margin-bottom: 15px; box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-                                font-size: 13px; color: #718096;">
-                        📦 Menampilkan <strong>${arsipItems.length}</strong> item arsip otomatis 
-                        (dari To-Do selesai, Agenda lewat, Pekerjaan selesai, Target selesai)
-                    </div>
-                `;
-
-                arsipItems.forEach(item => {
-                    const el = document.createElement('div');
-                    el.className = 'list-item';
-                    el.style.borderLeftColor = item.warna;
-                    el.innerHTML = `
-                        <div class="list-item-info">
-                            <h4>${item.icon} ${escapeHtml(item.judul)}</h4>
-                            ${item.deskripsi ? `<p>${escapeHtml(String(item.deskripsi).substring(0, 100))}</p>` : ''}
-                            <div style="margin-top:6px;font-size:12px;color:#718096;">
-                                🏷️ ${item.kategori} • 📅 ${item.tanggal}
-                            </div>
-                        </div>
-                        <div class="list-item-actions">
-                            <button class="btn-icon btn-hapus" title="Hapus dari sumber">🗑️</button>
-                        </div>
-                    `;
-                    el.querySelector('.btn-hapus').onclick = async () => {
-                        if (confirm('Hapus item ini dari arsip?\n(Ini akan menghapus data aslinya juga)')) {
-                            try {
-                                await deleteDoc(doc(db, item.sumber, item.id));
-                                showToast('🗑️ Item dihapus!');
-                                await tampilkanArsip();
-                            } catch (e) {
-                                showToast('❌ Gagal hapus: ' + e.message, 'error');
-                            }
-                        }
-                    };
-                    listData.appendChild(el);
-                });
-
-            } catch (error) {
-                console.error('Error:', error);
-                listData.innerHTML = `<div class="empty-state"><div class="icon-big">❌</div><p>Gagal memuat arsip: ${error.message}</p></div>`;
-            }
-        }
         loadStatistik();
     </script>
 </body>
