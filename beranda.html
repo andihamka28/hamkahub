@@ -5,20 +5,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Beranda - Dashboard Andi Raman</title>
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, sans-serif; }
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI',Tahoma,sans-serif; }
 :root {
-  --primary: #667eea; --accent: #f5576c; --bg: #f4f6fb;
-  --text: #2d3748; --text-light: #718096; --border: #e2e8f0;
-  --shadow: 0 4px 20px rgba(0,0,0,0.06); --sidebar-width: 260px;
-  --green: #38a169; --red: #e53e3e;
+  --primary:#667eea; --accent:#f5576c; --bg:#f4f6fb;
+  --text:#2d3748; --text-light:#718096; --border:#e2e8f0;
+  --shadow:0 4px 20px rgba(0,0,0,0.06); --sidebar-width:260px;
+  --green:#38a169; --red:#e53e3e;
 }
-body { background: var(--bg); color: var(--text); min-height: 100vh; display: flex; overflow-x: hidden; }
+body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; overflow-x:hidden; }
 
 /* SIDEBAR */
-.sidebar { width: var(--sidebar-width); height: 100vh; background: linear-gradient(180deg,#1a1f36,#2d3561); color: white; position: fixed; top:0; left:0; overflow-y:auto; transition:transform .3s; z-index:100; }
-.sidebar::-webkit-scrollbar { width: 6px; }
-.sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
-.sidebar-header { padding: 25px 20px; border-bottom: 1px solid rgba(255,255,255,0.1); display:flex; align-items:center; gap:12px; position:sticky; top:0; background:#1a1f36; z-index:10; }
+.sidebar { width:var(--sidebar-width); height:100vh; background:linear-gradient(180deg,#1a1f36,#2d3561); color:white; position:fixed; top:0; left:0; overflow-y:auto; transition:transform .3s; z-index:100; }
+.sidebar::-webkit-scrollbar { width:6px; }
+.sidebar::-webkit-scrollbar-thumb { background:rgba(255,255,255,0.2); border-radius:10px; }
+.sidebar-header { padding:25px 20px; border-bottom:1px solid rgba(255,255,255,0.1); display:flex; align-items:center; gap:12px; position:sticky; top:0; background:#1a1f36; z-index:10; }
 .sidebar-logo { width:42px; height:42px; background:linear-gradient(135deg,#f093fb,#f5576c); border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:18px; font-weight:700; box-shadow:0 8px 20px rgba(245,87,108,0.4); }
 .sidebar-title h2 { font-size:15px; }
 .sidebar-title p { font-size:11px; color:rgba(255,255,255,0.6); }
@@ -29,7 +29,7 @@ body { background: var(--bg); color: var(--text); min-height: 100vh; display: fl
 .menu-item .icon { width:20px; text-align:center; }
 
 /* MAIN */
-.main-content { margin-left: var(--sidebar-width); flex:1; min-height:100vh; display:flex; flex-direction:column; }
+.main-content { margin-left:var(--sidebar-width); flex:1; min-height:100vh; display:flex; flex-direction:column; }
 .topbar { background:rgba(255,255,255,0.9); backdrop-filter:blur(20px); padding:18px 30px; display:flex; justify-content:space-between; align-items:center; box-shadow:0 2px 10px rgba(0,0,0,0.04); position:sticky; top:0; z-index:50; }
 .topbar-left { display:flex; align-items:center; gap:15px; }
 .hamburger { display:none; background:none; border:none; font-size:24px; cursor:pointer; }
@@ -46,35 +46,23 @@ body { background: var(--bg); color: var(--text); min-height: 100vh; display: fl
 .content { padding:30px; flex:1; }
 
 /* DASHBOARD */
-.hero-banner { background:linear-gradient(135deg,#667eea 0%,#764ba2 50%,#f093fb 100%); background-size:200% 200%; animation:heroGradient 10s ease infinite; border-radius:24px; padding:40px 45px; color:white; margin-bottom:30px; display:flex; justify-content:space-between; align-items:center; box-shadow:0 20px 50px rgba(102,126,234,0.35); position:relative; overflow:hidden; }
+.hero-banner { background:linear-gradient(135deg,#667eea 0%,#764ba2 50%,#f093fb 100%); background-size:200% 200%; animation:heroGradient 10s ease infinite; border-radius:24px; padding:40px 45px; color:white; margin-bottom:30px; display:flex; justify-content:space-between; align-items:center; box-shadow:0 20px 50px rgba(102,126,234,0.35); position:relative; overflow:hidden; gap:25px; }
 @keyframes heroGradient { 0%,100%{background-position:0% 50%;} 50%{background-position:100% 50%;} }
 .hero-banner::before { content:''; position:absolute; width:300px; height:300px; background:rgba(255,255,255,0.08); border-radius:50%; top:-120px; right:-80px; }
 .hero-banner::after { content:''; position:absolute; width:180px; height:180px; background:rgba(255,255,255,0.06); border-radius:50%; bottom:-80px; right:120px; }
-.hero-text { position:relative; z-index:1; }
+.hero-text { position:relative; z-index:1; flex:1; }
 .hero-text .hero-greeting { font-size:13px; letter-spacing:2px; text-transform:uppercase; opacity:0.85; margin-bottom:10px; font-weight:600; }
-.hero-text h1 { font-size:32px; font-weight:800; margin-bottom:10px; letter-spacing:-0.5px; }
+.hero-text h1 { font-size:30px; font-weight:800; margin-bottom:10px; letter-spacing:-0.5px; }
 .hero-text .hero-sub { font-size:14px; opacity:0.9; line-height:1.5; max-width:500px; }
-.hero-text .hero-date { display:inline-flex; align-items:center; gap:8px; margin-top:16px; padding:8px 16px; background:rgba(255,255,255,0.18); backdrop-filter:blur(10px); border-radius:30px; font-size:13px; font-weight:600; border:1px solid rgba(255,255,255,0.25); }
-.hero-icon-wrap { position:relative; z-index:1; width:130px; height:130px; background:rgba(255,255,255,0.15); border-radius:30px; display:flex; align-items:center; justify-content:center; font-size:70px; backdrop-filter:blur(10px); border:1px solid rgba(255,255,255,0.2); box-shadow:0 15px 40px rgba(0,0,0,0.15); animation:floatIcon 3s ease-in-out infinite; }
-@keyframes floatIcon { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-10px);} }
 
-.stats-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:18px; margin-bottom:32px; }
-.stat-card { background:white; padding:22px; border-radius:20px; box-shadow:0 6px 20px rgba(0,0,0,0.06); display:flex; align-items:center; gap:16px; transition:all .35s cubic-bezier(0.4,0,0.2,1); border:1px solid rgba(0,0,0,0.03); position:relative; overflow:hidden; cursor:pointer; }
-.stat-card::before { content:''; position:absolute; top:0; left:0; width:4px; height:100%; background:linear-gradient(180deg,#667eea,#764ba2); transform:scaleY(0); transform-origin:top; transition:transform .4s; }
-.stat-card:hover { transform:translateY(-6px); box-shadow:0 18px 45px rgba(0,0,0,0.12); border-color:rgba(102,126,234,0.15); }
-.stat-card:hover::before { transform:scaleY(1); }
-.stat-card.blue-card::before { background:linear-gradient(180deg,#667eea,#764ba2); }
-.stat-card.green-card::before { background:linear-gradient(180deg,#48bb78,#38a169); }
-.stat-card.orange-card::before { background:linear-gradient(180deg,#f6ad55,#ed8936); }
-.stat-card.pink-card::before { background:linear-gradient(180deg,#f093fb,#f5576c); }
-.stat-icon { width:58px; height:58px; border-radius:16px; display:flex; align-items:center; justify-content:center; font-size:26px; flex-shrink:0; }
-.stat-icon.blue { background:linear-gradient(135deg,#e0e7ff,#c7d2fe); }
-.stat-icon.green { background:linear-gradient(135deg,#d1fae5,#a7f3d0); }
-.stat-icon.orange { background:linear-gradient(135deg,#fed7aa,#fdba74); }
-.stat-icon.pink { background:linear-gradient(135deg,#fbcfe8,#f9a8d4); }
-.stat-info { flex:1; min-width:0; }
-.stat-info .stat-label { font-size:12px; color:var(--text-light); font-weight:600; text-transform:uppercase; letter-spacing:0.8px; margin-bottom:4px; }
-.stat-info h3 { font-size:26px; font-weight:800; color:var(--text); letter-spacing:-0.5px; }
+/* JAM DIGITAL */
+.jam-digital { position:relative; z-index:1; background:rgba(255,255,255,0.15); backdrop-filter:blur(15px); border-radius:22px; padding:24px 28px; border:1px solid rgba(255,255,255,0.25); box-shadow:0 15px 40px rgba(0,0,0,0.15); text-align:center; min-width:280px; }
+.jam-digital .hari-ini { font-size:13px; letter-spacing:2px; text-transform:uppercase; opacity:0.85; margin-bottom:6px; font-weight:600; }
+.jam-digital .tanggal-ini { font-size:15px; font-weight:600; margin-bottom:14px; opacity:0.95; }
+.jam-digital .jam-besar { font-size:44px; font-weight:800; letter-spacing:2px; font-family:'Courier New',monospace; text-shadow:0 4px 15px rgba(0,0,0,0.2); line-height:1; }
+.jam-digital .jam-besar .detik { color:#fef3c7; font-size:36px; }
+.jam-digital .jam-besar .pemisah { opacity:0.6; animation:blinkJam 1s infinite; }
+@keyframes blinkJam { 0%,49%{opacity:0.6;} 50%,100%{opacity:0.2;} }
 
 .section-title { font-size:19px; font-weight:800; margin-bottom:18px; display:flex; justify-content:space-between; align-items:center; letter-spacing:-0.3px; }
 .section-title .section-sub { font-size:12px; color:var(--text-light); font-weight:500; }
@@ -89,14 +77,14 @@ body { background: var(--bg); color: var(--text); min-height: 100vh; display: fl
 .menu-card h4 { color:var(--text); font-size:16px; font-weight:700; margin-bottom:5px; letter-spacing:-0.2px; }
 .menu-card p { color:var(--text-light); font-size:12.5px; line-height:1.4; }
 
-.cta-banner { background:linear-gradient(135deg,#30cfd0,#330867); border-radius:20px; padding:28px 32px; color:white; display:flex; justify-content:space-between; align-items:center; box-shadow:0 15px 40px rgba(48,207,208,0.3); position:relative; overflow:hidden; margin-bottom:20px; }
+.cta-banner { background:linear-gradient(135deg,#30cfd0,#330867); border-radius:20px; padding:28px 32px; color:white; display:flex; justify-content:space-between; align-items:center; box-shadow:0 15px 40px rgba(48,207,208,0.3); position:relative; overflow:hidden; margin-bottom:20px; gap:20px; }
 .cta-banner::before { content:''; position:absolute; width:200px; height:200px; background:rgba(255,255,255,0.08); border-radius:50%; top:-80px; right:-60px; }
 .cta-text { position:relative; z-index:1; }
 .cta-text h3 { font-size:20px; font-weight:800; margin-bottom:6px; letter-spacing:-0.3px; }
 .cta-text p { font-size:13px; opacity:0.9; }
 .cta-btn { position:relative; z-index:1; background:white; color:#330867; border:none; padding:12px 24px; border-radius:12px; font-weight:700; cursor:pointer; transition:.3s; font-size:14px; white-space:nowrap; }
 .cta-btn:hover { transform:translateY(-3px); box-shadow:0 10px 25px rgba(255,255,255,0.3); }
-.cta-emoji { font-size:55px; position:relative; z-index:1; margin-left:15px; }
+.cta-emoji { font-size:55px; position:relative; z-index:1; }
 
 /* HALAMAN MENU */
 .page-menu { display:none; }
@@ -114,10 +102,10 @@ body { background: var(--bg); color: var(--text); min-height: 100vh; display: fl
 .list-data { display:flex; flex-direction:column; gap:12px; }
 .list-item { background:white; padding:18px 22px; border-radius:14px; box-shadow:var(--shadow); border-left:4px solid var(--primary); display:flex; justify-content:space-between; align-items:center; gap:15px; transition:.3s; }
 .list-item:hover { transform:translateX(4px); }
-.list-item-info { flex:1; }
+.list-item-info { flex:1; min-width:0; }
 .list-item-info h4 { color:var(--text); font-size:15px; margin-bottom:5px; }
-.list-item-info p { color:var(--text-light); font-size:13px; }
-.list-item-actions { display:flex; gap:8px; align-items:center; }
+.list-item-info p { color:var(--text-light); font-size:13px; word-break:break-word; }
+.list-item-actions { display:flex; gap:8px; align-items:center; flex-shrink:0; }
 .btn-icon { width:38px; height:38px; border:none; border-radius:10px; cursor:pointer; font-size:15px; transition:.3s; display:flex; align-items:center; justify-content:center; }
 .btn-edit { background:#fef3c7; }
 .btn-edit:hover { background:#fde68a; transform:scale(1.05); }
@@ -169,7 +157,7 @@ body { background: var(--bg); color: var(--text); min-height: 100vh; display: fl
 .keuangan-card.masuk { border-left-color:var(--green); }
 .keuangan-card.keluar { border-left-color:var(--red); }
 .keuangan-card .label { font-size:12px; color:var(--text-light); margin-bottom:5px; font-weight:600; text-transform:uppercase; }
-.keuangan-card .value { font-size:22px; font-weight:700; }
+.keuangan-card .value { font-size:22px; font-weight:700; word-break:break-all; }
 .keuangan-card.masuk .value { color:var(--green); }
 .keuangan-card.keluar .value { color:var(--red); }
 .grafik-mini { background:white; padding:25px; border-radius:16px; box-shadow:var(--shadow); }
@@ -189,7 +177,7 @@ body { background: var(--bg); color: var(--text); min-height: 100vh; display: fl
 .keuangan-tombol { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:12px; }
 .btn-keuangan { background:white; padding:18px; border-radius:14px; box-shadow:var(--shadow); border:2px solid transparent; cursor:pointer; transition:.3s; display:flex; align-items:center; gap:12px; font-size:14px; font-weight:600; color:var(--text); }
 .btn-keuangan:hover { transform:translateY(-3px); border-color:var(--primary); box-shadow:0 10px 25px rgba(102,126,234,0.15); }
-.btn-keuangan .ico { width:40px; height:40px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:18px; }
+.btn-keuangan .ico { width:40px; height:40px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0; }
 .btn-keuangan .ico.masuk { background:linear-gradient(135deg,#d1fae5,#a7f3d0); }
 .btn-keuangan .ico.keluar { background:linear-gradient(135deg,#fee2e2,#fecaca); }
 .btn-keuangan .ico.semua { background:linear-gradient(135deg,#e0e7ff,#c7d2fe); }
@@ -241,10 +229,10 @@ body { background: var(--bg); color: var(--text); min-height: 100vh; display: fl
 .sched-jam-label { font-size:9px; opacity:0.8; letter-spacing:1px; text-transform:uppercase; margin-bottom:2px; font-weight:600; }
 .sched-jam-divider { width:20px; height:1px; background:rgba(255,255,255,0.4); margin:4px 0; }
 .sched-konten-keren { flex:1; min-width:0; }
-.sched-judul-keren { font-size:16px; font-weight:700; color:var(--text); margin-bottom:6px; line-height:1.3; }
+.sched-judul-keren { font-size:16px; font-weight:700; color:var(--text); margin-bottom:6px; line-height:1.3; word-break:break-word; }
 .sched-meta-keren { display:flex; flex-wrap:wrap; gap:10px; font-size:12px; color:var(--text-light); }
 .sched-meta-keren span { display:inline-flex; align-items:center; gap:4px; background:#f7f9fc; padding:3px 10px; border-radius:20px; font-weight:500; }
-.sched-catatan-keren { font-size:12px; color:#a0aec0; font-style:italic; margin-top:6px; padding-left:2px; }
+.sched-catatan-keren { font-size:12px; color:#a0aec0; font-style:italic; margin-top:6px; padding-left:2px; word-break:break-word; }
 .sched-actions-keren { display:flex; flex-direction:column; gap:6px; flex-shrink:0; }
 .sched-actions-keren .btn-icon { width:36px; height:36px; font-size:14px; border-radius:10px; }
 
@@ -274,6 +262,19 @@ body { background: var(--bg); color: var(--text); min-height: 100vh; display: fl
 .overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:99; }
 .overlay.active { display:block; }
 
+/* ALARM MODAL */
+.alarm-modal { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.75); z-index:9998; justify-content:center; align-items:center; padding:20px; }
+.alarm-modal.active { display:flex; }
+.alarm-box { background:white; border-radius:24px; padding:40px 35px; text-align:center; max-width:400px; width:100%; box-shadow:0 25px 60px rgba(0,0,0,0.4); animation:alarmPulse 1s infinite; }
+@keyframes alarmPulse { 0%,100%{transform:scale(1);} 50%{transform:scale(1.02);} }
+.alarm-icon { font-size:80px; margin-bottom:15px; animation:alarmShake .5s infinite; }
+@keyframes alarmShake { 0%,100%{transform:rotate(-10deg);} 50%{transform:rotate(10deg);} }
+.alarm-box h2 { color:#e53e3e; font-size:24px; margin-bottom:12px; font-weight:800; }
+.alarm-box p { color:#4a5568; font-size:15px; margin-bottom:8px; }
+.alarm-box .alarm-judul { color:var(--text); font-size:18px; font-weight:700; margin:15px 0; padding:15px; background:#fef3c7; border-radius:12px; }
+.alarm-btn-stop { background:linear-gradient(135deg,#e53e3e,#c53030); color:white; border:none; padding:15px 40px; border-radius:12px; font-size:16px; font-weight:800; cursor:pointer; margin-top:20px; box-shadow:0 10px 25px rgba(229,62,62,0.4); transition:.3s; }
+.alarm-btn-stop:hover { transform:translateY(-3px); box-shadow:0 15px 35px rgba(229,62,62,0.6); }
+
 @media (max-width: 900px) {
   .sidebar { transform:translateX(-100%); }
   .sidebar.active { transform:translateX(0); }
@@ -281,26 +282,28 @@ body { background: var(--bg); color: var(--text); min-height: 100vh; display: fl
   .hamburger { display:block; }
   .user-info { display:none; }
 }
-@media (max-width: 700px) {
-  .hero-banner { padding:28px 25px; flex-direction:column; text-align:center; gap:15px; }
-  .hero-text h1 { font-size:24px; }
-  .hero-icon-wrap { width:90px; height:90px; font-size:50px; }
-  .cta-banner { padding:22px; flex-direction:column; gap:15px; text-align:center; }
-  .cta-text h3 { font-size:17px; }
-  .cta-emoji { font-size:40px; margin-left:0; }
+@media (max-width: 800px) {
+  .hero-banner { flex-direction:column; text-align:center; padding:28px 24px; gap:20px; }
+  .hero-text h1 { font-size:22px; }
+  .hero-text .hero-sub { font-size:12.5px; margin:0 auto; }
+  .jam-digital { min-width:auto; width:100%; max-width:320px; margin:0 auto; }
+  .jam-digital .jam-besar { font-size:34px; }
+  .jam-digital .jam-besar .detik { font-size:28px; }
+  .cta-banner { flex-direction:column; text-align:center; padding:22px; gap:15px; }
+  .cta-emoji { font-size:40px; }
 }
 @media (max-width: 600px) {
   .content { padding:12px; }
   .topbar { padding:12px 15px; }
-  .hero-banner { padding:22px; border-radius:18px; margin-bottom:20px; }
-  .hero-text h1 { font-size:20px; }
+  .hero-banner { padding:20px; border-radius:18px; margin-bottom:18px; }
+  .hero-text h1 { font-size:19px; }
+  .hero-text .hero-greeting { font-size:11px; }
   .hero-text .hero-sub { font-size:12px; }
-  .hero-icon-wrap { width:70px; height:70px; font-size:38px; border-radius:20px; }
-  .stats-grid { grid-template-columns:repeat(2,1fr); gap:10px; margin-bottom:22px; }
-  .stat-card { padding:14px; border-radius:16px; gap:10px; flex-direction:column; align-items:flex-start; }
-  .stat-icon { width:40px; height:40px; border-radius:12px; font-size:18px; }
-  .stat-info h3 { font-size:20px; }
-  .stat-info .stat-label { font-size:10px; }
+  .jam-digital { padding:18px 20px; border-radius:16px; }
+  .jam-digital .hari-ini { font-size:11px; }
+  .jam-digital .tanggal-ini { font-size:13px; margin-bottom:10px; }
+  .jam-digital .jam-besar { font-size:30px; }
+  .jam-digital .jam-besar .detik { font-size:24px; }
   .section-title { font-size:16px; margin-bottom:12px; }
   .menu-grid { grid-template-columns:repeat(2,1fr); gap:10px; margin-bottom:22px; }
   .menu-card { padding:16px; border-radius:16px; min-height:130px; }
@@ -308,7 +311,7 @@ body { background: var(--bg); color: var(--text); min-height: 100vh; display: fl
   .menu-card-icon { width:42px; height:42px; border-radius:12px; font-size:20px; margin-bottom:12px; }
   .menu-card h4 { font-size:13.5px; }
   .menu-card p { font-size:11px; }
-  .cta-banner { padding:20px; border-radius:16px; }
+  .cta-banner { padding:18px; border-radius:16px; }
   .cta-text h3 { font-size:15px; }
   .cta-btn { padding:10px 18px; font-size:12.5px; }
   .cta-emoji { font-size:34px; }
@@ -356,10 +359,12 @@ body { background: var(--bg); color: var(--text); min-height: 100vh; display: fl
   .sched-judul-keren { font-size:14px; }
   .sched-actions-keren { flex-direction:row; width:100%; justify-content:flex-end; }
   .sched-actions-keren .btn-icon { width:32px; height:32px; font-size:12px; }
+  .alarm-box { padding:30px 25px; }
+  .alarm-icon { font-size:60px; }
+  .alarm-box h2 { font-size:20px; }
 }
 @media (max-width: 380px) {
   .menu-grid { grid-template-columns:1fr; gap:8px; }
-  .stats-grid { grid-template-columns:1fr; }
   .keuangan-grid { grid-template-columns:1fr; }
 }
 .bg1 { background:linear-gradient(135deg,#667eea,#764ba2); }
@@ -368,6 +373,7 @@ body { background: var(--bg); color: var(--text); min-height: 100vh; display: fl
 .bg4 { background:linear-gradient(135deg,#43e97b,#38f9d7); }
 .bg5 { background:linear-gradient(135deg,#fa709a,#fee140); }
 .bg6 { background:linear-gradient(135deg,#30cfd0,#330867); }
+.bg7 { background:linear-gradient(135deg,#a8edea,#fed6e3); }
 </style>
 </head>
 <body>
@@ -386,15 +392,16 @@ body { background: var(--bg); color: var(--text); min-height: 100vh; display: fl
     <div class="menu-category">🏠 Utama</div>
     <a class="menu-item active" onclick="bukaHalaman('dashboard', this)"><span class="icon">📊</span> Dashboard</a>
     <a class="menu-item" onclick="bukaHalaman('catatan', this)"><span class="icon">📝</span> Catatan</a>
-    <a class="menu-item" onclick="bukaHalaman('jurnal', this)"><span class="icon">📔</span> Jurnal Harian</a>
     <a class="menu-item" onclick="bukaHalaman('target', this)"><span class="icon">🎯</span> Target & Habit</a>
+
     <div class="menu-category">📅 Kegiatan</div>
-    <a class="menu-item" onclick="bukaHalaman('agenda', this)"><span class="icon">📋</span> Agenda & To-Do</a>
-    <a class="menu-item" onclick="bukaHalaman('daily', this)"><span class="icon">⏰</span> Daily Scheduling</a>
-    <a class="menu-item" onclick="bukaHalaman('pengingat', this)"><span class="icon">🔔</span> Pengingat</a>
+    <a class="menu-item" onclick="bukaHalaman('tugas_agenda', this)"><span class="icon">📋</span> Tugas & Agenda</a>
+    <a class="menu-item" onclick="bukaHalaman('jadwal', this)"><span class="icon">⏰</span> Jadwal</a>
     <a class="menu-item" onclick="bukaHalaman('pekerjaan', this)"><span class="icon">💼</span> Pekerjaan</a>
+
     <div class="menu-category">💰 Keuangan</div>
     <a class="menu-item" onclick="bukaHalaman('keuangan', this)"><span class="icon">💰</span> Keuangan</a>
+
     <div class="menu-category">🔗 Lainnya</div>
     <a class="menu-item" onclick="bukaHalaman('link', this)"><span class="icon">⭐</span> Link Penting</a>
     <a class="menu-item" onclick="bukaHalaman('arsip', this)"><span class="icon">🗃️</span> Arsip</a>
@@ -427,27 +434,13 @@ body { background: var(--bg); color: var(--text); min-height: 100vh; display: fl
           <div class="hero-greeting" id="heroGreeting">SELAMAT DATANG</div>
           <h1 id="greeting">Hai, Andi! 👋</h1>
           <div class="hero-sub">Kelola semua aktivitas harianmu dalam satu dashboard yang rapi dan menyenangkan.</div>
-          <div class="hero-date"><span>📅</span><span id="currentDateFull">Memuat...</span></div>
         </div>
-        <div class="hero-icon-wrap">🚀</div>
-      </div>
-
-      <div class="stats-grid">
-        <div class="stat-card blue-card" onclick="bukaHalaman('catatan')">
-          <div class="stat-icon blue">📌</div>
-          <div class="stat-info"><div class="stat-label">Total Item</div><h3 id="statTotal">0</h3></div>
-        </div>
-        <div class="stat-card green-card" onclick="bukaHalaman('catatan')">
-          <div class="stat-icon green">📝</div>
-          <div class="stat-info"><div class="stat-label">Catatan</div><h3 id="statCatatan">0</h3></div>
-        </div>
-        <div class="stat-card orange-card" onclick="bukaHalaman('agenda')">
-          <div class="stat-icon orange">📅</div>
-          <div class="stat-info"><div class="stat-label">Agenda</div><h3 id="statAgenda">0</h3></div>
-        </div>
-        <div class="stat-card pink-card" onclick="bukaHalaman('keuangan')">
-          <div class="stat-icon pink">💰</div>
-          <div class="stat-info"><div class="stat-label">Saldo</div><h3 id="statKeuangan">Rp 0</h3></div>
+        <div class="jam-digital">
+          <div class="hari-ini" id="jamHari">-</div>
+          <div class="tanggal-ini" id="jamTanggal">-</div>
+          <div class="jam-besar">
+            <span id="jamJam">00</span><span class="pemisah">:</span><span id="jamMenit">00</span><span class="pemisah">:</span><span class="detik" id="jamDetik">00</span>
+          </div>
         </div>
       </div>
 
@@ -460,22 +453,22 @@ body { background: var(--bg); color: var(--text); min-height: 100vh; display: fl
         <div class="menu-card" onclick="bukaHalaman('catatan')">
           <div>
             <div class="menu-card-icon bg1">📝</div>
-            <h4>Catatan</h4>
-            <p>Simpan ide & catatan penting</p>
+            <h4>Catatan & Jurnal</h4>
+            <p>Simpan ide & cerita harian</p>
           </div>
         </div>
-        <div class="menu-card" onclick="bukaHalaman('agenda')">
+        <div class="menu-card" onclick="bukaHalaman('tugas_agenda')">
           <div>
             <div class="menu-card-icon bg2">📋</div>
-            <h4>Agenda & To-Do</h4>
-            <p>Jadwal kegiatan & tugas</p>
+            <h4>Tugas & Agenda</h4>
+            <p>Jadwal, tugas & pengingat</p>
           </div>
         </div>
-        <div class="menu-card" onclick="bukaHalaman('daily')">
+        <div class="menu-card" onclick="bukaHalaman('jadwal')">
           <div>
             <div class="menu-card-icon bg3">⏰</div>
-            <h4>Daily Scheduling</h4>
-            <p>Jadwal mingguan & pelajaran</p>
+            <h4>Jadwal</h4>
+            <p>Mingguan & mata pelajaran</p>
           </div>
         </div>
         <div class="menu-card" onclick="bukaHalaman('target')">
@@ -594,6 +587,17 @@ body { background: var(--bg); color: var(--text); min-height: 100vh; display: fl
   </div>
 </div>
 
+<div class="alarm-modal" id="alarmModal">
+  <div class="alarm-box">
+    <div class="alarm-icon">🔔</div>
+    <h2>PENGINGAT!</h2>
+    <p>Sudah waktunya untuk:</p>
+    <div class="alarm-judul" id="alarmJudul">-</div>
+    <p id="alarmCatatan" style="color:#718096;font-size:13px;"></p>
+    <button class="alarm-btn-stop" onclick="matikanAlarm()">🔕 Matikan Alarm</button>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script type="module">
@@ -616,15 +620,31 @@ else if (jam >= 15 && jam < 18) { sapaan='Selamat Sore'; heroGreet='SELAMAT SORE
 else if (jam >= 18) { sapaan='Selamat Malam'; heroGreet='SELAMAT MALAM'; }
 document.getElementById('greeting').textContent = `Hai, ${username}! 👋`;
 document.getElementById('heroGreeting').textContent = heroGreet;
-const opsi = { weekday:'long', day:'numeric', month:'long', year:'numeric' };
-document.getElementById('currentDate').textContent = now.toLocaleDateString('id-ID', opsi);
-document.getElementById('currentDateFull').textContent = now.toLocaleDateString('id-ID', opsi);
+document.getElementById('currentDate').textContent = now.toLocaleDateString('id-ID', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
 
+// JAM DIGITAL LIVE
+function updateJam() {
+  const d = new Date();
+  const hariArr = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
+  const bulanArr = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+  document.getElementById('jamHari').textContent = hariArr[d.getDay()].toUpperCase();
+  document.getElementById('jamTanggal').textContent = `${d.getDate()} ${bulanArr[d.getMonth()]} ${d.getFullYear()}`;
+  document.getElementById('jamJam').textContent = String(d.getHours()).padStart(2,'0');
+  document.getElementById('jamMenit').textContent = String(d.getMinutes()).padStart(2,'0');
+  document.getElementById('jamDetik').textContent = String(d.getSeconds()).padStart(2,'0');
+}
+updateJam();
+setInterval(updateJam, 1000);
+
+// MENU CONFIG
 const MENU_CONFIG = {
-  catatan: { title:"📝 Catatan", collection:"catatan", tabs:null,
-    fields:[{name:"judul",label:"Judul",type:"text",required:true},{name:"isi",label:"Isi Catatan",type:"textarea",required:true}] },
-  jurnal: { title:"📔 Jurnal Harian", collection:"jurnal", tabs:null,
-    fields:[{name:"tanggal",label:"Tanggal",type:"date",required:true},{name:"kegiatan",label:"Kegiatan",type:"textarea",required:true},{name:"perasaan",label:"Perasaan",type:"text",required:false}] },
+  catatan: { title:"📝 Catatan & Jurnal", collection:"catatan_jurnal",
+    tabs:[{id:'catatan',label:'📝 Catatan'},{id:'jurnal',label:'📔 Jurnal'}],
+    fieldsPerTab:{
+      catatan:[{name:"judul",label:"Judul",type:"text",required:true},{name:"isi",label:"Isi Catatan",type:"textarea",required:true}],
+      jurnal:[{name:"tanggal",label:"Tanggal",type:"date",required:true},{name:"kegiatan",label:"Kegiatan",type:"textarea",required:true},{name:"perasaan",label:"Perasaan",type:"text",required:false}]
+    }
+  },
   target: { title:"🎯 Target & Habit", collection:"target_habit",
     tabs:[{id:'target',label:'🎯 Target'},{id:'habit',label:'✅ Habit Tracker'}],
     fieldsPerTab:{
@@ -632,28 +652,48 @@ const MENU_CONFIG = {
       habit:[{name:"kebiasaan",label:"Nama Kebiasaan",type:"text",required:true},{name:"target_harian",label:"Target Harian",type:"text",required:true},{name:"progress",label:"Progress Awal (%)",type:"number",required:false}]
     }
   },
-  agenda: { title:"📋 Agenda & To-Do", collection:"agenda_todo",
-    tabs:[{id:'agenda',label:'📋 Agenda'},{id:'todo',label:'✔️ To-Do'},{id:'deadline',label:'⏰ Deadline'}],
+  tugas_agenda: { title:"📋 Tugas & Agenda", collection:"tugas_agenda",
+    tabs:[{id:'todo',label:'✔️ To-Do'},{id:'agenda',label:'📋 Agenda'},{id:'pengingat',label:'🔔 Pengingat'}],
     fieldsPerTab:{
+      todo:[{name:"tugas",label:"Nama Tugas",type:"text",required:true},{name:"deadline",label:"Deadline",type:"date",required:false},{name:"prioritas",label:"Prioritas",type:"select",options:["Rendah","Sedang","Tinggi"],required:true}],
       agenda:[{name:"judul",label:"Judul Agenda",type:"text",required:true},{name:"tanggal",label:"Tanggal",type:"date",required:true},{name:"waktu",label:"Waktu",type:"time",required:false},{name:"lokasi",label:"Lokasi",type:"text",required:false},{name:"catatan",label:"Catatan",type:"textarea",required:false}],
-      todo:[{name:"tugas",label:"Nama Tugas",type:"text",required:true},{name:"prioritas",label:"Prioritas",type:"select",options:["Rendah","Sedang","Tinggi"],required:true},{name:"status",label:"Status",type:"select",options:["Belum","Proses","Selesai"],required:true}],
-      deadline:[{name:"judul",label:"Judul",type:"text",required:true},{name:"deadline",label:"Tanggal Deadline",type:"date",required:true},{name:"keterangan",label:"Keterangan",type:"textarea",required:false}]
+      pengingat:[{name:"judul",label:"Judul Pengingat",type:"text",required:true},{name:"waktu",label:"Waktu Alarm",type:"datetime-local",required:true},{name:"catatan",label:"Catatan",type:"textarea",required:false}]
     }
   },
-  pengingat: { title:"🔔 Pengingat", collection:"pengingat", tabs:null,
-    fields:[{name:"judul",label:"Judul Pengingat",type:"text",required:true},{name:"waktu",label:"Waktu",type:"datetime-local",required:true},{name:"catatan",label:"Catatan",type:"textarea",required:false}] },
-  pekerjaan: { title:"💼 Pekerjaan", collection:"pekerjaan",
-    tabs:[{id:'pekerjaan',label:'💼 Pekerjaan'},{id:'tugas',label:'📌 Tugas'},{id:'proyek',label:'🚀 Proyek'}],
+  jadwal: { title:"⏰ Jadwal", collection:"jadwal",
+    tabs:[{id:'mingguan',label:'📅 Mingguan'},{id:'pelajaran',label:'📚 Pelajaran'}],
     fieldsPerTab:{
-      pekerjaan:[{name:"judul",label:"Nama Pekerjaan",type:"text",required:true},{name:"deskripsi",label:"Deskripsi",type:"textarea",required:false},{name:"status",label:"Status",type:"select",options:["Belum Mulai","Proses","Selesai"],required:true}],
-      tugas:[{name:"judul",label:"Nama Tugas",type:"text",required:true},{name:"deadline",label:"Deadline",type:"date",required:true},{name:"prioritas",label:"Prioritas",type:"select",options:["Rendah","Sedang","Tinggi"],required:true},{name:"status",label:"Status",type:"select",options:["Belum","Proses","Selesai"],required:true}],
+      mingguan:[
+        {name:"hari",label:"Hari",type:"select",options:["Senin","Selasa","Rabu","Kamis","Jumat","Sabtu","Minggu"],required:true},
+        {name:"jam_mulai",label:"Jam Mulai",type:"time",required:true},
+        {name:"jam_selesai",label:"Jam Selesai",type:"time",required:false},
+        {name:"kegiatan",label:"Nama Kegiatan",type:"text",required:true},
+        {name:"lokasi",label:"Lokasi",type:"text",required:false},
+        {name:"catatan",label:"Catatan",type:"textarea",required:false}
+      ],
+      pelajaran:[
+        {name:"hari",label:"Hari",type:"select",options:["Senin","Selasa","Rabu","Kamis","Jumat","Sabtu","Minggu"],required:true},
+        {name:"mapel",label:"Nama Mata Pelajaran",type:"text",required:true},
+        {name:"jam_mulai",label:"Jam Mulai",type:"time",required:true},
+        {name:"jam_selesai",label:"Jam Selesai",type:"time",required:false},
+        {name:"guru",label:"Nama Guru",type:"text",required:false},
+        {name:"ruang",label:"Ruang/Kelas",type:"text",required:false}
+      ]
+    }
+  },
+  pekerjaan: { title:"💼 Pekerjaan", collection:"pekerjaan",
+    tabs:[{id:'kerja',label:'💼 Pekerjaan'},{id:'proyek',label:'🚀 Proyek'}],
+    fieldsPerTab:{
+      kerja:[{name:"judul",label:"Nama Pekerjaan",type:"text",required:true},{name:"deskripsi",label:"Deskripsi",type:"textarea",required:false},{name:"status",label:"Status",type:"select",options:["Belum Mulai","Proses","Selesai"],required:true}],
       proyek:[{name:"nama",label:"Nama Proyek",type:"text",required:true},{name:"deskripsi",label:"Deskripsi",type:"textarea",required:false},{name:"mulai",label:"Tanggal Mulai",type:"date",required:true},{name:"selesai",label:"Target Selesai",type:"date",required:true},{name:"progress",label:"Progress (%)",type:"number",required:false}]
     }
   },
   link: { title:"⭐ Link Penting", collection:"link", tabs:null,
-    fields:[{name:"nama",label:"Nama Link",type:"text",required:true},{name:"url",label:"URL",type:"url",required:true},{name:"kategori",label:"Kategori",type:"text",required:false},{name:"catatan",label:"Catatan",type:"textarea",required:false}] },
+    fields:[{name:"nama",label:"Nama Link",type:"text",required:true},{name:"url",label:"URL",type:"url",required:true},{name:"kategori",label:"Kategori",type:"text",required:false},{name:"catatan",label:"Catatan",type:"textarea",required:false}]
+  },
   arsip: { title:"🗃️ Arsip", collection:"arsip", tabs:null,
-    fields:[{name:"judul",label:"Judul Arsip",type:"text",required:true},{name:"kategori",label:"Kategori",type:"select",options:["Agenda","Tugas","Catatan","Pekerjaan","Keuangan","Lainnya"],required:true},{name:"keterangan",label:"Keterangan",type:"textarea",required:false}] }
+    fields:[{name:"judul",label:"Judul Arsip",type:"text",required:true},{name:"kategori",label:"Kategori",type:"select",options:["Agenda","Tugas","Catatan","Pekerjaan","Keuangan","Lainnya"],required:true},{name:"keterangan",label:"Keterangan",type:"textarea",required:false}]
+  }
 };
 
 let currentMenu = null;
@@ -687,7 +727,6 @@ window.bukaHalaman = async function(namaMenu, el) {
     if (namaMenu === 'dashboard') {
       document.getElementById('page-dashboard').classList.add('active');
       document.getElementById('pageTitle').textContent = 'Dashboard';
-      await loadStatistik();
       return;
     }
 
@@ -715,10 +754,10 @@ window.bukaHalaman = async function(namaMenu, el) {
       if (tombol) tombol.style.display = 'none';
       document.getElementById('menuTabs').style.display = 'none';
       await tampilkanArsip();
-    } else if (namaMenu === 'daily') {
-      document.getElementById('pageTitle').textContent = '⏰ Daily Scheduling';
+    } else if (namaMenu === 'jadwal') {
+      document.getElementById('pageTitle').textContent = '⏰ Jadwal';
       document.getElementById('menuNormal').style.display = 'block';
-      document.getElementById('menuTitle').textContent = '⏰ Daily Scheduling';
+      document.getElementById('menuTitle').textContent = '⏰ Jadwal';
       hariAktif = getHariIni();
       const tabsEl = document.getElementById('menuTabs');
       tabsEl.style.display = 'flex';
@@ -731,12 +770,12 @@ window.bukaHalaman = async function(namaMenu, el) {
           tabsEl.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
           btn.classList.add('active');
           currentTab = tab.id;
-          tampilkanDaily(tab.id);
+          tampilkanJadwal(tab.id);
         };
         tabsEl.appendChild(btn);
       });
       currentTab = 'mingguan';
-      await tampilkanDaily('mingguan');
+      await tampilkanJadwal('mingguan');
     } else {
       const config = MENU_CONFIG[namaMenu];
       if (!config) { showToast('⚠️ Menu belum tersedia', 'error'); return; }
@@ -784,12 +823,12 @@ window.pindahHari = function(arah) {
   if (arah === 'next') newIdx = (idx + 1) % HARI_URUT.length;
   else newIdx = (idx - 1 + HARI_URUT.length) % HARI_URUT.length;
   hariAktif = HARI_URUT[newIdx];
-  tampilkanDaily(currentTab);
+  tampilkanJadwal(currentTab);
 };
 
 window.kembaliHariIni = function() {
   hariAktif = getHariIni();
-  tampilkanDaily(currentTab);
+  tampilkanJadwal(currentTab);
 };
 
 function getTanggalUntukHari(hari) {
@@ -799,8 +838,7 @@ function getTanggalUntukHari(hari) {
   const now = new Date();
   const targetDate = new Date(now);
   targetDate.setDate(now.getDate() + selisih);
-  const opsi = { day:'numeric', month:'long', year:'numeric' };
-  return targetDate.toLocaleDateString('id-ID', opsi);
+  return targetDate.toLocaleDateString('id-ID', { day:'numeric', month:'long', year:'numeric' });
 }
 
 function renderNavigasiHari(listData) {
@@ -830,125 +868,74 @@ function renderNavigasiHari(listData) {
   }, 50);
 }
 
-async function tampilkanDaily(tabDaily) {
+async function tampilkanJadwal(tabJadwal) {
   const listData = document.getElementById('listData');
   listData.innerHTML = '<div class="empty-state"><div class="icon-big">⏳</div>Memuat data...</div>';
   if (!hariAktif) hariAktif = getHariIni();
 
   try {
     const hariClass = 'hari-' + hariAktif.toLowerCase();
-    if (tabDaily === 'mingguan') {
-      const snapshot = await getDocs(collection(db, 'daily_mingguan'));
-      const items = [];
-      snapshot.forEach(docSnap => {
-        const data = docSnap.data();
-        if (data.hari === hariAktif) items.push({ id: docSnap.id, ...data });
-      });
-      items.sort((a, b) => (a.jam_mulai || '').localeCompare(b.jam_mulai || ''));
-      listData.innerHTML = '';
-      renderNavigasiHari(listData);
-      if (items.length === 0) {
-        const empty = document.createElement('div');
-        empty.className = 'empty-state';
-        empty.innerHTML = `<div class="icon-big">📭</div><p>Belum ada jadwal untuk <strong>${hariAktif}</strong>.</p><p style="margin-top:8px;font-size:13px;color:#a0aec0;">Klik <strong>"+ Tambah"</strong> untuk membuat jadwal.</p>`;
-        listData.appendChild(empty);
-        return;
-      }
-      const wrap = document.createElement('div');
-      wrap.className = 'sched-list-keren';
-      items.forEach(data => {
-        const id = data.id;
-        const item = document.createElement('div');
-        item.className = `sched-item-keren ${hariClass}`;
-        const jamMulai = data.jam_mulai || '-';
-        const jamSelesai = data.jam_selesai || '';
-        item.innerHTML = `
-          <div class="sched-jam-keren ${hariClass}">
-            <div class="sched-jam-label">Mulai</div>
-            <div class="sched-jam-mulai">${jamMulai}</div>
-            ${jamSelesai ? `<div class="sched-jam-divider"></div><div class="sched-jam-selesai">s/d ${jamSelesai}</div>` : ''}
-          </div>
-          <div class="sched-konten-keren">
-            <div class="sched-judul-keren">📌 ${escapeHtml(data.kegiatan || '-')}</div>
-            <div class="sched-meta-keren">${data.lokasi ? `<span>📍 ${escapeHtml(data.lokasi)}</span>` : ''}</div>
-            ${data.catatan ? `<div class="sched-catatan-keren">📝 ${escapeHtml(data.catatan)}</div>` : ''}
-          </div>
-          <div class="sched-actions-keren">
-            <button class="btn-icon btn-edit" title="Edit">✏️</button>
-            <button class="btn-icon btn-hapus" title="Hapus">🗑️</button>
-          </div>
-        `;
-        item.querySelector('.btn-edit').onclick = () => editDaily(id, data, 'mingguan');
-        item.querySelector('.btn-hapus').onclick = async () => {
-          if (confirm('Hapus jadwal ini?')) {
-            await deleteDoc(doc(db, 'daily_mingguan', id));
-            showToast('🗑️ Jadwal dihapus!');
-            await tampilkanDaily('mingguan');
-          }
-        };
-        wrap.appendChild(item);
-      });
-      listData.appendChild(wrap);
+    const snapshot = await getDocs(collection(db, 'jadwal'));
+    const items = [];
+    snapshot.forEach(docSnap => {
+      const data = docSnap.data();
+      if (data.jenis === tabJadwal && data.hari === hariAktif) items.push({ id: docSnap.id, ...data });
+    });
+    items.sort((a, b) => (a.jam_mulai || '').localeCompare(b.jam_mulai || ''));
+
+    listData.innerHTML = '';
+    renderNavigasiHari(listData);
+
+    if (items.length === 0) {
+      const empty = document.createElement('div');
+      empty.className = 'empty-state';
+      const label = tabJadwal === 'mingguan' ? 'jadwal' : 'mata pelajaran';
+      empty.innerHTML = `<div class="icon-big">📭</div><p>Belum ada ${label} untuk <strong>${hariAktif}</strong>.</p><p style="margin-top:8px;font-size:13px;color:#a0aec0;">Klik <strong>"+ Tambah"</strong> untuk membuat.</p>`;
+      listData.appendChild(empty);
       return;
     }
 
-    if (tabDaily === 'pelajaran') {
-      const snapshot = await getDocs(collection(db, 'pelajaran'));
-      const items = [];
-      snapshot.forEach(docSnap => {
-        const data = docSnap.data();
-        if (data.hari === hariAktif) items.push({ id: docSnap.id, ...data });
-      });
-      items.sort((a, b) => (a.jam_mulai || '').localeCompare(b.jam_mulai || ''));
-      listData.innerHTML = '';
-      renderNavigasiHari(listData);
-      if (items.length === 0) {
-        const empty = document.createElement('div');
-        empty.className = 'empty-state';
-        empty.innerHTML = `<div class="icon-big">📭</div><p>Belum ada mata pelajaran untuk <strong>${hariAktif}</strong>.</p><p style="margin-top:8px;font-size:13px;color:#a0aec0;">Klik <strong>"+ Tambah"</strong> untuk membuat jadwal.</p>`;
-        listData.appendChild(empty);
-        return;
-      }
-      const wrap = document.createElement('div');
-      wrap.className = 'sched-list-keren';
-      items.forEach(data => {
-        const id = data.id;
-        const item = document.createElement('div');
-        item.className = `sched-item-keren ${hariClass}`;
-        const jamMulai = data.jam_mulai || '-';
-        const jamSelesai = data.jam_selesai || '';
-        item.innerHTML = `
-          <div class="sched-jam-keren ${hariClass}">
-            <div class="sched-jam-label">Jam</div>
-            <div class="sched-jam-mulai">${jamMulai}</div>
-            ${jamSelesai ? `<div class="sched-jam-divider"></div><div class="sched-jam-selesai">s/d ${jamSelesai}</div>` : ''}
-          </div>
-          <div class="sched-konten-keren">
-            <div class="sched-judul-keren">📚 ${escapeHtml(data.mapel || '-')}</div>
-            <div class="sched-meta-keren">
-              ${data.guru ? `<span>👨‍🏫 ${escapeHtml(data.guru)}</span>` : ''}
-              ${data.ruang ? `<span>🏫 ${escapeHtml(data.ruang)}</span>` : ''}
-            </div>
-            ${data.catatan ? `<div class="sched-catatan-keren">📝 ${escapeHtml(data.catatan)}</div>` : ''}
-          </div>
-          <div class="sched-actions-keren">
-            <button class="btn-icon btn-edit" title="Edit">✏️</button>
-            <button class="btn-icon btn-hapus" title="Hapus">🗑️</button>
-          </div>
-        `;
-        item.querySelector('.btn-edit').onclick = () => editDaily(id, data, 'pelajaran');
-        item.querySelector('.btn-hapus').onclick = async () => {
-          if (confirm('Hapus mata pelajaran ini?')) {
-            await deleteDoc(doc(db, 'pelajaran', id));
-            showToast('🗑️ Mapel dihapus!');
-            await tampilkanDaily('pelajaran');
-          }
-        };
-        wrap.appendChild(item);
-      });
-      listData.appendChild(wrap);
-      return;
-    }
+    const wrap = document.createElement('div');
+    wrap.className = 'sched-list-keren';
+    items.forEach(data => {
+      const id = data.id;
+      const item = document.createElement('div');
+      item.className = `sched-item-keren ${hariClass}`;
+      const jamMulai = data.jam_mulai || '-';
+      const jamSelesai = data.jam_selesai || '';
+      const judul = tabJadwal === 'mingguan' ? data.kegiatan : data.mapel;
+      const icon = tabJadwal === 'mingguan' ? '📌' : '📚';
+      const metaExtra = tabJadwal === 'pelajaran' ? 
+        `${data.guru ? `<span>👨‍🏫 ${escapeHtml(data.guru)}</span>` : ''}${data.ruang ? `<span>🏫 ${escapeHtml(data.ruang)}</span>` : ''}` :
+        `${data.lokasi ? `<span>📍 ${escapeHtml(data.lokasi)}</span>` : ''}`;
+
+      item.innerHTML = `
+        <div class="sched-jam-keren ${hariClass}">
+          <div class="sched-jam-label">Jam</div>
+          <div class="sched-jam-mulai">${jamMulai}</div>
+          ${jamSelesai ? `<div class="sched-jam-divider"></div><div class="sched-jam-selesai">s/d ${jamSelesai}</div>` : ''}
+        </div>
+        <div class="sched-konten-keren">
+          <div class="sched-judul-keren">${icon} ${escapeHtml(judul || '-')}</div>
+          <div class="sched-meta-keren">${metaExtra}</div>
+          ${data.catatan ? `<div class="sched-catatan-keren">📝 ${escapeHtml(data.catatan)}</div>` : ''}
+        </div>
+        <div class="sched-actions-keren">
+          <button class="btn-icon btn-edit" title="Edit">✏️</button>
+          <button class="btn-icon btn-hapus" title="Hapus">🗑️</button>
+        </div>
+      `;
+      item.querySelector('.btn-edit').onclick = () => editData(id, data, 'jadwal');
+      item.querySelector('.btn-hapus').onclick = async () => {
+        if (confirm('Hapus jadwal ini?')) {
+          await deleteDoc(doc(db, 'jadwal', id));
+          showToast('🗑️ Jadwal dihapus!');
+          await tampilkanJadwal(tabJadwal);
+        }
+      };
+      wrap.appendChild(item);
+    });
+    listData.appendChild(wrap);
   } catch (error) {
     console.error('Error:', error);
     listData.innerHTML = `<div class="empty-state"><div class="icon-big">❌</div><p>Gagal memuat: ${error.message}</p></div>`;
@@ -961,26 +948,16 @@ async function tampilkanData(koleksi, tab) {
 
   try {
     const snapshot = await getDocs(collection(db, koleksi));
-    if (snapshot.empty) {
-      listData.innerHTML = `<div class="empty-state"><div class="icon-big">📭</div><p>Belum ada data. Klik <strong>"+ Tambah"</strong> untuk membuat.</p></div>`;
-      return;
-    }
-
     let items = [];
     snapshot.forEach(docSnap => {
       const data = docSnap.data();
       if (tab && data.jenis !== tab) return;
       items.push({ id: docSnap.id, ...data });
     });
-
-    items.sort((a, b) => {
-      const ta = a.createdAt?.seconds || 0;
-      const tb = b.createdAt?.seconds || 0;
-      return tb - ta;
-    });
+    items.sort((a, b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0));
 
     if (items.length === 0) {
-      listData.innerHTML = `<div class="empty-state"><div class="icon-big">📭</div><p>Belum ada data di tab ini.</p></div>`;
+      listData.innerHTML = `<div class="empty-state"><div class="icon-big">📭</div><p>Belum ada data. Klik <strong>"+ Tambah"</strong> untuk membuat.</p></div>`;
       return;
     }
 
@@ -995,10 +972,7 @@ async function tampilkanData(koleksi, tab) {
         const card = document.createElement('div');
         card.className = 'habit-card';
         card.innerHTML = `
-          <div class="habit-header">
-            <h4>${escapeHtml(data.kebiasaan || 'Tanpa Nama')}</h4>
-            <button class="btn-icon btn-hapus" title="Hapus">🗑️</button>
-          </div>
+          <div class="habit-header"><h4>${escapeHtml(data.kebiasaan || 'Tanpa Nama')}</h4><button class="btn-icon btn-hapus" title="Hapus">🗑️</button></div>
           <div class="habit-target">🎯 Target: ${escapeHtml(data.target_harian || '-')}</div>
           <div class="progress-bar"><div class="progress-fill ${progressClass}" style="width:${progress}%"></div></div>
           <div class="progress-text"><span class="persen">${progress}%</span><span class="status">${statusText}</span></div>
@@ -1039,8 +1013,6 @@ async function tampilkanData(koleksi, tab) {
         const id = data.id;
         const nama = data.nama || 'Tanpa Nama';
         const url = data.url || '#';
-        const kategori = data.kategori || '';
-        const catatan = data.catatan || '';
         const item = document.createElement('div');
         item.className = 'list-item';
         item.style.borderLeftColor = '#30cfd0';
@@ -1048,8 +1020,8 @@ async function tampilkanData(koleksi, tab) {
           <div class="list-item-info" style="cursor:pointer;" onclick="window.open('${escapeHtml(url)}','_blank')">
             <h4 style="color:var(--primary);text-decoration:underline;">🔗 ${escapeHtml(nama)}</h4>
             <p style="color:#30cfd0;word-break:break-all;">${escapeHtml(url)}</p>
-            ${kategori ? `<div style="margin-top:6px;font-size:12px;color:#718096;">🏷️ ${escapeHtml(kategori)}</div>` : ''}
-            ${catatan ? `<div style="margin-top:6px;font-size:12px;color:#a0aec0;font-style:italic;">📝 ${escapeHtml(catatan)}</div>` : ''}
+            ${data.kategori ? `<div style="margin-top:6px;font-size:12px;color:#718096;">🏷️ ${escapeHtml(data.kategori)}</div>` : ''}
+            ${data.catatan ? `<div style="margin-top:6px;font-size:12px;color:#a0aec0;font-style:italic;">📝 ${escapeHtml(data.catatan)}</div>` : ''}
           </div>
           <div class="list-item-actions">
             <button class="btn-icon" style="background:#dbeafe;color:#1e40af;" title="Buka Link">🔗</button>
@@ -1060,11 +1032,10 @@ async function tampilkanData(koleksi, tab) {
         item.querySelector('.btn-icon[title="Buka Link"]').onclick = () => window.open(url, '_blank');
         item.querySelector('.btn-edit').onclick = () => editData(id, data, koleksi);
         item.querySelector('.btn-hapus').onclick = async () => {
-          if (confirm('Yakin ingin menghapus link ini?')) {
+          if (confirm('Hapus link ini?')) {
             await deleteDoc(doc(db, koleksi, id));
-            showToast('🗑️ Link berhasil dihapus!');
+            showToast('🗑️ Link dihapus!');
             await tampilkanData(koleksi, tab);
-            await loadStatistik();
           }
         };
         listData.appendChild(item);
@@ -1072,13 +1043,13 @@ async function tampilkanData(koleksi, tab) {
       return;
     }
 
-    const pakaiCheckbox = (tab === 'todo' || tab === 'tugas');
+    const pakaiCheckbox = (tab === 'todo');
     items.forEach(data => {
       const id = data.id;
       let title = data.judul || data.nama || data.keterangan || data.tugas || data.kebiasaan || 'Tanpa Judul';
       const infoItems = [];
       if (data.tanggal) infoItems.push(`📅 ${data.tanggal}`);
-      if (data.waktu) infoItems.push(`🕐 ${data.waktu}`);
+      if (data.waktu) infoItems.push(`🕐 ${data.waktu.replace('T',' ')}`);
       if (data.deadline) infoItems.push(`⏰ ${data.deadline}`);
       if (data.status) infoItems.push(`📌 ${data.status}`);
       if (data.prioritas) infoItems.push(`⚡ ${data.prioritas}`);
@@ -1094,7 +1065,7 @@ async function tampilkanData(koleksi, tab) {
         ${checkboxHTML}
         <div class="list-item-info">
           <h4 class="${isSelesai ? 'selesai-teks' : ''}">${escapeHtml(title)}</h4>
-          ${deskripsi ? `<p class="${isSelesai ? 'selesai-teks' : ''}">${escapeHtml(String(deskripsi).substring(0, 100))}${deskripsi.length > 100 ? '...' : ''}</p>` : ''}
+          ${deskripsi ? `<p class="${isSelesai ? 'selesai-teks' : ''}">${escapeHtml(String(deskripsi).substring(0, 150))}${deskripsi.length > 150 ? '...' : ''}</p>` : ''}
           ${preview ? `<div style="margin-top:6px;font-size:12px;color:#718096;" class="${isSelesai ? 'selesai-teks' : ''}">${preview}</div>` : ''}
         </div>
         <div class="list-item-actions">
@@ -1116,11 +1087,10 @@ async function tampilkanData(koleksi, tab) {
       const editBtn = item.querySelector('.btn-edit');
       if (editBtn) editBtn.onclick = () => editData(id, data, koleksi);
       item.querySelector('.btn-hapus').onclick = async () => {
-        if (confirm('Yakin ingin menghapus data ini?')) {
+        if (confirm('Hapus data ini?')) {
           await deleteDoc(doc(db, koleksi, id));
-          showToast('🗑️ Data berhasil dihapus!');
+          showToast('🗑️ Data dihapus!');
           await tampilkanData(koleksi, tab);
-          await loadStatistik();
         }
       };
       listData.appendChild(item);
@@ -1154,38 +1124,8 @@ window.bukaModal = function() {
   const formFields = document.getElementById('formFields');
   formFields.innerHTML = '';
 
-  if (currentMenu === 'daily') {
-    const hariSelect = ['Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu'].map(h => 
-      `<option value="${h}" ${hariAktif === h ? 'selected' : ''}>${h}</option>`
-    ).join('');
-    if (currentTab === 'mingguan') {
-      document.getElementById('modalTitle').textContent = '⏰ Tambah Jadwal Mingguan';
-      formFields.innerHTML = `
-        <div class="form-group"><label>Hari *</label><select name="hari" required>${hariSelect}</select></div>
-        <div class="form-group"><label>Jam Mulai *</label><input type="time" name="jam_mulai" required></div>
-        <div class="form-group"><label>Jam Selesai</label><input type="time" name="jam_selesai"></div>
-        <div class="form-group"><label>Nama Kegiatan *</label><input type="text" name="kegiatan" required placeholder="Contoh: Meeting klien..."></div>
-        <div class="form-group"><label>Lokasi</label><input type="text" name="lokasi" placeholder="Contoh: Kantor..."></div>
-        <div class="form-group"><label>Catatan</label><textarea name="catatan"></textarea></div>
-      `;
-    } else if (currentTab === 'pelajaran') {
-      document.getElementById('modalTitle').textContent = '📚 Tambah Mata Pelajaran';
-      formFields.innerHTML = `
-        <div class="form-group"><label>Hari *</label><select name="hari" required>${hariSelect}</select></div>
-        <div class="form-group"><label>Nama Mata Pelajaran *</label><input type="text" name="mapel" required placeholder="Contoh: Matematika..."></div>
-        <div class="form-group"><label>Jam Mulai *</label><input type="time" name="jam_mulai" required></div>
-        <div class="form-group"><label>Jam Selesai</label><input type="time" name="jam_selesai"></div>
-        <div class="form-group"><label>Nama Guru</label><input type="text" name="guru" placeholder="Contoh: Pak Budi..."></div>
-        <div class="form-group"><label>Ruang/Kelas</label><input type="text" name="ruang" placeholder="Contoh: Kelas 10A..."></div>
-        <div class="form-group"><label>Catatan</label><textarea name="catatan"></textarea></div>
-      `;
-    }
-    document.getElementById('modal').classList.add('active');
-    return;
-  }
-
   const config = MENU_CONFIG[currentMenu];
-  const fields = config.tabs ? config.fieldsPerTab[currentTab] : config.fields;
+  let fields = config.tabs ? config.fieldsPerTab[currentTab] : config.fields;
   document.getElementById('modalTitle').textContent = 'Tambah ' + config.title;
 
   fields.forEach(field => {
@@ -1197,8 +1137,6 @@ window.bukaModal = function() {
     } else if (field.type === 'select') {
       const options = field.options.map(o => `<option value="${o}">${o}</option>`).join('');
       input = `<select name="${field.name}" ${field.required ? 'required' : ''}>${options}</select>`;
-    } else if (field.type === 'currency') {
-      input = `<input type="text" name="${field.name}" ${field.required ? 'required' : ''} placeholder="Contoh: 800000" class="input-currency" inputmode="numeric">`;
     } else {
       input = `<input type="${field.type}" name="${field.name}" ${field.required ? 'required' : ''} placeholder="Masukkan ${field.label.toLowerCase()}...">`;
     }
@@ -1219,40 +1157,6 @@ document.getElementById('modal').addEventListener('click', function(e) {
   if (e.target === this) tutupModal();
 });
 
-window.editDaily = function(id, data, jenis) {
-  editId = id;
-  document.getElementById('formData').reset();
-  const formFields = document.getElementById('formFields');
-  formFields.innerHTML = '';
-  const hariOpt = (selected) => ['Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu'].map(h => 
-    `<option value="${h}" ${selected === h ? 'selected' : ''}>${h}</option>`
-  ).join('');
-
-  if (jenis === 'mingguan') {
-    document.getElementById('modalTitle').textContent = '✏️ Edit Jadwal Mingguan';
-    formFields.innerHTML = `
-      <div class="form-group"><label>Hari *</label><select name="hari" required>${hariOpt(data.hari)}</select></div>
-      <div class="form-group"><label>Jam Mulai *</label><input type="time" name="jam_mulai" value="${data.jam_mulai || ''}" required></div>
-      <div class="form-group"><label>Jam Selesai</label><input type="time" name="jam_selesai" value="${data.jam_selesai || ''}"></div>
-      <div class="form-group"><label>Nama Kegiatan *</label><input type="text" name="kegiatan" value="${escapeHtml(data.kegiatan || '')}" required></div>
-      <div class="form-group"><label>Lokasi</label><input type="text" name="lokasi" value="${escapeHtml(data.lokasi || '')}"></div>
-      <div class="form-group"><label>Catatan</label><textarea name="catatan">${escapeHtml(data.catatan || '')}</textarea></div>
-    `;
-  } else if (jenis === 'pelajaran') {
-    document.getElementById('modalTitle').textContent = '✏️ Edit Mata Pelajaran';
-    formFields.innerHTML = `
-      <div class="form-group"><label>Hari *</label><select name="hari" required>${hariOpt(data.hari)}</select></div>
-      <div class="form-group"><label>Nama Mata Pelajaran *</label><input type="text" name="mapel" value="${escapeHtml(data.mapel || '')}" required></div>
-      <div class="form-group"><label>Jam Mulai *</label><input type="time" name="jam_mulai" value="${data.jam_mulai || ''}" required></div>
-      <div class="form-group"><label>Jam Selesai</label><input type="time" name="jam_selesai" value="${data.jam_selesai || ''}"></div>
-      <div class="form-group"><label>Nama Guru</label><input type="text" name="guru" value="${escapeHtml(data.guru || '')}"></div>
-      <div class="form-group"><label>Ruang/Kelas</label><input type="text" name="ruang" value="${escapeHtml(data.ruang || '')}"></div>
-      <div class="form-group"><label>Catatan</label><textarea name="catatan">${escapeHtml(data.catatan || '')}</textarea></div>
-    `;
-  }
-  document.getElementById('modal').classList.add('active');
-};
-
 window.simpanData = async function(e) {
   e.preventDefault();
   if (!currentMenu) return;
@@ -1264,47 +1168,28 @@ window.simpanData = async function(e) {
   });
 
   try {
-    if (currentMenu === 'daily') {
-      if (currentTab === 'mingguan') {
-        if (editId) {
-          await updateDoc(doc(db, 'daily_mingguan', editId), {...data, updatedAt: serverTimestamp()});
-          showToast('✅ Jadwal diperbarui!');
-        } else {
-          await addDoc(collection(db, 'daily_mingguan'), {...data, createdAt: serverTimestamp()});
-          showToast('✅ Jadwal disimpan!');
-        }
-      } else if (currentTab === 'pelajaran') {
-        if (editId) {
-          await updateDoc(doc(db, 'pelajaran', editId), {...data, updatedAt: serverTimestamp()});
-          showToast('✅ Mapel diperbarui!');
-        } else {
-          await addDoc(collection(db, 'pelajaran'), {...data, createdAt: serverTimestamp()});
-          showToast('✅ Mapel disimpan!');
-        }
-      }
-      tutupModal();
-      await tampilkanDaily(currentTab);
-      return;
-    }
-
     const config = MENU_CONFIG[currentMenu];
+    let koleksi = config.collection;
     if (currentTab) data.jenis = currentTab;
 
     if (editId) {
-      await updateDoc(doc(db, config.collection, editId), {...data, updatedAt: serverTimestamp()});
-      showToast('✅ Data berhasil diperbarui!');
+      await updateDoc(doc(db, koleksi, editId), {...data, updatedAt: serverTimestamp()});
+      showToast('✅ Data diperbarui!');
     } else {
       if (currentTab === 'habit') data.progress = Number(data.progress) || 0;
-      if (currentTab === 'todo' || currentTab === 'tugas') data.selesai = false;
-      await addDoc(collection(db, config.collection), {...data, createdAt: serverTimestamp()});
-      showToast('✅ Data berhasil disimpan!');
+      if (currentTab === 'todo') data.selesai = false;
+      await addDoc(collection(db, koleksi), {...data, createdAt: serverTimestamp()});
+      showToast('✅ Data disimpan!');
     }
     tutupModal();
-    await tampilkanData(config.collection, currentTab);
-    await loadStatistik();
+    if (currentMenu === 'jadwal') {
+      await tampilkanJadwal(currentTab);
+    } else {
+      await tampilkanData(koleksi, currentTab);
+    }
   } catch (error) {
     console.error('Error:', error);
-    showToast('❌ Gagal menyimpan: ' + error.message, 'error');
+    showToast('❌ Gagal: ' + error.message, 'error');
   }
 };
 
@@ -1327,9 +1212,6 @@ window.editData = function(id, data, koleksi) {
     } else if (field.type === 'select') {
       const options = field.options.map(o => `<option value="${o}" ${value === o ? 'selected' : ''}>${o}</option>`).join('');
       input = `<select name="${field.name}" ${field.required ? 'required' : ''}>${options}</select>`;
-    } else if (field.type === 'currency') {
-      const formatted = value ? Number(value).toLocaleString('id-ID') : '';
-      input = `<input type="text" name="${field.name}" value="${formatted}" ${field.required ? 'required' : ''} class="input-currency" inputmode="numeric">`;
     } else {
       input = `<input type="${field.type}" name="${field.name}" value="${escapeHtml(value)}" ${field.required ? 'required' : ''}>`;
     }
@@ -1338,7 +1220,6 @@ window.editData = function(id, data, koleksi) {
   });
 
   document.getElementById('modal').classList.add('active');
-  aktifkanAutoFormat();
 };
 
 window.logout = function() {
@@ -1354,27 +1235,27 @@ async function tampilkanArsip() {
   try {
     const arsipItems = [];
     const today = new Date().toISOString().slice(0, 10);
-    const snapAgenda = await getDocs(collection(db, 'agenda_todo'));
-    snapAgenda.forEach(docSnap => {
+    const snapTugas = await getDocs(collection(db, 'tugas_agenda'));
+    snapTugas.forEach(docSnap => {
       const d = docSnap.data();
       if (d.jenis === 'todo' && d.selesai === true) {
         arsipItems.push({ id: docSnap.id, judul: d.tugas || 'Tanpa Judul', kategori: 'To-Do', icon: '✔️',
           deskripsi: d.prioritas ? `Prioritas: ${d.prioritas}` : '',
           tanggal: d.createdAt?.seconds ? new Date(d.createdAt.seconds * 1000).toLocaleDateString('id-ID') : '-',
-          sumber: 'agenda_todo', warna: '#48bb78' });
+          sumber: 'tugas_agenda', warna: '#48bb78' });
       }
       if (d.jenis === 'agenda' && d.tanggal && d.tanggal < today) {
         arsipItems.push({ id: docSnap.id, judul: d.judul || 'Tanpa Judul', kategori: 'Agenda', icon: '📋',
           deskripsi: d.lokasi ? `Lokasi: ${d.lokasi}` : '', tanggal: d.tanggal,
-          sumber: 'agenda_todo', warna: '#667eea' });
+          sumber: 'tugas_agenda', warna: '#667eea' });
       }
     });
     const snapKerja = await getDocs(collection(db, 'pekerjaan'));
     snapKerja.forEach(docSnap => {
       const d = docSnap.data();
       if (d.status === 'Selesai') {
-        const jenisLabel = d.jenis === 'tugas' ? 'Tugas' : d.jenis === 'proyek' ? 'Proyek' : 'Pekerjaan';
-        const icon = d.jenis === 'tugas' ? '📌' : d.jenis === 'proyek' ? '🚀' : '💼';
+        const jenisLabel = d.jenis === 'proyek' ? 'Proyek' : 'Pekerjaan';
+        const icon = d.jenis === 'proyek' ? '🚀' : '💼';
         arsipItems.push({ id: docSnap.id, judul: d.judul || d.nama || 'Tanpa Judul', kategori: jenisLabel, icon: icon,
           deskripsi: d.deskripsi || '', tanggal: d.deadline || d.selesai || '-',
           sumber: 'pekerjaan', warna: '#4facfe' });
@@ -1398,7 +1279,7 @@ async function tampilkanArsip() {
     arsipItems.sort((a, b) => (b.tanggal || '').localeCompare(a.tanggal || ''));
 
     if (arsipItems.length === 0) {
-      listData.innerHTML = `<div class="empty-state"><div class="icon-big">📭</div><p>Belum ada data di arsip.</p><p style="margin-top:10px;font-size:13px;color:#a0aec0;">Arsip otomatis terisi dari: To-Do yang dicentang ✅, Agenda yang sudah lewat, Pekerjaan/Target yang selesai.</p></div>`;
+      listData.innerHTML = `<div class="empty-state"><div class="icon-big">📭</div><p>Belum ada data di arsip.</p><p style="margin-top:10px;font-size:13px;color:#a0aec0;">Arsip otomatis terisi dari: To-Do selesai, Agenda lewat, Pekerjaan/Target selesai.</p></div>`;
       return;
     }
     listData.innerHTML = `<div style="background:white;padding:15px 20px;border-radius:12px;margin-bottom:15px;box-shadow:0 4px 20px rgba(0,0,0,0.06);font-size:13px;color:#718096;">📦 Menampilkan <strong>${arsipItems.length}</strong> item arsip otomatis</div>`;
@@ -1415,7 +1296,7 @@ async function tampilkanArsip() {
         <div class="list-item-actions"><button class="btn-icon btn-hapus" title="Hapus">🗑️</button></div>
       `;
       el.querySelector('.btn-hapus').onclick = async () => {
-        if (confirm('Hapus item ini dari arsip?\n(Ini akan menghapus data aslinya juga)')) {
+        if (confirm('Hapus item ini dari arsip?')) {
           try {
             await deleteDoc(doc(db, item.sumber, item.id));
             showToast('🗑️ Item dihapus!');
@@ -1503,39 +1384,97 @@ async function loadKeuangan() {
     document.getElementById('totalMasukBulan').textContent = 'Rp ' + masuk.toLocaleString('id-ID');
     document.getElementById('totalKeluarBulan').textContent = 'Rp ' + keluar.toLocaleString('id-ID');
     const max = Math.max(masuk, keluar, 1);
-    const maxHeight = 160;
-    document.getElementById('barMasuk').style.height = Math.max(5, (masuk / max) * maxHeight) + 'px';
-    document.getElementById('barKeluar').style.height = Math.max(5, (keluar / max) * maxHeight) + 'px';
+    document.getElementById('barMasuk').style.height = Math.max(5, (masuk/max) * 160) + 'px';
+    document.getElementById('barKeluar').style.height = Math.max(5, (keluar/max) * 160) + 'px';
     document.getElementById('labelBarMasuk').textContent = 'Rp ' + masuk.toLocaleString('id-ID');
     document.getElementById('labelBarKeluar').textContent = 'Rp ' + keluar.toLocaleString('id-ID');
   } catch (e) { console.error(e); }
 }
 
-async function loadStatistik() {
+/* ============================================
+   ALARM PENGINGAT
+   ============================================ */
+let audioCtx = null;
+let alarmInterval = null;
+let alarmAktif = false;
+const sudahBerbunyi = new Set();
+
+function putarAlarm() {
   try {
-    const collections = ['catatan', 'agenda_todo', 'target_habit', 'pekerjaan', 'jurnal', 'daily_mingguan', 'pelajaran'];
-    let total = 0;
-    for (const col of collections) {
-      const snap = await getDocs(collection(db, col));
-      total += snap.size;
+    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    
+    const now = audioCtx.currentTime;
+    for (let i = 0; i < 6; i++) {
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = 'square';
+      osc.frequency.setValueAtTime(880, now + i * 0.3);
+      osc.frequency.setValueAtTime(1100, now + i * 0.3 + 0.15);
+      gain.gain.setValueAtTime(0, now + i * 0.3);
+      gain.gain.linearRampToValueAtTime(0.4, now + i * 0.3 + 0.02);
+      gain.gain.linearRampToValueAtTime(0, now + i * 0.3 + 0.28);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start(now + i * 0.3);
+      osc.stop(now + i * 0.3 + 0.3);
     }
-    document.getElementById('statTotal').textContent = total;
-    const snapCatatan = await getDocs(collection(db, 'catatan'));
-    document.getElementById('statCatatan').textContent = snapCatatan.size;
-    const snapAgenda = await getDocs(collection(db, 'agenda_todo'));
-    document.getElementById('statAgenda').textContent = snapAgenda.size;
-    const snapTrx = await getDocs(collection(db, 'transaksi'));
-    let totalMasuk = 0, totalKeluar = 0;
-    snapTrx.forEach(d => {
-      const data = d.data();
-      if (data.jenis === 'pemasukan') totalMasuk += Number(data.jumlah) || 0;
-      else totalKeluar += Number(data.jumlah) || 0;
-    });
-    document.getElementById('statKeuangan').textContent = 'Rp ' + (totalMasuk - totalKeluar).toLocaleString('id-ID');
-  } catch (e) { console.error('Gagal load statistik:', e); }
+  } catch (e) { console.error('Gagal memutar suara:', e); }
 }
 
-loadStatistik();
+function tampilkanAlarm(judul, catatan) {
+  document.getElementById('alarmJudul').textContent = judul;
+  document.getElementById('alarmCatatan').textContent = catatan || '';
+  document.getElementById('alarmModal').classList.add('active');
+  alarmAktif = true;
+  
+  putarAlarm();
+  alarmInterval = setInterval(putarAlarm, 2000);
+  
+  if (Notification.permission === 'granted') {
+    try {
+      new Notification('🔔 PENGINGAT: ' + judul, {
+        body: catatan || 'Sudah waktunya!',
+        icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="75" font-size="75">🔔</text></svg>'
+      });
+    } catch (e) {}
+  }
+}
+
+window.matikanAlarm = function() {
+  alarmAktif = false;
+  document.getElementById('alarmModal').classList.remove('active');
+  if (alarmInterval) { clearInterval(alarmInterval); alarmInterval = null; }
+};
+
+async function cekPengingat() {
+  if (alarmAktif) return;
+  try {
+    const snap = await getDocs(collection(db, 'tugas_agenda'));
+    const now = new Date();
+    const nowStr = now.getFullYear() + '-' + String(now.getMonth()+1).padStart(2,'0') + '-' + String(now.getDate()).padStart(2,'0') + 'T' + String(now.getHours()).padStart(2,'0') + ':' + String(now.getMinutes()).padStart(2,'0');
+
+    snap.forEach(docSnap => {
+      const d = docSnap.data();
+      if (d.jenis !== 'pengingat') return;
+      if (!d.waktu) return;
+      if (sudahBerbunyi.has(docSnap.id)) return;
+      
+      const waktuPengingat = d.waktu.slice(0, 16);
+      if (waktuPengingat === nowStr) {
+        sudahBerbunyi.add(docSnap.id);
+        tampilkanAlarm(d.judul || 'Pengingat', d.catatan);
+      }
+    });
+  } catch (e) { console.error('Cek pengingat gagal:', e); }
+}
+
+if ('Notification' in window && Notification.permission === 'default') {
+  Notification.requestPermission();
+}
+
+setInterval(cekPengingat, 30000);
+setTimeout(cekPengingat, 3000);
 </script>
 </body>
 </html>
