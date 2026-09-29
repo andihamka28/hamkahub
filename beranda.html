@@ -532,6 +532,116 @@
         .sched-kegiatan h4 { font-size: 15px; color: var(--text); margin-bottom: 3px; }
         .sched-kegiatan p { font-size: 12px; color: var(--text-light); }
 
+        /* ⭐ JADWAL PELAJARAN - KARTU KOTAK */
+        .mapel-header {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 15px;
+            margin-bottom: 14px;
+            margin-top: 20px;
+            box-shadow: 0 6px 20px rgba(102,126,234,0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .mapel-header:first-child { margin-top: 0; }
+        .mapel-header .count {
+            background: rgba(255,255,255,0.25);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+        .mapel-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+        .mapel-card {
+            background: white;
+            border-radius: 14px;
+            padding: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border-left: 5px solid #4facfe;
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .mapel-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+        }
+        .mapel-card::before {
+            content: '';
+            position: absolute;
+            top: 0; right: 0;
+            width: 60px; height: 60px;
+            background: linear-gradient(135deg, rgba(79,172,254,0.15), rgba(0,242,254,0.05));
+            border-radius: 0 14px 0 60px;
+        }
+        .mapel-jam {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 12px;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 10px rgba(79,172,254,0.3);
+        }
+        .mapel-nama {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 8px;
+            line-height: 1.3;
+            padding-right: 20px;
+        }
+        .mapel-info {
+            font-size: 12px;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-bottom: 4px;
+        }
+        .mapel-actions {
+            display: flex;
+            gap: 6px;
+            margin-top: 12px;
+            padding-top: 10px;
+            border-top: 1px dashed var(--border);
+            justify-content: flex-end;
+        }
+        .mapel-actions .btn-icon {
+            width: 30px;
+            height: 30px;
+            font-size: 12px;
+            border-radius: 8px;
+        }
+
+        /* Warna berbeda per hari */
+        .hari-senin { border-left-color: #667eea !important; }
+        .hari-senin .mapel-jam { background: linear-gradient(135deg, #667eea, #764ba2); }
+        .hari-selasa { border-left-color: #f093fb !important; }
+        .hari-selasa .mapel-jam { background: linear-gradient(135deg, #f093fb, #f5576c); }
+        .hari-rabu { border-left-color: #4facfe !important; }
+        .hari-rabu .mapel-jam { background: linear-gradient(135deg, #4facfe, #00f2fe); }
+        .hari-kamis { border-left-color: #43e97b !important; }
+        .hari-kamis .mapel-jam { background: linear-gradient(135deg, #43e97b, #38f9d7); }
+        .hari-jumat { border-left-color: #fa709a !important; }
+        .hari-jumat .mapel-jam { background: linear-gradient(135deg, #fa709a, #fee140); }
+        .hari-sabtu { border-left-color: #30cfd0 !important; }
+        .hari-sabtu .mapel-jam { background: linear-gradient(135deg, #30cfd0, #330867); }
+        .hari-minggu { border-left-color: #a8edea !important; }
+        .hari-minggu .mapel-jam { background: linear-gradient(135deg, #a8edea, #fed6e3); }
+
         .modal {
             display: none; position: fixed; inset: 0;
             background: rgba(0,0,0,0.6);
@@ -679,6 +789,14 @@
             .sched-jam { padding: 6px 10px; font-size: 12px; min-width: 55px; }
             .sched-kegiatan h4 { font-size: 13.5px; }
             .sched-kegiatan p { font-size: 11px; }
+            .mapel-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+            .mapel-card { padding: 12px; border-radius: 12px; }
+            .mapel-nama { font-size: 13px; }
+            .mapel-jam { font-size: 10px; padding: 4px 10px; margin-bottom: 8px; }
+            .mapel-info { font-size: 11px; }
+            .mapel-header { font-size: 13px; padding: 10px 15px; }
+            .mapel-header .count { font-size: 11px; padding: 3px 10px; }
+            .mapel-actions .btn-icon { width: 26px; height: 26px; font-size: 11px; }
         }
 
         @media (max-width: 380px) {
@@ -1300,7 +1418,7 @@
                     return;
                 }
 
-                // ⭐ JADWAL PELAJARAN - dikelompokkan per hari
+                // ⭐ JADWAL PELAJARAN - KARTU KOTAK
                 if (koleksi === 'pelajaran') {
                     const hariUrut = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'];
                     const perHari = {};
@@ -1317,19 +1435,15 @@
                         if (listHari.length === 0) return;
 
                         const header = document.createElement('div');
-                        header.style.cssText = `
-                            background: linear-gradient(135deg, #667eea, #764ba2);
-                            color: white;
-                            padding: 12px 20px;
-                            border-radius: 12px;
-                            font-weight: 700;
-                            font-size: 15px;
-                            margin-bottom: 10px;
-                            margin-top: 15px;
-                            box-shadow: 0 4px 15px rgba(102,126,234,0.3);
+                        header.className = 'mapel-header';
+                        header.innerHTML = `
+                            <span>📅 ${hari}</span>
+                            <span class="count">${listHari.length} mapel</span>
                         `;
-                        header.textContent = `📅 ${hari} (${listHari.length} mapel)`;
                         listData.appendChild(header);
+
+                        const grid = document.createElement('div');
+                        grid.className = 'mapel-grid';
 
                         listHari.forEach(data => {
                             const id = data.id;
@@ -1337,37 +1451,33 @@
                                 ? `${data.jam_mulai} - ${data.jam_selesai}` 
                                 : data.jam_mulai;
                             
-                            const item = document.createElement('div');
-                            item.className = 'list-item';
-                            item.style.borderLeftColor = '#4facfe';
-                            item.style.marginBottom = '8px';
-                            item.innerHTML = `
-                                <div style="display:flex; align-items:center; gap:14px; flex:1;">
-                                    <div style="background:linear-gradient(135deg,#4facfe,#00f2fe); color:white; padding:8px 14px; border-radius:10px; font-weight:700; font-size:13px; white-space:nowrap; min-width:80px; text-align:center;">
-                                        ${jam}
-                                    </div>
-                                    <div class="list-item-info">
-                                        <h4>📚 ${escapeHtml(data.mapel || '-')}</h4>
-                                        ${data.guru ? `<p>👨‍🏫 ${escapeHtml(data.guru)}</p>` : ''}
-                                        ${data.ruang ? `<div style="margin-top:4px;font-size:12px;color:#718096;">🏫 ${escapeHtml(data.ruang)}</div>` : ''}
-                                        ${data.catatan ? `<div style="margin-top:4px;font-size:12px;color:#a0aec0;font-style:italic;">📝 ${escapeHtml(data.catatan)}</div>` : ''}
-                                    </div>
-                                </div>
-                                <div class="list-item-actions">
+                            const hariClass = 'hari-' + hari.toLowerCase();
+                            
+                            const card = document.createElement('div');
+                            card.className = `mapel-card ${hariClass}`;
+                            card.innerHTML = `
+                                <div class="mapel-jam">🕐 ${jam}</div>
+                                <div class="mapel-nama">📚 ${escapeHtml(data.mapel || '-')}</div>
+                                ${data.guru ? `<div class="mapel-info">👨‍🏫 ${escapeHtml(data.guru)}</div>` : ''}
+                                ${data.ruang ? `<div class="mapel-info">🏫 ${escapeHtml(data.ruang)}</div>` : ''}
+                                ${data.catatan ? `<div class="mapel-info">📝 ${escapeHtml(data.catatan)}</div>` : ''}
+                                <div class="mapel-actions">
                                     <button class="btn-icon btn-edit" title="Edit">✏️</button>
                                     <button class="btn-icon btn-hapus" title="Hapus">🗑️</button>
                                 </div>
                             `;
-                            item.querySelector('.btn-edit').onclick = () => editData(id, data, koleksi);
-                            item.querySelector('.btn-hapus').onclick = async () => {
+                            card.querySelector('.btn-edit').onclick = () => editData(id, data, koleksi);
+                            card.querySelector('.btn-hapus').onclick = async () => {
                                 if (confirm('Hapus mata pelajaran ini?')) {
                                     await deleteDoc(doc(db, koleksi, id));
                                     showToast('🗑️ Mapel dihapus!');
                                     await tampilkanData(koleksi, tab);
                                 }
                             };
-                            listData.appendChild(item);
+                            grid.appendChild(card);
                         });
+
+                        listData.appendChild(grid);
                     });
                     return;
                 }
