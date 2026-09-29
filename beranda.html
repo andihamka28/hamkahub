@@ -269,6 +269,10 @@ body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; 
 .alarm-btn-stop { background:linear-gradient(135deg,#e53e3e,#c53030); color:white; border:none; padding:15px 40px; border-radius:12px; font-size:16px; font-weight:800; cursor:pointer; margin-top:20px; box-shadow:0 10px 25px rgba(229,62,62,0.4); transition:.3s; }
 .alarm-btn-stop:hover { transform:translateY(-3px); box-shadow:0 15px 35px rgba(229,62,62,0.6); }
 
+/* FILTER BELANJA */
+.filter-belanja-bar { background:white; padding:16px 20px; border-radius:14px; margin-bottom:16px; box-shadow:0 4px 20px rgba(0,0,0,0.06); display:flex; flex-wrap:wrap; gap:12px; align-items:center; justify-content:space-between; }
+.filter-belanja-btns { display:flex; gap:8px; flex-wrap:wrap; }
+
 @media (max-width: 900px) {
   .sidebar { transform:translateX(-100%); }
   .sidebar.active { transform:translateX(0); }
@@ -355,6 +359,8 @@ body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; 
   .alarm-box { padding:30px 25px; }
   .alarm-icon { font-size:60px; }
   .alarm-box h2 { font-size:20px; }
+  .filter-belanja-bar { padding:12px 14px; }
+  .filter-belanja-btns button { padding:6px 10px !important; font-size:11px !important; }
 }
 @media (max-width: 380px) {
   .menu-grid { grid-template-columns:1fr; gap:8px; }
@@ -366,6 +372,7 @@ body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; 
 .bg4 { background:linear-gradient(135deg,#43e97b,#38f9d7); }
 .bg5 { background:linear-gradient(135deg,#fa709a,#fee140); }
 .bg6 { background:linear-gradient(135deg,#30cfd0,#330867); }
+.bg7 { background:linear-gradient(135deg,#ff9a9e,#fecfef); }
 </style>
 </head>
 <body>
@@ -390,6 +397,7 @@ body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; 
     <a class="menu-item" onclick="bukaHalaman('tugas_agenda', this)"><span class="icon">📋</span> Tugas & Agenda</a>
     <a class="menu-item" onclick="bukaHalaman('jadwal', this)"><span class="icon">⏰</span> Jadwal</a>
     <a class="menu-item" onclick="bukaHalaman('pekerjaan', this)"><span class="icon">💼</span> Pekerjaan</a>
+    <a class="menu-item" onclick="bukaHalaman('belanja', this)"><span class="icon">🛒</span> Daftar Belanja</a>
 
     <div class="menu-category">💰 Keuangan</div>
     <a class="menu-item" onclick="bukaHalaman('keuangan', this)"><span class="icon">💰</span> Keuangan</a>
@@ -471,6 +479,13 @@ body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; 
             <p>Rencana & kebiasaan</p>
           </div>
         </div>
+        <div class="menu-card" onclick="bukaHalaman('belanja')">
+          <div>
+            <div class="menu-card-icon bg7">🛒</div>
+            <h4>Daftar Belanja</h4>
+            <p>Jangan lupa beli barang</p>
+          </div>
+        </div>
         <div class="menu-card" onclick="bukaHalaman('keuangan')">
           <div>
             <div class="menu-card-icon bg5">💰</div>
@@ -483,6 +498,13 @@ body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; 
             <div class="menu-card-icon bg6">💼</div>
             <h4>Pekerjaan</h4>
             <p>Tugas, proyek & progres</p>
+          </div>
+        </div>
+        <div class="menu-card" onclick="bukaHalaman('link')">
+          <div>
+            <div class="menu-card-icon bg1">⭐</div>
+            <h4>Link Penting</h4>
+            <p>Bookmark favoritmu</p>
           </div>
         </div>
       </div>
@@ -679,6 +701,14 @@ const MENU_CONFIG = {
       proyek:[{name:"nama",label:"Nama Proyek",type:"text",required:true},{name:"deskripsi",label:"Deskripsi",type:"textarea",required:false},{name:"mulai",label:"Tanggal Mulai",type:"date",required:true},{name:"selesai",label:"Target Selesai",type:"date",required:true},{name:"progress",label:"Progress (%)",type:"number",required:false}]
     }
   },
+  belanja: { title:"🛒 Daftar Belanja", collection:"belanja", tabs:null,
+    fields:[
+      {name:"nama",label:"Nama Barang",type:"text",required:true},
+      {name:"jumlah",label:"Jumlah (contoh: 2 kg / 3 pcs)",type:"text",required:false},
+      {name:"kategori",label:"Kategori",type:"select",options:["Sayur & Buah","Daging & Ikan","Bumbu Dapur","Minuman","Snack","Kebutuhan Rumah","Obat & Kesehatan","Lainnya"],required:false},
+      {name:"catatan",label:"Catatan",type:"textarea",required:false}
+    ]
+  },
   link: { title:"⭐ Link Penting", collection:"link", tabs:null,
     fields:[{name:"nama",label:"Nama Link",type:"text",required:true},{name:"url",label:"URL",type:"url",required:true},{name:"kategori",label:"Kategori",type:"text",required:false},{name:"catatan",label:"Catatan",type:"textarea",required:false}]
   },
@@ -691,6 +721,7 @@ let currentMenu = null;
 let currentTab = null;
 let editId = null;
 let hariAktif = null;
+let filterBelanja = 'belum';
 const HARI_URUT = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
 function getHariIni() { return HARI_URUT[new Date().getDay()]; }
 
@@ -738,9 +769,9 @@ window.bukaHalaman = async function(namaMenu, el) {
       filterBulan.onchange = () => loadKeuangan();
       await loadKeuangan();
     } else if (namaMenu === 'arsip') {
-      document.getElementById('pageTitle').textContent = '🗃️ Arsip (Otomatis)';
+      document.getElementById('pageTitle').textContent = '🗃️ Arsip';
       document.getElementById('menuNormal').style.display = 'block';
-      document.getElementById('menuTitle').textContent = '🗃️ Arsip Otomatis';
+      document.getElementById('menuTitle').textContent = '🗃️ Arsip';
       const tombol = document.querySelector('.page-header .btn-tambah');
       if (tombol) tombol.style.display = 'none';
       document.getElementById('menuTabs').style.display = 'none';
@@ -933,7 +964,144 @@ async function tampilkanJadwal(tabJadwal) {
   }
 }
 
+// ⭐ TAMPILKAN BELANJA
+window.setFilterBelanja = function(f) {
+  filterBelanja = f;
+  tampilkanData('belanja', null);
+};
+
+window.hapusYangSudahDibeli = async function() {
+  if (!confirm('Hapus semua barang yang sudah dibeli?')) return;
+  try {
+    const snap = await getDocs(collection(db, 'belanja'));
+    let count = 0;
+    for (const docSnap of snap.docs) {
+      const d = docSnap.data();
+      if (d.dibeli === true) {
+        await deleteDoc(doc(db, 'belanja', docSnap.id));
+        count++;
+      }
+    }
+    showToast(`🗑️ ${count} barang dihapus!`);
+    await tampilkanData('belanja', null);
+  } catch (e) { showToast('❌ Gagal: ' + e.message, 'error'); }
+};
+
+async function tampilkanBelanja() {
+  const listData = document.getElementById('listData');
+  listData.innerHTML = '<div class="empty-state"><div class="icon-big">⏳</div>Memuat daftar belanja...</div>';
+
+  try {
+    const snapshot = await getDocs(collection(db, 'belanja'));
+    let items = [];
+    snapshot.forEach(docSnap => {
+      items.push({ id: docSnap.id, ...docSnap.data() });
+    });
+
+    const totalItems = items.length;
+    const belumDibeli = items.filter(i => i.dibeli !== true).length;
+    const sudahDibeli = items.filter(i => i.dibeli === true).length;
+
+    if (filterBelanja === 'belum') items = items.filter(i => i.dibeli !== true);
+    else if (filterBelanja === 'sudah') items = items.filter(i => i.dibeli === true);
+
+    items.sort((a, b) => {
+      const aDibeli = a.dibeli === true ? 1 : 0;
+      const bDibeli = b.dibeli === true ? 1 : 0;
+      if (aDibeli !== bDibeli) return aDibeli - bDibeli;
+      return (a.kategori || '').localeCompare(b.kategori || '');
+    });
+
+    listData.innerHTML = '';
+
+    const infoBar = document.createElement('div');
+    infoBar.className = 'filter-belanja-bar';
+    infoBar.innerHTML = `
+      <div class="filter-belanja-btns">
+        <button onclick="setFilterBelanja('belum')" style="padding:8px 14px;border:2px solid ${filterBelanja === 'belum' ? '#667eea' : '#e2e8f0'};background:${filterBelanja === 'belum' ? 'linear-gradient(135deg,#667eea,#764ba2)' : 'white'};color:${filterBelanja === 'belum' ? 'white' : '#4a5568'};border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;">⏳ Belum Dibeli (${belumDibeli})</button>
+        <button onclick="setFilterBelanja('sudah')" style="padding:8px 14px;border:2px solid ${filterBelanja === 'sudah' ? '#48bb78' : '#e2e8f0'};background:${filterBelanja === 'sudah' ? 'linear-gradient(135deg,#48bb78,#38a169)' : 'white'};color:${filterBelanja === 'sudah' ? 'white' : '#4a5568'};border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;">✅ Sudah Dibeli (${sudahDibeli})</button>
+        <button onclick="setFilterBelanja('semua')" style="padding:8px 14px;border:2px solid ${filterBelanja === 'semua' ? '#667eea' : '#e2e8f0'};background:${filterBelanja === 'semua' ? 'linear-gradient(135deg,#667eea,#764ba2)' : 'white'};color:${filterBelanja === 'semua' ? 'white' : '#4a5568'};border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;">📋 Semua (${totalItems})</button>
+      </div>
+      ${sudahDibeli > 0 ? `<button onclick="hapusYangSudahDibeli()" style="padding:8px 14px;border:none;background:#fee2e2;color:#991b1b;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;">🗑️ Hapus yang Sudah Dibeli</button>` : ''}
+    `;
+    listData.appendChild(infoBar);
+
+    if (items.length === 0) {
+      const empty = document.createElement('div');
+      empty.className = 'empty-state';
+      const pesan = filterBelanja === 'belum' ? 'Semua barang sudah dibeli! 🎉' : filterBelanja === 'sudah' ? 'Belum ada barang yang dibeli.' : 'Daftar belanja masih kosong.';
+      empty.innerHTML = `<div class="icon-big">${filterBelanja === 'belum' && totalItems > 0 ? '🎉' : '🛒'}</div><p>${pesan}</p><p style="margin-top:8px;font-size:13px;color:#a0aec0;">Klik <strong>"+ Tambah"</strong> untuk menambah barang.</p>`;
+      listData.appendChild(empty);
+      return;
+    }
+
+    const perKategori = {};
+    items.forEach(item => {
+      const kat = item.kategori || 'Lainnya';
+      if (!perKategori[kat]) perKategori[kat] = [];
+      perKategori[kat].push(item);
+    });
+
+    const iconKategori = {
+      'Sayur & Buah': '🥬', 'Daging & Ikan': '🍖', 'Bumbu Dapur': '🧄',
+      'Minuman': '🥤', 'Snack': '🍪', 'Kebutuhan Rumah': '🧴',
+      'Obat & Kesehatan': '💊', 'Lainnya': '🛒'
+    };
+
+    Object.keys(perKategori).sort().forEach(kategori => {
+      const header = document.createElement('div');
+      header.style.cssText = 'background:linear-gradient(135deg,#667eea,#764ba2);color:white;padding:10px 18px;border-radius:12px;font-weight:700;font-size:14px;margin-bottom:10px;margin-top:14px;display:flex;justify-content:space-between;align-items:center;';
+      header.innerHTML = `<span>${iconKategori[kategori] || '🛒'} ${kategori}</span><span style="background:rgba(255,255,255,0.25);padding:3px 10px;border-radius:20px;font-size:11px;">${perKategori[kategori].length} item</span>`;
+      listData.appendChild(header);
+
+      perKategori[kategori].forEach(data => {
+        const id = data.id;
+        const sudahDibeli2 = data.dibeli === true;
+        const item = document.createElement('div');
+        item.className = 'list-item' + (sudahDibeli2 ? ' selesai' : '');
+        item.style.borderLeftColor = sudahDibeli2 ? 'var(--green)' : '#fa709a';
+        item.style.marginBottom = '8px';
+        item.innerHTML = `
+          <div class="check-selesai ${sudahDibeli2 ? 'checked' : ''}" title="Tandai sudah dibeli" style="width:32px;height:32px;font-size:16px;">✓</div>
+          <div class="list-item-info">
+            <h4 class="${sudahDibeli2 ? 'selesai-teks' : ''}" style="font-size:16px;">🛍️ ${escapeHtml(data.nama || '-')}</h4>
+            ${data.jumlah ? `<p class="${sudahDibeli2 ? 'selesai-teks' : ''}" style="font-weight:600;color:#667eea;">📦 ${escapeHtml(data.jumlah)}</p>` : ''}
+            ${data.catatan ? `<div style="margin-top:4px;font-size:12px;color:#a0aec0;font-style:italic;" class="${sudahDibeli2 ? 'selesai-teks' : ''}">📝 ${escapeHtml(data.catatan)}</div>` : ''}
+          </div>
+          <div class="list-item-actions">
+            <button class="btn-icon btn-edit" title="Edit">✏️</button>
+            <button class="btn-icon btn-hapus" title="Hapus">🗑️</button>
+          </div>
+        `;
+        item.querySelector('.check-selesai').onclick = async () => {
+          await updateDoc(doc(db, 'belanja', id), { dibeli: !sudahDibeli2 });
+          await tampilkanData('belanja', null);
+          if (!sudahDibeli2) showToast('✅ ' + data.nama + ' sudah dibeli!');
+          else showToast('↩️ ' + data.nama + ' dikembalikan');
+        };
+        item.querySelector('.btn-edit').onclick = () => editData(id, data, 'belanja');
+        item.querySelector('.btn-hapus').onclick = async () => {
+          if (confirm('Hapus ' + data.nama + '?')) {
+            await deleteDoc(doc(db, 'belanja', id));
+            showToast('🗑️ Barang dihapus!');
+            await tampilkanData('belanja', null);
+          }
+        };
+        listData.appendChild(item);
+      });
+    });
+
+  } catch (error) {
+    console.error('Error:', error);
+    listData.innerHTML = `<div class="empty-state"><div class="icon-big">❌</div><p>Gagal memuat: ${error.message}</p></div>`;
+  }
+}
+
 async function tampilkanData(koleksi, tab) {
+  if (koleksi === 'belanja') {
+    return tampilkanBelanja();
+  }
+
   const listData = document.getElementById('listData');
   listData.innerHTML = '<div class="empty-state"><div class="icon-big">⏳</div>Memuat data...</div>';
 
@@ -1169,6 +1337,7 @@ window.simpanData = async function(e) {
     } else {
       if (currentTab === 'habit') data.progress = Number(data.progress) || 0;
       if (currentTab === 'todo') data.selesai = false;
+      if (currentMenu === 'belanja') data.dibeli = false;
       await addDoc(collection(db, koleksi), {...data, createdAt: serverTimestamp()});
       showToast('✅ Data disimpan!');
     }
@@ -1220,60 +1389,178 @@ window.logout = function() {
   }
 };
 
+/* ⭐ TAMPILKAN ARSIP - VERSI DIPERBAIKI */
 async function tampilkanArsip() {
   const listData = document.getElementById('listData');
   listData.innerHTML = '<div class="empty-state"><div class="icon-big">⏳</div>Memuat arsip...</div>';
+  
   try {
     const arsipItems = [];
     const today = new Date().toISOString().slice(0, 10);
-    const snapTugas = await getDocs(collection(db, 'tugas_agenda'));
-    snapTugas.forEach(docSnap => {
-      const d = docSnap.data();
-      if (d.jenis === 'todo' && d.selesai === true) {
-        arsipItems.push({ id: docSnap.id, judul: d.tugas || 'Tanpa Judul', kategori: 'To-Do', icon: '✔️',
-          deskripsi: d.prioritas ? `Prioritas: ${d.prioritas}` : '',
-          tanggal: d.createdAt?.seconds ? new Date(d.createdAt.seconds * 1000).toLocaleDateString('id-ID') : '-',
-          sumber: 'tugas_agenda', warna: '#48bb78' });
-      }
-      if (d.jenis === 'agenda' && d.tanggal && d.tanggal < today) {
-        arsipItems.push({ id: docSnap.id, judul: d.judul || 'Tanpa Judul', kategori: 'Agenda', icon: '📋',
-          deskripsi: d.lokasi ? `Lokasi: ${d.lokasi}` : '', tanggal: d.tanggal,
-          sumber: 'tugas_agenda', warna: '#667eea' });
-      }
-    });
-    const snapKerja = await getDocs(collection(db, 'pekerjaan'));
-    snapKerja.forEach(docSnap => {
-      const d = docSnap.data();
-      if (d.status === 'Selesai') {
-        const jenisLabel = d.jenis === 'proyek' ? 'Proyek' : 'Pekerjaan';
-        const icon = d.jenis === 'proyek' ? '🚀' : '💼';
-        arsipItems.push({ id: docSnap.id, judul: d.judul || d.nama || 'Tanpa Judul', kategori: jenisLabel, icon: icon,
-          deskripsi: d.deskripsi || '', tanggal: d.deadline || d.selesai || '-',
-          sumber: 'pekerjaan', warna: '#4facfe' });
-      }
-    });
-    const snapTarget = await getDocs(collection(db, 'target_habit'));
-    snapTarget.forEach(docSnap => {
-      const d = docSnap.data();
-      if (d.jenis === 'target' && d.status === 'Selesai') {
-        arsipItems.push({ id: docSnap.id, judul: d.judul || 'Tanpa Judul', kategori: 'Target', icon: '🎯',
-          deskripsi: d.deskripsi || '', tanggal: d.deadline || '-',
-          sumber: 'target_habit', warna: '#43e97b' });
-      }
-    });
-    const snapArsip = await getDocs(collection(db, 'arsip'));
-    snapArsip.forEach(docSnap => {
-      const d = docSnap.data();
-      arsipItems.push({ id: docSnap.id, judul: d.judul || 'Tanpa Judul', kategori: d.kategori || 'Lainnya', icon: '🗃️',
-        deskripsi: d.keterangan || '', tanggal: '-', sumber: 'arsip', warna: '#a8edea', manual: true });
-    });
+
+    // 1️⃣ TO-DO yang sudah selesai
+    try {
+      const snapTugas = await getDocs(collection(db, 'tugas_agenda'));
+      snapTugas.forEach(docSnap => {
+        const d = docSnap.data();
+        if (d.jenis === 'todo' && d.selesai === true) {
+          arsipItems.push({
+            id: docSnap.id,
+            judul: d.tugas || 'Tanpa Judul',
+            kategori: '✔️ To-Do',
+            icon: '✔️',
+            deskripsi: d.prioritas ? `Prioritas: ${d.prioritas}` : '',
+            tanggal: d.deadline || (d.createdAt?.seconds ? new Date(d.createdAt.seconds * 1000).toLocaleDateString('id-ID') : '-'),
+            sumber: 'tugas_agenda',
+            warna: '#48bb78'
+          });
+        }
+        if (d.jenis === 'agenda' && d.tanggal && d.tanggal < today) {
+          arsipItems.push({
+            id: docSnap.id,
+            judul: d.judul || 'Tanpa Judul',
+            kategori: '📋 Agenda (lewat)',
+            icon: '📋',
+            deskripsi: d.lokasi ? `Lokasi: ${d.lokasi}` : '',
+            tanggal: d.tanggal,
+            sumber: 'tugas_agenda',
+            warna: '#667eea'
+          });
+        }
+      });
+    } catch(e) { console.log('Skip tugas_agenda:', e.message); }
+
+    // 2️⃣ PEKERJAAN yang selesai
+    try {
+      const snapKerja = await getDocs(collection(db, 'pekerjaan'));
+      snapKerja.forEach(docSnap => {
+        const d = docSnap.data();
+        if (d.status === 'Selesai') {
+          const jenisLabel = d.jenis === 'proyek' ? '🚀 Proyek' : '💼 Pekerjaan';
+          const icon = d.jenis === 'proyek' ? '🚀' : '💼';
+          arsipItems.push({
+            id: docSnap.id,
+            judul: d.judul || d.nama || 'Tanpa Judul',
+            kategori: jenisLabel,
+            icon: icon,
+            deskripsi: d.deskripsi || '',
+            tanggal: d.deadline || d.selesai || '-',
+            sumber: 'pekerjaan',
+            warna: '#4facfe'
+          });
+        }
+      });
+    } catch(e) { console.log('Skip pekerjaan:', e.message); }
+
+    // 3️⃣ TARGET yang selesai
+    try {
+      const snapTarget = await getDocs(collection(db, 'target_habit'));
+      snapTarget.forEach(docSnap => {
+        const d = docSnap.data();
+        if (d.jenis === 'target' && d.status === 'Selesai') {
+          arsipItems.push({
+            id: docSnap.id,
+            judul: d.judul || 'Tanpa Judul',
+            kategori: '🎯 Target',
+            icon: '🎯',
+            deskripsi: d.deskripsi || '',
+            tanggal: d.deadline || '-',
+            sumber: 'target_habit',
+            warna: '#43e97b'
+          });
+        }
+      });
+    } catch(e) { console.log('Skip target:', e.message); }
+
+    // 4️⃣ PENGINGAT yang sudah lewat
+    try {
+      const snapTugas2 = await getDocs(collection(db, 'tugas_agenda'));
+      snapTugas2.forEach(docSnap => {
+        const d = docSnap.data();
+        if (d.jenis === 'pengingat' && d.waktu) {
+          const tglPengingat = d.waktu.split('T')[0];
+          if (tglPengingat < today) {
+            arsipItems.push({
+              id: docSnap.id,
+              judul: d.judul || 'Tanpa Judul',
+              kategori: '🔔 Pengingat (lewat)',
+              icon: '🔔',
+              deskripsi: d.catatan || '',
+              tanggal: tglPengingat,
+              sumber: 'tugas_agenda',
+              warna: '#ed8936'
+            });
+          }
+        }
+      });
+    } catch(e) { console.log('Skip pengingat:', e.message); }
+
+    // 5️⃣ BELANJA yang sudah dibeli
+    try {
+      const snapBelanja = await getDocs(collection(db, 'belanja'));
+      snapBelanja.forEach(docSnap => {
+        const d = docSnap.data();
+        if (d.dibeli === true) {
+          arsipItems.push({
+            id: docSnap.id,
+            judul: d.nama || 'Tanpa Nama',
+            kategori: '🛒 Belanja',
+            icon: '🛒',
+            deskripsi: (d.jumlah ? `Jumlah: ${d.jumlah}` : '') + (d.kategori ? ` • ${d.kategori}` : ''),
+            tanggal: d.createdAt?.seconds ? new Date(d.createdAt.seconds * 1000).toLocaleDateString('id-ID') : '-',
+            sumber: 'belanja',
+            warna: '#fa709a'
+          });
+        }
+      });
+    } catch(e) { console.log('Skip belanja:', e.message); }
+
+    // 6️⃣ ARSIP MANUAL (jika ada)
+    try {
+      const snapArsip = await getDocs(collection(db, 'arsip'));
+      snapArsip.forEach(docSnap => {
+        const d = docSnap.data();
+        arsipItems.push({
+          id: docSnap.id,
+          judul: d.judul || 'Tanpa Judul',
+          kategori: d.kategori || '🗃️ Lainnya',
+          icon: '🗃️',
+          deskripsi: d.keterangan || '',
+          tanggal: '-',
+          sumber: 'arsip',
+          warna: '#a8edea',
+          manual: true
+        });
+      });
+    } catch(e) { console.log('Skip arsip manual:', e.message); }
+
     arsipItems.sort((a, b) => (b.tanggal || '').localeCompare(a.tanggal || ''));
 
     if (arsipItems.length === 0) {
-      listData.innerHTML = `<div class="empty-state"><div class="icon-big">📭</div><p>Belum ada data di arsip.</p><p style="margin-top:10px;font-size:13px;color:#a0aec0;">Arsip otomatis terisi dari: To-Do selesai, Agenda lewat, Pekerjaan/Target selesai.</p></div>`;
+      listData.innerHTML = `
+        <div class="empty-state">
+          <div class="icon-big">📭</div>
+          <p>Arsip masih kosong.</p>
+          <p style="margin-top:12px;font-size:13px;color:#a0aec0;line-height:1.7;">
+            Arsip otomatis terisi dari:<br>
+            ✔️ To-Do yang dicentang selesai<br>
+            📋 Agenda yang sudah lewat tanggalnya<br>
+            🔔 Pengingat yang sudah lewat<br>
+            💼 Pekerjaan yang statusnya "Selesai"<br>
+            🎯 Target yang statusnya "Selesai"<br>
+            🛒 Barang belanja yang sudah dibeli
+          </p>
+        </div>`;
       return;
     }
-    listData.innerHTML = `<div style="background:white;padding:15px 20px;border-radius:12px;margin-bottom:15px;box-shadow:0 4px 20px rgba(0,0,0,0.06);font-size:13px;color:#718096;">📦 Menampilkan <strong>${arsipItems.length}</strong> item arsip otomatis</div>`;
+
+    // Info bar
+    listData.innerHTML = `
+      <div style="background:white;padding:15px 20px;border-radius:12px;margin-bottom:15px;box-shadow:0 4px 20px rgba(0,0,0,0.06);font-size:13px;color:#718096;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;">
+        <span>📦 Menampilkan <strong>${arsipItems.length}</strong> item arsip otomatis</span>
+      </div>
+    `;
+
     arsipItems.forEach(item => {
       const el = document.createElement('div');
       el.className = 'list-item';
@@ -1284,10 +1571,12 @@ async function tampilkanArsip() {
           ${item.deskripsi ? `<p>${escapeHtml(String(item.deskripsi).substring(0, 100))}</p>` : ''}
           <div style="margin-top:6px;font-size:12px;color:#718096;">🏷️ ${item.kategori} • 📅 ${item.tanggal}</div>
         </div>
-        <div class="list-item-actions"><button class="btn-icon btn-hapus" title="Hapus">🗑️</button></div>
+        <div class="list-item-actions">
+          <button class="btn-icon btn-hapus" title="Hapus dari sumber">🗑️</button>
+        </div>
       `;
       el.querySelector('.btn-hapus').onclick = async () => {
-        if (confirm('Hapus item ini dari arsip?')) {
+        if (confirm('Hapus item ini secara permanen?')) {
           try {
             await deleteDoc(doc(db, item.sumber, item.id));
             showToast('🗑️ Item dihapus!');
@@ -1297,6 +1586,7 @@ async function tampilkanArsip() {
       };
       listData.appendChild(el);
     });
+
   } catch (error) {
     console.error('Error:', error);
     listData.innerHTML = `<div class="empty-state"><div class="icon-big">❌</div><p>Gagal memuat arsip: ${error.message}</p></div>`;
@@ -1382,9 +1672,7 @@ async function loadKeuangan() {
   } catch (e) { console.error(e); }
 }
 
-/* ============================================
-   ALARM PENGINGAT - VERSI ANDAL
-   ============================================ */
+/* ALARM */
 let audioCtx = null;
 let alarmInterval = null;
 let alarmAktif = false;
@@ -1410,10 +1698,7 @@ window.aktifkanSuara = function() {
     showToast('🔊 Suara alarm aktif!');
     putarTesSingkat();
     const btn = document.getElementById('btnAudio');
-    if (btn) {
-      btn.textContent = '🔊 Suara Aktif ✓';
-      btn.classList.add('aktif');
-    }
+    if (btn) { btn.textContent = '🔊 Suara Aktif ✓'; btn.classList.add('aktif'); }
   } else {
     showToast('⚠️ Gagal aktifkan suara. Coba klik lagi.', 'error');
   }
@@ -1440,13 +1725,8 @@ function putarTesSingkat() {
 
 function putarAlarm() {
   try {
-    if (!audioCtx) {
-      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    }
-    if (audioCtx.state === 'suspended') {
-      audioCtx.resume();
-    }
-    
+    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    if (audioCtx.state === 'suspended') audioCtx.resume();
     const now = audioCtx.currentTime;
     for (let i = 0; i < 8; i++) {
       const osc = audioCtx.createOscillator();
@@ -1470,29 +1750,13 @@ function tampilkanAlarm(judul, catatan) {
   document.getElementById('alarmCatatan').textContent = catatan || '';
   document.getElementById('alarmModal').classList.add('active');
   alarmAktif = true;
-  
   putarAlarm();
   alarmInterval = setInterval(putarAlarm, 2500);
-  
-  if (navigator.vibrate) {
-    navigator.vibrate([500, 300, 500, 300, 500]);
-  }
-  
+  if (navigator.vibrate) navigator.vibrate([500, 300, 500, 300, 500]);
   if (Notification.permission === 'granted') {
     try {
-      new Notification('🔔 PENGINGAT: ' + judul, {
-        body: catatan || 'Sudah waktunya!',
-        requireInteraction: true
-      });
+      new Notification('🔔 PENGINGAT: ' + judul, { body: catatan || 'Sudah waktunya!', requireInteraction: true });
     } catch (e) {}
-  }
-  
-  if (Notification.permission !== 'granted') {
-    setTimeout(() => {
-      if (alarmAktif) {
-        try { alert('🔔 PENGINGAT!\n\n' + judul + '\n' + (catatan || '')); } catch(e) {}
-      }
-    }, 100);
   }
 }
 
@@ -1508,24 +1772,18 @@ async function cekPengingat() {
   try {
     const snap = await getDocs(collection(db, 'tugas_agenda'));
     const nowTime = Date.now();
-
     snap.forEach(docSnap => {
       const d = docSnap.data();
       if (d.jenis !== 'pengingat') return;
       if (!d.waktu) return;
       if (sudahBerbunyi.has(docSnap.id)) return;
-      
       const waktuPengingat = new Date(d.waktu);
       const selisihDetik = (nowTime - waktuPengingat.getTime()) / 1000;
-      
       if (selisihDetik >= 0 && selisihDetik <= 90) {
         sudahBerbunyi.add(docSnap.id);
         tampilkanAlarm(d.judul || 'Pengingat', d.catatan);
       }
-      
-      if (selisihDetik > 86400) {
-        sudahBerbunyi.delete(docSnap.id);
-      }
+      if (selisihDetik > 86400) sudahBerbunyi.delete(docSnap.id);
     });
   } catch (e) { console.error('Cek pengingat gagal:', e); }
 }
@@ -1536,15 +1794,6 @@ if ('Notification' in window && Notification.permission === 'default') {
 
 setInterval(cekPengingat, 5000);
 setTimeout(cekPengingat, 2000);
-
-// Update tombol audio saat pertama interaksi
-document.addEventListener('click', function() {
-  const btn = document.getElementById('btnAudio');
-  if (btn && audioSiap) {
-    btn.textContent = '🔊 Suara Aktif ✓';
-    btn.classList.add('aktif');
-  }
-}, { once: false });
 </script>
 </body>
 </html>
