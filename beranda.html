@@ -480,60 +480,8 @@
         .btn-keuangan .ico.keluar { background: linear-gradient(135deg, #fee2e2, #fecaca); }
         .btn-keuangan .ico.semua { background: linear-gradient(135deg, #e0e7ff, #c7d2fe); }
 
-        /* DAILY SCHEDULING */
-        .sched-tanggal {
-            background: white;
-            padding: 15px 20px;
-            border-radius: 15px;
-            box-shadow: var(--shadow);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-        .sched-tanggal label { font-size: 13px; font-weight: 600; color: var(--text); }
-        .sched-tanggal input {
-            padding: 8px 12px;
-            border: 2px solid var(--border);
-            border-radius: 8px;
-            font-size: 14px;
-            outline: none;
-            flex: 1;
-            min-width: 150px;
-        }
-        .sched-tanggal input:focus { border-color: var(--primary); }
-
-        .sched-list { display: flex; flex-direction: column; gap: 10px; }
-        .sched-item {
-            background: white;
-            padding: 16px 20px;
-            border-radius: 14px;
-            box-shadow: var(--shadow);
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            border-left: 4px solid var(--primary);
-            transition: 0.3s;
-        }
-        .sched-item:hover { transform: translateX(5px); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
-        .sched-jam {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            padding: 8px 14px;
-            border-radius: 10px;
-            font-weight: 700;
-            font-size: 14px;
-            white-space: nowrap;
-            min-width: 70px;
-            text-align: center;
-        }
-        .sched-kegiatan { flex: 1; }
-        .sched-kegiatan h4 { font-size: 15px; color: var(--text); margin-bottom: 3px; }
-        .sched-kegiatan p { font-size: 12px; color: var(--text-light); }
-
-        /* ⭐ JADWAL PELAJARAN - KARTU KOTAK */
-        .mapel-header {
+        /* DAILY SCHEDULING (MINGGUAN) */
+        .minggu-header {
             background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
             padding: 12px 20px;
@@ -547,20 +495,20 @@
             justify-content: space-between;
             align-items: center;
         }
-        .mapel-header:first-child { margin-top: 0; }
-        .mapel-header .count {
+        .minggu-header:first-child { margin-top: 0; }
+        .minggu-header .count {
             background: rgba(255,255,255,0.25);
             padding: 4px 12px;
             border-radius: 20px;
             font-size: 12px;
         }
-        .mapel-grid {
+        .minggu-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
             gap: 12px;
             margin-bottom: 10px;
         }
-        .mapel-card {
+        .sched-card {
             background: white;
             border-radius: 14px;
             padding: 16px;
@@ -570,11 +518,11 @@
             position: relative;
             overflow: hidden;
         }
-        .mapel-card:hover {
+        .sched-card:hover {
             transform: translateY(-4px);
             box-shadow: 0 12px 30px rgba(0,0,0,0.15);
         }
-        .mapel-card::before {
+        .sched-card::before {
             content: '';
             position: absolute;
             top: 0; right: 0;
@@ -582,7 +530,7 @@
             background: linear-gradient(135deg, rgba(79,172,254,0.15), rgba(0,242,254,0.05));
             border-radius: 0 14px 0 60px;
         }
-        .mapel-jam {
+        .sched-jam-badge {
             display: inline-flex;
             align-items: center;
             gap: 5px;
@@ -595,7 +543,7 @@
             margin-bottom: 10px;
             box-shadow: 0 4px 10px rgba(79,172,254,0.3);
         }
-        .mapel-nama {
+        .sched-nama {
             font-size: 15px;
             font-weight: 700;
             color: var(--text);
@@ -603,7 +551,7 @@
             line-height: 1.3;
             padding-right: 20px;
         }
-        .mapel-info {
+        .sched-info {
             font-size: 12px;
             color: var(--text-light);
             display: flex;
@@ -611,7 +559,7 @@
             gap: 5px;
             margin-bottom: 4px;
         }
-        .mapel-actions {
+        .sched-actions {
             display: flex;
             gap: 6px;
             margin-top: 12px;
@@ -619,7 +567,7 @@
             border-top: 1px dashed var(--border);
             justify-content: flex-end;
         }
-        .mapel-actions .btn-icon {
+        .sched-actions .btn-icon {
             width: 30px;
             height: 30px;
             font-size: 12px;
@@ -628,19 +576,19 @@
 
         /* Warna berbeda per hari */
         .hari-senin { border-left-color: #667eea !important; }
-        .hari-senin .mapel-jam { background: linear-gradient(135deg, #667eea, #764ba2); }
+        .hari-senin .sched-jam-badge { background: linear-gradient(135deg, #667eea, #764ba2); }
         .hari-selasa { border-left-color: #f093fb !important; }
-        .hari-selasa .mapel-jam { background: linear-gradient(135deg, #f093fb, #f5576c); }
+        .hari-selasa .sched-jam-badge { background: linear-gradient(135deg, #f093fb, #f5576c); }
         .hari-rabu { border-left-color: #4facfe !important; }
-        .hari-rabu .mapel-jam { background: linear-gradient(135deg, #4facfe, #00f2fe); }
+        .hari-rabu .sched-jam-badge { background: linear-gradient(135deg, #4facfe, #00f2fe); }
         .hari-kamis { border-left-color: #43e97b !important; }
-        .hari-kamis .mapel-jam { background: linear-gradient(135deg, #43e97b, #38f9d7); }
+        .hari-kamis .sched-jam-badge { background: linear-gradient(135deg, #43e97b, #38f9d7); }
         .hari-jumat { border-left-color: #fa709a !important; }
-        .hari-jumat .mapel-jam { background: linear-gradient(135deg, #fa709a, #fee140); }
+        .hari-jumat .sched-jam-badge { background: linear-gradient(135deg, #fa709a, #fee140); }
         .hari-sabtu { border-left-color: #30cfd0 !important; }
-        .hari-sabtu .mapel-jam { background: linear-gradient(135deg, #30cfd0, #330867); }
+        .hari-sabtu .sched-jam-badge { background: linear-gradient(135deg, #30cfd0, #330867); }
         .hari-minggu { border-left-color: #a8edea !important; }
-        .hari-minggu .mapel-jam { background: linear-gradient(135deg, #a8edea, #fed6e3); }
+        .hari-minggu .sched-jam-badge { background: linear-gradient(135deg, #a8edea, #fed6e3); }
 
         .modal {
             display: none; position: fixed; inset: 0;
@@ -785,18 +733,14 @@
             .filter-bulan { padding: 12px 15px; }
             .filter-bulan label { font-size: 12px; }
             .filter-bulan input { font-size: 13px; padding: 6px 10px; }
-            .sched-item { padding: 12px 14px; gap: 10px; }
-            .sched-jam { padding: 6px 10px; font-size: 12px; min-width: 55px; }
-            .sched-kegiatan h4 { font-size: 13.5px; }
-            .sched-kegiatan p { font-size: 11px; }
-            .mapel-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
-            .mapel-card { padding: 12px; border-radius: 12px; }
-            .mapel-nama { font-size: 13px; }
-            .mapel-jam { font-size: 10px; padding: 4px 10px; margin-bottom: 8px; }
-            .mapel-info { font-size: 11px; }
-            .mapel-header { font-size: 13px; padding: 10px 15px; }
-            .mapel-header .count { font-size: 11px; padding: 3px 10px; }
-            .mapel-actions .btn-icon { width: 26px; height: 26px; font-size: 11px; }
+            .minggu-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+            .sched-card { padding: 12px; border-radius: 12px; }
+            .sched-nama { font-size: 13px; }
+            .sched-jam-badge { font-size: 10px; padding: 4px 10px; margin-bottom: 8px; }
+            .sched-info { font-size: 11px; }
+            .minggu-header { font-size: 13px; padding: 10px 15px; }
+            .minggu-header .count { font-size: 11px; padding: 3px 10px; }
+            .sched-actions .btn-icon { width: 26px; height: 26px; font-size: 11px; }
         }
 
         @media (max-width: 380px) {
@@ -829,7 +773,6 @@
             <div class="menu-category">📅 Kegiatan</div>
             <a class="menu-item" onclick="bukaHalaman('agenda', this)"><span class="icon">📋</span> Agenda & To-Do</a>
             <a class="menu-item" onclick="bukaHalaman('daily', this)"><span class="icon">⏰</span> Daily Scheduling</a>
-            <a class="menu-item" onclick="bukaHalaman('pelajaran', this)"><span class="icon">📚</span> Jadwal Pelajaran</a>
             <a class="menu-item" onclick="bukaHalaman('pengingat', this)"><span class="icon">🔔</span> Pengingat</a>
             <a class="menu-item" onclick="bukaHalaman('pekerjaan', this)"><span class="icon">💼</span> Pekerjaan</a>
 
@@ -917,7 +860,7 @@
                     <div class="menu-card" onclick="bukaHalaman('daily')">
                         <div class="menu-card-icon bg3">⏰</div>
                         <h4>Daily Scheduling</h4>
-                        <p>Jadwal harian</p>
+                        <p>Jadwal mingguan & mapel</p>
                     </div>
                     <div class="menu-card" onclick="bukaHalaman('target')">
                         <div class="menu-card-icon bg4">🎯</div>
@@ -1008,15 +951,6 @@
 
                         <div class="list-data" id="listKeuangan" style="margin-top: 20px"></div>
                     </div>
-                </div>
-
-                <div id="menuDaily" style="display:none">
-                    <div class="sched-tanggal">
-                        <label>📅 Pilih Tanggal:</label>
-                        <input type="date" id="filterTanggalDaily">
-                        <button class="btn-tambah" onclick="bukaModalDaily()" style="margin-left:auto">+ Tambah Jadwal</button>
-                    </div>
-                    <div class="sched-list" id="listDaily"></div>
                 </div>
             </div>
         </div>
@@ -1132,20 +1066,6 @@
                     ]
                 }
             },
-            pelajaran: {
-                title: "📚 Jadwal Pelajaran",
-                collection: "pelajaran",
-                tabs: null,
-                fields: [
-                    { name: "mapel", label: "Nama Mata Pelajaran", type: "text", required: true },
-                    { name: "hari", label: "Hari", type: "select", options: ["Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"], required: true },
-                    { name: "jam_mulai", label: "Jam Mulai", type: "time", required: true },
-                    { name: "jam_selesai", label: "Jam Selesai", type: "time", required: false },
-                    { name: "guru", label: "Nama Guru", type: "text", required: false },
-                    { name: "ruang", label: "Ruang/Kelas", type: "text", required: false },
-                    { name: "catatan", label: "Catatan", type: "textarea", required: false }
-                ]
-            },
             pengingat: {
                 title: "🔔 Pengingat",
                 collection: "pengingat",
@@ -1245,7 +1165,6 @@
 
                 document.getElementById('menuNormal').style.display = 'none';
                 document.getElementById('menuKeuangan').style.display = 'none';
-                document.getElementById('menuDaily').style.display = 'none';
 
                 const tombolTambah = document.querySelector('.page-header .btn-tambah');
                 if (tombolTambah) tombolTambah.style.display = 'block';
@@ -1259,15 +1178,6 @@
                     filterBulan.onchange = () => loadKeuangan();
                     await loadKeuangan();
                 }
-                else if (namaMenu === 'daily') {
-                    document.getElementById('pageTitle').textContent = '⏰ Daily Scheduling';
-                    document.getElementById('menuDaily').style.display = 'block';
-                    const today = new Date().toISOString().slice(0, 10);
-                    const filterTanggal = document.getElementById('filterTanggalDaily');
-                    if (!filterTanggal.value) filterTanggal.value = today;
-                    filterTanggal.onchange = () => loadDaily();
-                    await loadDaily();
-                }
                 else if (namaMenu === 'arsip') {
                     document.getElementById('pageTitle').textContent = '🗃️ Arsip (Otomatis)';
                     document.getElementById('menuNormal').style.display = 'block';
@@ -1276,6 +1186,36 @@
                     if (tombol) tombol.style.display = 'none';
                     document.getElementById('menuTabs').style.display = 'none';
                     await tampilkanArsip();
+                }
+                else if (namaMenu === 'daily') {
+                    document.getElementById('pageTitle').textContent = '⏰ Daily Scheduling';
+                    document.getElementById('menuNormal').style.display = 'block';
+                    document.getElementById('menuTitle').textContent = '⏰ Daily Scheduling';
+
+                    const tabsEl = document.getElementById('menuTabs');
+                    tabsEl.style.display = 'flex';
+                    tabsEl.innerHTML = '';
+                    
+                    const tabConfig = [
+                        { id: 'mingguan', label: '📅 Mingguan' },
+                        { id: 'pelajaran', label: '📚 Pelajaran' }
+                    ];
+                    
+                    tabConfig.forEach((tab, i) => {
+                        const btn = document.createElement('button');
+                        btn.className = 'tab' + (i === 0 ? ' active' : '');
+                        btn.textContent = tab.label;
+                        btn.onclick = () => {
+                            tabsEl.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                            btn.classList.add('active');
+                            currentTab = tab.id;
+                            tampilkanDaily(tab.id);
+                        };
+                        tabsEl.appendChild(btn);
+                    });
+                    
+                    currentTab = 'mingguan';
+                    await tampilkanDaily('mingguan');
                 }
                 else {
                     const config = MENU_CONFIG[namaMenu];
@@ -1322,7 +1262,175 @@
             }
         };
 
-        // ⭐ TAMPILKAN DATA
+        // ⭐ TAMPILKAN DAILY SCHEDULING (Mingguan + Pelajaran)
+        async function tampilkanDaily(tabDaily) {
+            const listData = document.getElementById('listData');
+            listData.innerHTML = '<div class="empty-state"><div class="icon-big">⏳</div>Memuat data...</div>';
+
+            try {
+                const hariUrut = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'];
+                
+                if (tabDaily === 'mingguan') {
+                    // ⭐ MINGGUAN - dari koleksi 'daily_mingguan'
+                    const snapshot = await getDocs(collection(db, 'daily_mingguan'));
+                    
+                    const perHari = {};
+                    hariUrut.forEach(h => perHari[h] = []);
+                    snapshot.forEach(docSnap => {
+                        const data = docSnap.data();
+                        if (perHari[data.hari]) perHari[data.hari].push({ id: docSnap.id, ...data });
+                    });
+                    hariUrut.forEach(h => {
+                        perHari[h].sort((a, b) => (a.jam_mulai || '').localeCompare(b.jam_mulai || ''));
+                    });
+
+                    let adaData = false;
+                    hariUrut.forEach(h => { if (perHari[h].length > 0) adaData = true; });
+
+                    if (!adaData) {
+                        listData.innerHTML = `
+                            <div class="empty-state">
+                                <div class="icon-big">📭</div>
+                                <p>Belum ada jadwal mingguan. Klik <strong>"+ Tambah"</strong> untuk membuat.</p>
+                            </div>`;
+                        return;
+                    }
+
+                    listData.innerHTML = '';
+                    hariUrut.forEach(hari => {
+                        const listHari = perHari[hari];
+                        if (listHari.length === 0) return;
+
+                        const header = document.createElement('div');
+                        header.className = 'minggu-header';
+                        header.innerHTML = `
+                            <span>📅 ${hari}</span>
+                            <span class="count">${listHari.length} kegiatan</span>
+                        `;
+                        listData.appendChild(header);
+
+                        const grid = document.createElement('div');
+                        grid.className = 'minggu-grid';
+
+                        listHari.forEach(data => {
+                            const id = data.id;
+                            const jam = data.jam_selesai 
+                                ? `${data.jam_mulai} - ${data.jam_selesai}` 
+                                : data.jam_mulai;
+                            const hariClass = 'hari-' + hari.toLowerCase();
+                            
+                            const card = document.createElement('div');
+                            card.className = `sched-card ${hariClass}`;
+                            card.innerHTML = `
+                                <div class="sched-jam-badge">🕐 ${jam}</div>
+                                <div class="sched-nama">📌 ${escapeHtml(data.kegiatan || '-')}</div>
+                                ${data.lokasi ? `<div class="sched-info">📍 ${escapeHtml(data.lokasi)}</div>` : ''}
+                                ${data.catatan ? `<div class="sched-info">📝 ${escapeHtml(data.catatan)}</div>` : ''}
+                                <div class="sched-actions">
+                                    <button class="btn-icon btn-edit" title="Edit">✏️</button>
+                                    <button class="btn-icon btn-hapus" title="Hapus">🗑️</button>
+                                </div>
+                            `;
+                            card.querySelector('.btn-edit').onclick = () => editDaily(id, data, 'mingguan');
+                            card.querySelector('.btn-hapus').onclick = async () => {
+                                if (confirm('Hapus jadwal ini?')) {
+                                    await deleteDoc(doc(db, 'daily_mingguan', id));
+                                    showToast('🗑️ Jadwal dihapus!');
+                                    await tampilkanDaily('mingguan');
+                                }
+                            };
+                            grid.appendChild(card);
+                        });
+
+                        listData.appendChild(grid);
+                    });
+                    return;
+                }
+
+                if (tabDaily === 'pelajaran') {
+                    // ⭐ PELAJARAN - dari koleksi 'pelajaran'
+                    const snapshot = await getDocs(collection(db, 'pelajaran'));
+                    
+                    const perHari = {};
+                    hariUrut.forEach(h => perHari[h] = []);
+                    snapshot.forEach(docSnap => {
+                        const data = docSnap.data();
+                        if (perHari[data.hari]) perHari[data.hari].push({ id: docSnap.id, ...data });
+                    });
+                    hariUrut.forEach(h => {
+                        perHari[h].sort((a, b) => (a.jam_mulai || '').localeCompare(b.jam_mulai || ''));
+                    });
+
+                    let adaData = false;
+                    hariUrut.forEach(h => { if (perHari[h].length > 0) adaData = true; });
+
+                    if (!adaData) {
+                        listData.innerHTML = `
+                            <div class="empty-state">
+                                <div class="icon-big">📭</div>
+                                <p>Belum ada jadwal pelajaran. Klik <strong>"+ Tambah"</strong> untuk membuat.</p>
+                            </div>`;
+                        return;
+                    }
+
+                    listData.innerHTML = '';
+                    hariUrut.forEach(hari => {
+                        const listHari = perHari[hari];
+                        if (listHari.length === 0) return;
+
+                        const header = document.createElement('div');
+                        header.className = 'minggu-header';
+                        header.innerHTML = `
+                            <span>📅 ${hari}</span>
+                            <span class="count">${listHari.length} mapel</span>
+                        `;
+                        listData.appendChild(header);
+
+                        const grid = document.createElement('div');
+                        grid.className = 'minggu-grid';
+
+                        listHari.forEach(data => {
+                            const id = data.id;
+                            const jam = data.jam_selesai 
+                                ? `${data.jam_mulai} - ${data.jam_selesai}` 
+                                : data.jam_mulai;
+                            const hariClass = 'hari-' + hari.toLowerCase();
+                            
+                            const card = document.createElement('div');
+                            card.className = `sched-card ${hariClass}`;
+                            card.innerHTML = `
+                                <div class="sched-jam-badge">🕐 ${jam}</div>
+                                <div class="sched-nama">📚 ${escapeHtml(data.mapel || '-')}</div>
+                                ${data.guru ? `<div class="sched-info">👨‍🏫 ${escapeHtml(data.guru)}</div>` : ''}
+                                ${data.ruang ? `<div class="sched-info">🏫 ${escapeHtml(data.ruang)}</div>` : ''}
+                                ${data.catatan ? `<div class="sched-info">📝 ${escapeHtml(data.catatan)}</div>` : ''}
+                                <div class="sched-actions">
+                                    <button class="btn-icon btn-edit" title="Edit">✏️</button>
+                                    <button class="btn-icon btn-hapus" title="Hapus">🗑️</button>
+                                </div>
+                            `;
+                            card.querySelector('.btn-edit').onclick = () => editDaily(id, data, 'pelajaran');
+                            card.querySelector('.btn-hapus').onclick = async () => {
+                                if (confirm('Hapus mata pelajaran ini?')) {
+                                    await deleteDoc(doc(db, 'pelajaran', id));
+                                    showToast('🗑️ Mapel dihapus!');
+                                    await tampilkanDaily('pelajaran');
+                                }
+                            };
+                            grid.appendChild(card);
+                        });
+
+                        listData.appendChild(grid);
+                    });
+                    return;
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                listData.innerHTML = `<div class="empty-state"><div class="icon-big">❌</div><p>Gagal memuat: ${error.message}</p></div>`;
+            }
+        }
+
+        // ⭐ TAMPILKAN DATA UMUM
         async function tampilkanData(koleksi, tab) {
             const listData = document.getElementById('listData');
             listData.innerHTML = '<div class="empty-state"><div class="icon-big">⏳</div>Memuat data...</div>';
@@ -1414,70 +1522,6 @@
                             };
                         });
                         listData.appendChild(card);
-                    });
-                    return;
-                }
-
-                // ⭐ JADWAL PELAJARAN - KARTU KOTAK
-                if (koleksi === 'pelajaran') {
-                    const hariUrut = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'];
-                    const perHari = {};
-                    hariUrut.forEach(h => perHari[h] = []);
-                    items.forEach(data => {
-                        if (perHari[data.hari]) perHari[data.hari].push(data);
-                    });
-                    hariUrut.forEach(h => {
-                        perHari[h].sort((a, b) => (a.jam_mulai || '').localeCompare(b.jam_mulai || ''));
-                    });
-
-                    hariUrut.forEach(hari => {
-                        const listHari = perHari[hari];
-                        if (listHari.length === 0) return;
-
-                        const header = document.createElement('div');
-                        header.className = 'mapel-header';
-                        header.innerHTML = `
-                            <span>📅 ${hari}</span>
-                            <span class="count">${listHari.length} mapel</span>
-                        `;
-                        listData.appendChild(header);
-
-                        const grid = document.createElement('div');
-                        grid.className = 'mapel-grid';
-
-                        listHari.forEach(data => {
-                            const id = data.id;
-                            const jam = data.jam_selesai 
-                                ? `${data.jam_mulai} - ${data.jam_selesai}` 
-                                : data.jam_mulai;
-                            
-                            const hariClass = 'hari-' + hari.toLowerCase();
-                            
-                            const card = document.createElement('div');
-                            card.className = `mapel-card ${hariClass}`;
-                            card.innerHTML = `
-                                <div class="mapel-jam">🕐 ${jam}</div>
-                                <div class="mapel-nama">📚 ${escapeHtml(data.mapel || '-')}</div>
-                                ${data.guru ? `<div class="mapel-info">👨‍🏫 ${escapeHtml(data.guru)}</div>` : ''}
-                                ${data.ruang ? `<div class="mapel-info">🏫 ${escapeHtml(data.ruang)}</div>` : ''}
-                                ${data.catatan ? `<div class="mapel-info">📝 ${escapeHtml(data.catatan)}</div>` : ''}
-                                <div class="mapel-actions">
-                                    <button class="btn-icon btn-edit" title="Edit">✏️</button>
-                                    <button class="btn-icon btn-hapus" title="Hapus">🗑️</button>
-                                </div>
-                            `;
-                            card.querySelector('.btn-edit').onclick = () => editData(id, data, koleksi);
-                            card.querySelector('.btn-hapus').onclick = async () => {
-                                if (confirm('Hapus mata pelajaran ini?')) {
-                                    await deleteDoc(doc(db, koleksi, id));
-                                    showToast('🗑️ Mapel dihapus!');
-                                    await tampilkanData(koleksi, tab);
-                                }
-                            };
-                            grid.appendChild(card);
-                        });
-
-                        listData.appendChild(grid);
                     });
                     return;
                 }
@@ -1611,18 +1655,98 @@
 
         window.bukaModal = function() {
             if (!currentMenu) return;
-            const config = MENU_CONFIG[currentMenu];
+            
             editId = null;
-
-            const fields = config.tabs 
-                ? config.fieldsPerTab[currentTab] 
-                : config.fields;
-
-            document.getElementById('modalTitle').textContent = 'Tambah ' + config.title;
             document.getElementById('formData').reset();
-
             const formFields = document.getElementById('formFields');
             formFields.innerHTML = '';
+
+            // ⭐ KHUSUS MENU DAILY
+            if (currentMenu === 'daily') {
+                if (currentTab === 'mingguan') {
+                    document.getElementById('modalTitle').textContent = '⏰ Tambah Jadwal Mingguan';
+                    formFields.innerHTML = `
+                        <div class="form-group">
+                            <label>Hari *</label>
+                            <select name="hari" required>
+                                <option value="Senin">Senin</option>
+                                <option value="Selasa">Selasa</option>
+                                <option value="Rabu">Rabu</option>
+                                <option value="Kamis">Kamis</option>
+                                <option value="Jumat">Jumat</option>
+                                <option value="Sabtu">Sabtu</option>
+                                <option value="Minggu">Minggu</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Jam Mulai *</label>
+                            <input type="time" name="jam_mulai" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Jam Selesai</label>
+                            <input type="time" name="jam_selesai">
+                        </div>
+                        <div class="form-group">
+                            <label>Nama Kegiatan *</label>
+                            <input type="text" name="kegiatan" required placeholder="Contoh: Meeting klien...">
+                        </div>
+                        <div class="form-group">
+                            <label>Lokasi</label>
+                            <input type="text" name="lokasi" placeholder="Contoh: Kantor...">
+                        </div>
+                        <div class="form-group">
+                            <label>Catatan</label>
+                            <textarea name="catatan" placeholder="Catatan tambahan..."></textarea>
+                        </div>
+                    `;
+                } else if (currentTab === 'pelajaran') {
+                    document.getElementById('modalTitle').textContent = '📚 Tambah Mata Pelajaran';
+                    formFields.innerHTML = `
+                        <div class="form-group">
+                            <label>Hari *</label>
+                            <select name="hari" required>
+                                <option value="Senin">Senin</option>
+                                <option value="Selasa">Selasa</option>
+                                <option value="Rabu">Rabu</option>
+                                <option value="Kamis">Kamis</option>
+                                <option value="Jumat">Jumat</option>
+                                <option value="Sabtu">Sabtu</option>
+                                <option value="Minggu">Minggu</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Nama Mata Pelajaran *</label>
+                            <input type="text" name="mapel" required placeholder="Contoh: Matematika...">
+                        </div>
+                        <div class="form-group">
+                            <label>Jam Mulai *</label>
+                            <input type="time" name="jam_mulai" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Jam Selesai</label>
+                            <input type="time" name="jam_selesai">
+                        </div>
+                        <div class="form-group">
+                            <label>Nama Guru</label>
+                            <input type="text" name="guru" placeholder="Contoh: Pak Budi...">
+                        </div>
+                        <div class="form-group">
+                            <label>Ruang/Kelas</label>
+                            <input type="text" name="ruang" placeholder="Contoh: Kelas 10A...">
+                        </div>
+                        <div class="form-group">
+                            <label>Catatan</label>
+                            <textarea name="catatan" placeholder="Catatan tambahan..."></textarea>
+                        </div>
+                    `;
+                }
+                document.getElementById('modal').classList.add('active');
+                return;
+            }
+
+            const config = MENU_CONFIG[currentMenu];
+            const fields = config.tabs ? config.fieldsPerTab[currentTab] : config.fields;
+            document.getElementById('modalTitle').textContent = 'Tambah ' + config.title;
 
             fields.forEach(field => {
                 const div = document.createElement('div');
@@ -1657,30 +1781,144 @@
             if (e.target === this) tutupModal();
         });
 
+        // ⭐ EDIT DAILY
+        window.editDaily = function(id, data, jenis) {
+            editId = id;
+            document.getElementById('formData').reset();
+            const formFields = document.getElementById('formFields');
+            formFields.innerHTML = '';
+
+            if (jenis === 'mingguan') {
+                document.getElementById('modalTitle').textContent = '✏️ Edit Jadwal Mingguan';
+                formFields.innerHTML = `
+                    <div class="form-group">
+                        <label>Hari *</label>
+                        <select name="hari" required>
+                            ${['Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu'].map(h => 
+                                `<option value="${h}" ${data.hari === h ? 'selected' : ''}>${h}</option>`
+                            ).join('')}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Jam Mulai *</label>
+                        <input type="time" name="jam_mulai" value="${data.jam_mulai || ''}" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Jam Selesai</label>
+                        <input type="time" name="jam_selesai" value="${data.jam_selesai || ''}">
+                    </div>
+                    <div class="form-group">
+                        <label>Nama Kegiatan *</label>
+                        <input type="text" name="kegiatan" value="${escapeHtml(data.kegiatan || '')}" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Lokasi</label>
+                        <input type="text" name="lokasi" value="${escapeHtml(data.lokasi || '')}">
+                    </div>
+                    <div class="form-group">
+                        <label>Catatan</label>
+                        <textarea name="catatan">${escapeHtml(data.catatan || '')}</textarea>
+                    </div>
+                `;
+            } else if (jenis === 'pelajaran') {
+                document.getElementById('modalTitle').textContent = '✏️ Edit Mata Pelajaran';
+                formFields.innerHTML = `
+                    <div class="form-group">
+                        <label>Hari *</label>
+                        <select name="hari" required>
+                            ${['Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu'].map(h => 
+                                `<option value="${h}" ${data.hari === h ? 'selected' : ''}>${h}</option>`
+                            ).join('')}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Nama Mata Pelajaran *</label>
+                        <input type="text" name="mapel" value="${escapeHtml(data.mapel || '')}" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Jam Mulai *</label>
+                        <input type="time" name="jam_mulai" value="${data.jam_mulai || ''}" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Jam Selesai</label>
+                        <input type="time" name="jam_selesai" value="${data.jam_selesai || ''}">
+                    </div>
+                    <div class="form-group">
+                        <label>Nama Guru</label>
+                        <input type="text" name="guru" value="${escapeHtml(data.guru || '')}">
+                    </div>
+                    <div class="form-group">
+                        <label>Ruang/Kelas</label>
+                        <input type="text" name="ruang" value="${escapeHtml(data.ruang || '')}">
+                    </div>
+                    <div class="form-group">
+                        <label>Catatan</label>
+                        <textarea name="catatan">${escapeHtml(data.catatan || '')}</textarea>
+                    </div>
+                `;
+            }
+            document.getElementById('modal').classList.add('active');
+        };
+
+        // ⭐ SIMPAN DATA
         window.simpanData = async function(e) {
             e.preventDefault();
             if (!currentMenu) return;
 
-            const config = MENU_CONFIG[currentMenu];
             const formData = new FormData(e.target);
             const data = {};
             formData.forEach((value, key) => {
-                if (key === 'jumlah') {
-                    data[key] = value.replace(/\./g, '');
-                } else {
-                    data[key] = value;
-                }
+                if (key === 'jumlah') data[key] = value.replace(/\./g, '');
+                else data[key] = value;
             });
 
-            if (currentTab) data.jenis = currentTab;
-
             try {
+                // ⭐ KHUSUS MENU DAILY
+                if (currentMenu === 'daily') {
+                    if (currentTab === 'mingguan') {
+                        if (editId) {
+                            await updateDoc(doc(db, 'daily_mingguan', editId), {
+                                ...data,
+                                updatedAt: serverTimestamp()
+                            });
+                            showToast('✅ Jadwal diperbarui!');
+                        } else {
+                            await addDoc(collection(db, 'daily_mingguan'), {
+                                ...data,
+                                createdAt: serverTimestamp()
+                            });
+                            showToast('✅ Jadwal disimpan!');
+                        }
+                    } else if (currentTab === 'pelajaran') {
+                        if (editId) {
+                            await updateDoc(doc(db, 'pelajaran', editId), {
+                                ...data,
+                                updatedAt: serverTimestamp()
+                            });
+                            showToast('✅ Mapel diperbarui!');
+                        } else {
+                            await addDoc(collection(db, 'pelajaran'), {
+                                ...data,
+                                createdAt: serverTimestamp()
+                            });
+                            showToast('✅ Mapel disimpan!');
+                        }
+                    }
+                    tutupModal();
+                    await tampilkanDaily(currentTab);
+                    return;
+                }
+
+                // Menu biasa
+                const config = MENU_CONFIG[currentMenu];
+                if (currentTab) data.jenis = currentTab;
+
                 if (editId) {
                     await updateDoc(doc(db, config.collection, editId), {
                         ...data,
                         updatedAt: serverTimestamp()
                     });
-                    showToast('✅ Data berhasil diperbarui!', 'success');
+                    showToast('✅ Data berhasil diperbarui!');
                 } else {
                     if (currentTab === 'habit') data.progress = Number(data.progress) || 0;
                     if (currentTab === 'todo' || currentTab === 'tugas') data.selesai = false;
@@ -1688,7 +1926,7 @@
                         ...data,
                         createdAt: serverTimestamp()
                     });
-                    showToast('✅ Data berhasil disimpan!', 'success');
+                    showToast('✅ Data berhasil disimpan!');
                 }
                 tutupModal();
                 await tampilkanData(config.collection, currentTab);
@@ -1704,10 +1942,7 @@
             const config = MENU_CONFIG[currentMenu];
             editId = id;
 
-            const fields = config.tabs 
-                ? config.fieldsPerTab[currentTab] 
-                : config.fields;
-
+            const fields = config.tabs ? config.fieldsPerTab[currentTab] : config.fields;
             document.getElementById('modalTitle').textContent = 'Edit ' + config.title;
 
             const formFields = document.getElementById('formFields');
@@ -2023,141 +2258,9 @@
             }
         }
 
-        window.bukaModalDaily = function() {
-            editId = null;
-            document.getElementById('modalTitle').textContent = '⏰ Tambah Jadwal';
-            
-            const tanggal = document.getElementById('filterTanggalDaily').value || new Date().toISOString().slice(0,10);
-            
-            const formFields = document.getElementById('formFields');
-            formFields.innerHTML = `
-                <div class="form-group">
-                    <label>Tanggal *</label>
-                    <input type="date" name="tanggal" required value="${tanggal}">
-                </div>
-                <div class="form-group">
-                    <label>Jam Mulai *</label>
-                    <input type="time" name="jam_mulai" required>
-                </div>
-                <div class="form-group">
-                    <label>Jam Selesai</label>
-                    <input type="time" name="jam_selesai">
-                </div>
-                <div class="form-group">
-                    <label>Kegiatan *</label>
-                    <input type="text" name="kegiatan" required placeholder="Contoh: Meeting dengan klien...">
-                </div>
-                <div class="form-group">
-                    <label>Catatan</label>
-                    <textarea name="catatan" placeholder="Catatan tambahan..."></textarea>
-                </div>
-            `;
-            document.getElementById('modal').classList.add('active');
-        };
-
-        async function loadDaily() {
-            const tanggal = document.getElementById('filterTanggalDaily').value;
-            if (!tanggal) return;
-            
-            const listEl = document.getElementById('listDaily');
-            listEl.innerHTML = '<div class="empty-state"><div class="icon-big">⏳</div>Memuat...</div>';
-
-            try {
-                const snap = await getDocs(collection(db, 'daily'));
-                const items = [];
-                snap.forEach(docSnap => {
-                    const d = docSnap.data();
-                    if (d.tanggal === tanggal) items.push({ id: docSnap.id, ...d });
-                });
-
-                items.sort((a, b) => (a.jam_mulai || '').localeCompare(b.jam_mulai || ''));
-
-                if (items.length === 0) {
-                    listEl.innerHTML = '<div class="empty-state"><div class="icon-big">📭</div><p>Belum ada jadwal untuk tanggal ini.</p></div>';
-                    return;
-                }
-
-                listEl.innerHTML = '';
-                items.forEach(d => {
-                    const waktu = d.jam_selesai ? `${d.jam_mulai} - ${d.jam_selesai}` : d.jam_mulai;
-                    const item = document.createElement('div');
-                    item.className = 'sched-item';
-                    item.innerHTML = `
-                        <div class="sched-jam">${waktu}</div>
-                        <div class="sched-kegiatan">
-                            <h4>${escapeHtml(d.kegiatan || '-')}</h4>
-                            ${d.catatan ? `<p>${escapeHtml(d.catatan)}</p>` : ''}
-                        </div>
-                        <div class="list-item-actions">
-                            <button class="btn-icon btn-hapus" title="Hapus">🗑️</button>
-                        </div>
-                    `;
-                    item.querySelector('.btn-hapus').onclick = async () => {
-                        if (confirm('Hapus jadwal ini?')) {
-                            await deleteDoc(doc(db, 'daily', d.id));
-                            showToast('🗑️ Terhapus!');
-                            await loadDaily();
-                        }
-                    };
-                    listEl.appendChild(item);
-                });
-            } catch (e) {
-                listEl.innerHTML = `<div class="empty-state">❌ ${e.message}</div>`;
-            }
-        }
-
-        const originalSimpan = window.simpanData;
-        window.simpanData = async function(e) {
-            e.preventDefault();
-            
-            if (currentMenu === 'daily') {
-                const formData = new FormData(e.target);
-                const data = {};
-                formData.forEach((v, k) => data[k] = v);
-                
-                try {
-                    await addDoc(collection(db, 'daily'), {
-                        ...data,
-                        createdAt: serverTimestamp()
-                    });
-                    showToast('✅ Jadwal berhasil disimpan!');
-                    tutupModal();
-                    await loadDaily();
-                } catch (err) {
-                    showToast('❌ Gagal: ' + err.message, 'error');
-                }
-                return;
-            }
-
-            if (currentMenu === 'keuangan') {
-                const formData = new FormData(e.target);
-                const data = {};
-                formData.forEach((v, k) => {
-                    if (k === 'jumlah') data[k] = v.replace(/\./g, '');
-                    else data[k] = v;
-                });
-                
-                try {
-                    await addDoc(collection(db, 'transaksi'), {
-                        ...data,
-                        createdAt: serverTimestamp()
-                    });
-                    showToast('✅ Transaksi berhasil disimpan!');
-                    tutupModal();
-                    await loadKeuangan();
-                    await loadStatistik();
-                } catch (err) {
-                    showToast('❌ Gagal: ' + err.message, 'error');
-                }
-                return;
-            }
-
-            return originalSimpan.call(this, e);
-        };
-
         async function loadStatistik() {
             try {
-                const collections = ['catatan', 'agenda_todo', 'target_habit', 'pekerjaan', 'jurnal', 'daily', 'pelajaran'];
+                const collections = ['catatan', 'agenda_todo', 'target_habit', 'pekerjaan', 'jurnal', 'daily_mingguan', 'pelajaran'];
                 let total = 0;
                 for (const col of collections) {
                     const snap = await getDocs(collection(db, col));
