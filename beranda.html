@@ -14,7 +14,6 @@
 }
 body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; overflow-x:hidden; }
 
-/* SIDEBAR */
 .sidebar { width:var(--sidebar-width); height:100vh; background:linear-gradient(180deg,#1a1f36,#2d3561); color:white; position:fixed; top:0; left:0; overflow-y:auto; transition:transform .3s; z-index:100; }
 .sidebar::-webkit-scrollbar { width:6px; }
 .sidebar::-webkit-scrollbar-thumb { background:rgba(255,255,255,0.2); border-radius:10px; }
@@ -28,7 +27,6 @@ body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; 
 .menu-item.active { background:linear-gradient(90deg,rgba(245,87,108,0.2),transparent); color:white; border-left-color:var(--accent); font-weight:600; }
 .menu-item .icon { width:20px; text-align:center; }
 
-/* MAIN */
 .main-content { margin-left:var(--sidebar-width); flex:1; min-height:100vh; display:flex; flex-direction:column; }
 .topbar { background:rgba(255,255,255,0.9); backdrop-filter:blur(20px); padding:18px 30px; display:flex; justify-content:space-between; align-items:center; box-shadow:0 2px 10px rgba(0,0,0,0.04); position:sticky; top:0; z-index:50; }
 .topbar-left { display:flex; align-items:center; gap:15px; }
@@ -45,7 +43,6 @@ body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; 
 
 .content { padding:30px; flex:1; }
 
-/* DASHBOARD */
 .hero-banner { background:linear-gradient(135deg,#667eea 0%,#764ba2 50%,#f093fb 100%); background-size:200% 200%; animation:heroGradient 10s ease infinite; border-radius:24px; padding:40px 45px; color:white; margin-bottom:30px; display:flex; justify-content:space-between; align-items:center; box-shadow:0 20px 50px rgba(102,126,234,0.35); position:relative; overflow:hidden; gap:25px; }
 @keyframes heroGradient { 0%,100%{background-position:0% 50%;} 50%{background-position:100% 50%;} }
 .hero-banner::before { content:''; position:absolute; width:300px; height:300px; background:rgba(255,255,255,0.08); border-radius:50%; top:-120px; right:-80px; }
@@ -55,7 +52,10 @@ body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; 
 .hero-text h1 { font-size:30px; font-weight:800; margin-bottom:10px; letter-spacing:-0.5px; }
 .hero-text .hero-sub { font-size:14px; opacity:0.9; line-height:1.5; max-width:500px; }
 
-/* JAM DIGITAL */
+.btn-audio { position:absolute; top:15px; right:15px; z-index:5; background:rgba(255,255,255,0.2); border:1px solid rgba(255,255,255,0.4); color:white; padding:6px 12px; border-radius:20px; font-size:11px; font-weight:700; cursor:pointer; backdrop-filter:blur(10px); transition:.3s; }
+.btn-audio:hover { background:rgba(255,255,255,0.35); transform:translateY(-2px); }
+.btn-audio.aktif { background:rgba(72,187,120,0.35); border-color:rgba(72,187,120,0.7); }
+
 .jam-digital { position:relative; z-index:1; background:rgba(255,255,255,0.15); backdrop-filter:blur(15px); border-radius:22px; padding:24px 28px; border:1px solid rgba(255,255,255,0.25); box-shadow:0 15px 40px rgba(0,0,0,0.15); text-align:center; min-width:280px; }
 .jam-digital .hari-ini { font-size:13px; letter-spacing:2px; text-transform:uppercase; opacity:0.85; margin-bottom:6px; font-weight:600; }
 .jam-digital .tanggal-ini { font-size:15px; font-weight:600; margin-bottom:14px; opacity:0.95; }
@@ -86,7 +86,6 @@ body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; 
 .cta-btn:hover { transform:translateY(-3px); box-shadow:0 10px 25px rgba(255,255,255,0.3); }
 .cta-emoji { font-size:55px; position:relative; z-index:1; }
 
-/* HALAMAN MENU */
 .page-menu { display:none; }
 .page-menu.active { display:block; }
 .page-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; padding:20px; background:white; border-radius:15px; box-shadow:var(--shadow); flex-wrap:wrap; gap:12px; }
@@ -141,7 +140,6 @@ body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; 
 .btn-progress.reset { background:#fef3c7; color:#92400e; }
 .btn-progress.selesai { background:#dbeafe; color:#1e40af; }
 
-/* KEUANGAN */
 .keuangan-container { display:flex; flex-direction:column; gap:20px; }
 .filter-bulan { background:white; padding:15px 20px; border-radius:15px; box-shadow:var(--shadow); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; }
 .filter-bulan label { font-size:13px; font-weight:600; color:var(--text); }
@@ -182,7 +180,6 @@ body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; 
 .btn-keuangan .ico.keluar { background:linear-gradient(135deg,#fee2e2,#fecaca); }
 .btn-keuangan .ico.semua { background:linear-gradient(135deg,#e0e7ff,#c7d2fe); }
 
-/* NAV HARI */
 .nav-hari { background:white; padding:18px 20px; border-radius:18px; box-shadow:0 8px 30px rgba(0,0,0,0.08); display:flex; justify-content:space-between; align-items:center; margin-bottom:22px; gap:12px; flex-wrap:wrap; }
 .nav-hari-info { display:flex; align-items:center; gap:15px; flex:1; min-width:200px; }
 .nav-hari-icon { width:58px; height:58px; border-radius:16px; display:flex; align-items:center; justify-content:center; font-size:28px; color:white; flex-shrink:0; }
@@ -205,7 +202,6 @@ body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; 
 .btn-nav-today.disabled { background:#e2e8f0; color:#a0aec0; cursor:not-allowed; }
 .btn-nav-today.disabled:hover { transform:none; box-shadow:none; }
 
-/* JADWAL */
 .sched-list-keren { display:flex; flex-direction:column; gap:12px; }
 .sched-item-keren { background:white; border-radius:18px; padding:20px 22px; box-shadow:0 8px 25px rgba(0,0,0,0.07); display:flex; align-items:center; gap:18px; transition:all .35s cubic-bezier(0.4,0,0.2,1); border-left:6px solid #667eea; }
 .sched-item-keren:hover { transform:translateX(6px); box-shadow:0 15px 40px rgba(0,0,0,0.13); }
@@ -236,7 +232,6 @@ body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; 
 .sched-actions-keren { display:flex; flex-direction:column; gap:6px; flex-shrink:0; }
 .sched-actions-keren .btn-icon { width:36px; height:36px; font-size:14px; border-radius:10px; }
 
-/* MODAL */
 .modal { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); backdrop-filter:blur(5px); justify-content:center; align-items:center; z-index:999; padding:20px; }
 .modal.active { display:flex; }
 .modal-content { background:white; border-radius:20px; padding:30px; width:100%; max-width:500px; max-height:90vh; overflow-y:auto; animation:slideUp .3s; }
@@ -262,16 +257,15 @@ body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; 
 .overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:99; }
 .overlay.active { display:block; }
 
-/* ALARM MODAL */
-.alarm-modal { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.75); z-index:9998; justify-content:center; align-items:center; padding:20px; }
+.alarm-modal { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.8); z-index:9998; justify-content:center; align-items:center; padding:20px; }
 .alarm-modal.active { display:flex; }
-.alarm-box { background:white; border-radius:24px; padding:40px 35px; text-align:center; max-width:400px; width:100%; box-shadow:0 25px 60px rgba(0,0,0,0.4); animation:alarmPulse 1s infinite; }
+.alarm-box { background:white; border-radius:24px; padding:40px 35px; text-align:center; max-width:400px; width:100%; box-shadow:0 25px 60px rgba(0,0,0,0.5); animation:alarmPulse 1s infinite; }
 @keyframes alarmPulse { 0%,100%{transform:scale(1);} 50%{transform:scale(1.02);} }
 .alarm-icon { font-size:80px; margin-bottom:15px; animation:alarmShake .5s infinite; }
 @keyframes alarmShake { 0%,100%{transform:rotate(-10deg);} 50%{transform:rotate(10deg);} }
 .alarm-box h2 { color:#e53e3e; font-size:24px; margin-bottom:12px; font-weight:800; }
 .alarm-box p { color:#4a5568; font-size:15px; margin-bottom:8px; }
-.alarm-box .alarm-judul { color:var(--text); font-size:18px; font-weight:700; margin:15px 0; padding:15px; background:#fef3c7; border-radius:12px; }
+.alarm-box .alarm-judul { color:var(--text); font-size:18px; font-weight:700; margin:15px 0; padding:15px; background:#fef3c7; border-radius:12px; word-break:break-word; }
 .alarm-btn-stop { background:linear-gradient(135deg,#e53e3e,#c53030); color:white; border:none; padding:15px 40px; border-radius:12px; font-size:16px; font-weight:800; cursor:pointer; margin-top:20px; box-shadow:0 10px 25px rgba(229,62,62,0.4); transition:.3s; }
 .alarm-btn-stop:hover { transform:translateY(-3px); box-shadow:0 15px 35px rgba(229,62,62,0.6); }
 
@@ -285,7 +279,6 @@ body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; 
 @media (max-width: 800px) {
   .hero-banner { flex-direction:column; text-align:center; padding:28px 24px; gap:20px; }
   .hero-text h1 { font-size:22px; }
-  .hero-text .hero-sub { font-size:12.5px; margin:0 auto; }
   .jam-digital { min-width:auto; width:100%; max-width:320px; margin:0 auto; }
   .jam-digital .jam-besar { font-size:34px; }
   .jam-digital .jam-besar .detik { font-size:28px; }
@@ -299,6 +292,7 @@ body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; 
   .hero-text h1 { font-size:19px; }
   .hero-text .hero-greeting { font-size:11px; }
   .hero-text .hero-sub { font-size:12px; }
+  .btn-audio { font-size:10px; padding:5px 10px; top:10px; right:10px; }
   .jam-digital { padding:18px 20px; border-radius:16px; }
   .jam-digital .hari-ini { font-size:11px; }
   .jam-digital .tanggal-ini { font-size:13px; margin-bottom:10px; }
@@ -349,7 +343,6 @@ body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; 
   .nav-hari-icon { width:46px; height:46px; font-size:22px; border-radius:12px; }
   .nav-hari-text h3 { font-size:15px; }
   .nav-hari-text p { font-size:10px; }
-  .nav-hari-text .badge-hari-ini { font-size:8px; padding:2px 8px; }
   .btn-nav-hari { width:38px; height:38px; font-size:15px; border-radius:10px; }
   .btn-nav-today { height:38px; padding:0 14px; font-size:12px; }
   .sched-item-keren { padding:14px; gap:12px; border-radius:14px; flex-wrap:wrap; }
@@ -373,7 +366,6 @@ body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; 
 .bg4 { background:linear-gradient(135deg,#43e97b,#38f9d7); }
 .bg5 { background:linear-gradient(135deg,#fa709a,#fee140); }
 .bg6 { background:linear-gradient(135deg,#30cfd0,#330867); }
-.bg7 { background:linear-gradient(135deg,#a8edea,#fed6e3); }
 </style>
 </head>
 <body>
@@ -430,6 +422,7 @@ body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; 
   <div class="content">
     <div id="page-dashboard" class="page-menu active">
       <div class="hero-banner">
+        <button class="btn-audio" id="btnAudio" onclick="aktifkanSuara()">🔊 Aktifkan Suara</button>
         <div class="hero-text">
           <div class="hero-greeting" id="heroGreeting">SELAMAT DATANG</div>
           <h1 id="greeting">Hai, Andi! 👋</h1>
@@ -622,7 +615,6 @@ document.getElementById('greeting').textContent = `Hai, ${username}! 👋`;
 document.getElementById('heroGreeting').textContent = heroGreet;
 document.getElementById('currentDate').textContent = now.toLocaleDateString('id-ID', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
 
-// JAM DIGITAL LIVE
 function updateJam() {
   const d = new Date();
   const hariArr = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
@@ -636,7 +628,6 @@ function updateJam() {
 updateJam();
 setInterval(updateJam, 1000);
 
-// MENU CONFIG
 const MENU_CONFIG = {
   catatan: { title:"📝 Catatan & Jurnal", collection:"catatan_jurnal",
     tabs:[{id:'catatan',label:'📝 Catatan'},{id:'jurnal',label:'📔 Jurnal'}],
@@ -1392,32 +1383,84 @@ async function loadKeuangan() {
 }
 
 /* ============================================
-   ALARM PENGINGAT
+   ALARM PENGINGAT - VERSI ANDAL
    ============================================ */
 let audioCtx = null;
 let alarmInterval = null;
 let alarmAktif = false;
+let audioSiap = false;
 const sudahBerbunyi = new Set();
 
-function putarAlarm() {
+function bukaAudio() {
   try {
     if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     if (audioCtx.state === 'suspended') audioCtx.resume();
+    audioSiap = audioCtx.state === 'running';
+    return audioSiap;
+  } catch (e) { return false; }
+}
+
+document.addEventListener('click', bukaAudio, { once: false });
+document.addEventListener('touchstart', bukaAudio, { once: false });
+document.addEventListener('keydown', bukaAudio, { once: false });
+
+window.aktifkanSuara = function() {
+  const ok = bukaAudio();
+  if (ok) {
+    showToast('🔊 Suara alarm aktif!');
+    putarTesSingkat();
+    const btn = document.getElementById('btnAudio');
+    if (btn) {
+      btn.textContent = '🔊 Suara Aktif ✓';
+      btn.classList.add('aktif');
+    }
+  } else {
+    showToast('⚠️ Gagal aktifkan suara. Coba klik lagi.', 'error');
+  }
+};
+
+function putarTesSingkat() {
+  try {
+    if (!audioCtx) return;
+    const now = audioCtx.currentTime;
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.type = 'square';
+    osc.frequency.setValueAtTime(880, now);
+    osc.frequency.setValueAtTime(1100, now + 0.15);
+    gain.gain.setValueAtTime(0, now);
+    gain.gain.linearRampToValueAtTime(0.3, now + 0.02);
+    gain.gain.linearRampToValueAtTime(0, now + 0.28);
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    osc.start(now);
+    osc.stop(now + 0.3);
+  } catch (e) {}
+}
+
+function putarAlarm() {
+  try {
+    if (!audioCtx) {
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    if (audioCtx.state === 'suspended') {
+      audioCtx.resume();
+    }
     
     const now = audioCtx.currentTime;
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < 8; i++) {
       const osc = audioCtx.createOscillator();
       const gain = audioCtx.createGain();
       osc.type = 'square';
-      osc.frequency.setValueAtTime(880, now + i * 0.3);
-      osc.frequency.setValueAtTime(1100, now + i * 0.3 + 0.15);
-      gain.gain.setValueAtTime(0, now + i * 0.3);
-      gain.gain.linearRampToValueAtTime(0.4, now + i * 0.3 + 0.02);
-      gain.gain.linearRampToValueAtTime(0, now + i * 0.3 + 0.28);
+      osc.frequency.setValueAtTime(880, now + i * 0.4);
+      osc.frequency.setValueAtTime(1200, now + i * 0.4 + 0.2);
+      gain.gain.setValueAtTime(0, now + i * 0.4);
+      gain.gain.linearRampToValueAtTime(0.5, now + i * 0.4 + 0.02);
+      gain.gain.linearRampToValueAtTime(0, now + i * 0.4 + 0.38);
       osc.connect(gain);
       gain.connect(audioCtx.destination);
-      osc.start(now + i * 0.3);
-      osc.stop(now + i * 0.3 + 0.3);
+      osc.start(now + i * 0.4);
+      osc.stop(now + i * 0.4 + 0.4);
     }
   } catch (e) { console.error('Gagal memutar suara:', e); }
 }
@@ -1429,15 +1472,27 @@ function tampilkanAlarm(judul, catatan) {
   alarmAktif = true;
   
   putarAlarm();
-  alarmInterval = setInterval(putarAlarm, 2000);
+  alarmInterval = setInterval(putarAlarm, 2500);
+  
+  if (navigator.vibrate) {
+    navigator.vibrate([500, 300, 500, 300, 500]);
+  }
   
   if (Notification.permission === 'granted') {
     try {
       new Notification('🔔 PENGINGAT: ' + judul, {
         body: catatan || 'Sudah waktunya!',
-        icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="75" font-size="75">🔔</text></svg>'
+        requireInteraction: true
       });
     } catch (e) {}
+  }
+  
+  if (Notification.permission !== 'granted') {
+    setTimeout(() => {
+      if (alarmAktif) {
+        try { alert('🔔 PENGINGAT!\n\n' + judul + '\n' + (catatan || '')); } catch(e) {}
+      }
+    }, 100);
   }
 }
 
@@ -1445,14 +1500,14 @@ window.matikanAlarm = function() {
   alarmAktif = false;
   document.getElementById('alarmModal').classList.remove('active');
   if (alarmInterval) { clearInterval(alarmInterval); alarmInterval = null; }
+  if (navigator.vibrate) navigator.vibrate(0);
 };
 
 async function cekPengingat() {
   if (alarmAktif) return;
   try {
     const snap = await getDocs(collection(db, 'tugas_agenda'));
-    const now = new Date();
-    const nowStr = now.getFullYear() + '-' + String(now.getMonth()+1).padStart(2,'0') + '-' + String(now.getDate()).padStart(2,'0') + 'T' + String(now.getHours()).padStart(2,'0') + ':' + String(now.getMinutes()).padStart(2,'0');
+    const nowTime = Date.now();
 
     snap.forEach(docSnap => {
       const d = docSnap.data();
@@ -1460,10 +1515,16 @@ async function cekPengingat() {
       if (!d.waktu) return;
       if (sudahBerbunyi.has(docSnap.id)) return;
       
-      const waktuPengingat = d.waktu.slice(0, 16);
-      if (waktuPengingat === nowStr) {
+      const waktuPengingat = new Date(d.waktu);
+      const selisihDetik = (nowTime - waktuPengingat.getTime()) / 1000;
+      
+      if (selisihDetik >= 0 && selisihDetik <= 90) {
         sudahBerbunyi.add(docSnap.id);
         tampilkanAlarm(d.judul || 'Pengingat', d.catatan);
+      }
+      
+      if (selisihDetik > 86400) {
+        sudahBerbunyi.delete(docSnap.id);
       }
     });
   } catch (e) { console.error('Cek pengingat gagal:', e); }
@@ -1473,8 +1534,17 @@ if ('Notification' in window && Notification.permission === 'default') {
   Notification.requestPermission();
 }
 
-setInterval(cekPengingat, 30000);
-setTimeout(cekPengingat, 3000);
+setInterval(cekPengingat, 5000);
+setTimeout(cekPengingat, 2000);
+
+// Update tombol audio saat pertama interaksi
+document.addEventListener('click', function() {
+  const btn = document.getElementById('btnAudio');
+  if (btn && audioSiap) {
+    btn.textContent = '🔊 Suara Aktif ✓';
+    btn.classList.add('aktif');
+  }
+}, { once: false });
 </script>
 </body>
 </html>
