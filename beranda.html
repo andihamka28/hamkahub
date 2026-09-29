@@ -15,9 +15,6 @@
 html, body { overflow-x:hidden; }
 body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; }
 
-/* ============================================ */
-/* SIDEBAR */
-/* ============================================ */
 .sidebar { width:var(--sidebar-width); height:100vh; background:linear-gradient(180deg,#1a1f36,#2d3561); color:white; position:fixed; top:0; left:0; overflow-y:auto; transition:transform .3s; z-index:1000; }
 .sidebar::-webkit-scrollbar { width:6px; }
 .sidebar::-webkit-scrollbar-thumb { background:rgba(255,255,255,0.2); border-radius:10px; }
@@ -31,11 +28,8 @@ body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; 
 .menu-item.active { background:linear-gradient(90deg,rgba(245,87,108,0.2),transparent); color:white; border-left-color:var(--accent); font-weight:600; }
 .menu-item .icon { width:20px; text-align:center; flex-shrink:0; }
 
-/* ============================================ */
-/* MAIN */
-/* ============================================ */
 .main-content { margin-left:var(--sidebar-width); flex:1; min-height:100vh; display:flex; flex-direction:column; width:100%; }
-.topbar { background:rgba(255,255,255,0.95); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); padding:16px 30px; display:flex; justify-content:space-between; align-items:center; box-shadow:0 2px 10px rgba(0,0,0,0.04); position:sticky; top:0; z-index:50; }
+.topbar { background:rgba(255,255,255,0.95); backdrop-filter:blur(20px); padding:16px 30px; display:flex; justify-content:space-between; align-items:center; box-shadow:0 2px 10px rgba(0,0,0,0.04); position:sticky; top:0; z-index:50; }
 .topbar-left { display:flex; align-items:center; gap:15px; min-width:0; }
 .hamburger { display:none; background:none; border:none; font-size:24px; cursor:pointer; color:var(--text); padding:8px; }
 .page-title { min-width:0; }
@@ -51,9 +45,6 @@ body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; 
 
 .content { padding:30px; flex:1; min-width:0; }
 
-/* ============================================ */
-/* HERO BANNER */
-/* ============================================ */
 .hero-banner { background:linear-gradient(135deg,#667eea 0%,#764ba2 50%,#f093fb 100%); background-size:200% 200%; animation:heroGradient 10s ease infinite; border-radius:24px; padding:40px 45px; color:white; margin-bottom:30px; display:flex; justify-content:space-between; align-items:center; box-shadow:0 20px 50px rgba(102,126,234,0.35); position:relative; overflow:hidden; gap:25px; }
 @keyframes heroGradient { 0%,100%{background-position:0% 50%;} 50%{background-position:100% 50%;} }
 .hero-banner::before { content:''; position:absolute; width:300px; height:300px; background:rgba(255,255,255,0.08); border-radius:50%; top:-120px; right:-80px; }
@@ -64,10 +55,10 @@ body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; 
 .hero-text .hero-sub { font-size:14px; opacity:0.9; line-height:1.5; max-width:500px; }
 
 .btn-audio { position:absolute; top:15px; right:15px; z-index:5; background:rgba(255,255,255,0.2); border:1px solid rgba(255,255,255,0.4); color:white; padding:6px 12px; border-radius:20px; font-size:11px; font-weight:700; cursor:pointer; backdrop-filter:blur(10px); transition:.3s; }
-.btn-audio:hover { background:rgba(255,255,255,0.35); transform:translateY(-2px); }
+.btn-audio:hover { background:rgba(255,255,255,0.35); }
 .btn-audio.aktif { background:rgba(72,187,120,0.35); border-color:rgba(72,187,120,0.7); }
 
-.jam-digital { position:relative; z-index:1; background:rgba(255,255,255,0.15); backdrop-filter:blur(15px); -webkit-backdrop-filter:blur(15px); border-radius:22px; padding:24px 28px; border:1px solid rgba(255,255,255,0.25); box-shadow:0 15px 40px rgba(0,0,0,0.15); text-align:center; min-width:280px; flex-shrink:0; }
+.jam-digital { position:relative; z-index:1; background:rgba(255,255,255,0.15); backdrop-filter:blur(15px); border-radius:22px; padding:24px 28px; border:1px solid rgba(255,255,255,0.25); box-shadow:0 15px 40px rgba(0,0,0,0.15); text-align:center; min-width:280px; flex-shrink:0; }
 .jam-digital .hari-ini { font-size:13px; letter-spacing:2px; text-transform:uppercase; opacity:0.85; margin-bottom:6px; font-weight:600; }
 .jam-digital .tanggal-ini { font-size:15px; font-weight:600; margin-bottom:14px; opacity:0.95; }
 .jam-digital .jam-besar { font-size:44px; font-weight:800; letter-spacing:2px; font-family:'Courier New',monospace; text-shadow:0 4px 15px rgba(0,0,0,0.2); line-height:1; }
@@ -75,9 +66,6 @@ body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; 
 .jam-digital .jam-besar .pemisah { opacity:0.6; animation:blinkJam 1s infinite; }
 @keyframes blinkJam { 0%,49%{opacity:0.6;} 50%,100%{opacity:0.2;} }
 
-/* ============================================ */
-/* MENU GRID DASHBOARD */
-/* ============================================ */
 .section-title { font-size:19px; font-weight:800; margin-bottom:18px; display:flex; justify-content:space-between; align-items:center; letter-spacing:-0.3px; }
 .section-title .section-sub { font-size:12px; color:var(--text-light); font-weight:500; }
 
@@ -100,9 +88,6 @@ body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; 
 .cta-btn:hover { transform:translateY(-3px); box-shadow:0 10px 25px rgba(255,255,255,0.3); }
 .cta-emoji { font-size:50px; position:relative; z-index:1; flex-shrink:0; }
 
-/* ============================================ */
-/* HALAMAN MENU */
-/* ============================================ */
 .page-menu { display:none; }
 .page-menu.active { display:block; }
 .page-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; padding:18px 22px; background:white; border-radius:15px; box-shadow:var(--shadow); flex-wrap:wrap; gap:12px; }
@@ -158,7 +143,6 @@ body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; 
 .btn-progress.reset { background:#fef3c7; color:#92400e; }
 .btn-progress.selesai { background:#dbeafe; color:#1e40af; }
 
-/* KEUANGAN */
 .keuangan-container { display:flex; flex-direction:column; gap:20px; }
 .filter-bulan { background:white; padding:15px 20px; border-radius:15px; box-shadow:var(--shadow); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; }
 .filter-bulan label { font-size:13px; font-weight:600; color:var(--text); }
@@ -199,7 +183,6 @@ body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; 
 .btn-keuangan .ico.keluar { background:linear-gradient(135deg,#fee2e2,#fecaca); }
 .btn-keuangan .ico.semua { background:linear-gradient(135deg,#e0e7ff,#c7d2fe); }
 
-/* NAV HARI */
 .nav-hari { background:white; padding:16px 18px; border-radius:16px; box-shadow:0 8px 30px rgba(0,0,0,0.08); display:flex; justify-content:space-between; align-items:center; margin-bottom:22px; gap:12px; flex-wrap:wrap; }
 .nav-hari-info { display:flex; align-items:center; gap:14px; flex:1; min-width:200px; }
 .nav-hari-icon { width:54px; height:54px; border-radius:16px; display:flex; align-items:center; justify-content:center; font-size:26px; color:white; flex-shrink:0; }
@@ -223,7 +206,6 @@ body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; 
 .btn-nav-today.disabled { background:#e2e8f0; color:#a0aec0; cursor:not-allowed; }
 .btn-nav-today.disabled:hover { transform:none; box-shadow:none; }
 
-/* SCHEDULE */
 .sched-list-keren { display:flex; flex-direction:column; gap:12px; }
 .sched-item-keren { background:white; border-radius:18px; padding:18px 20px; box-shadow:0 8px 25px rgba(0,0,0,0.07); display:flex; align-items:center; gap:16px; transition:all .35s cubic-bezier(0.4,0,0.2,1); border-left:6px solid #667eea; min-width:0; }
 .sched-item-keren:hover { transform:translateX(6px); box-shadow:0 15px 40px rgba(0,0,0,0.13); }
@@ -254,7 +236,6 @@ body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; 
 .sched-actions-keren { display:flex; flex-direction:column; gap:6px; flex-shrink:0; }
 .sched-actions-keren .btn-icon { width:34px; height:34px; font-size:13px; border-radius:10px; }
 
-/* MODAL */
 .modal { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); backdrop-filter:blur(5px); justify-content:center; align-items:center; z-index:999; padding:20px; }
 .modal.active { display:flex; }
 .modal-content { background:white; border-radius:20px; padding:26px; width:100%; max-width:500px; max-height:90vh; overflow-y:auto; animation:slideUp .3s; -webkit-overflow-scrolling:touch; }
@@ -280,7 +261,6 @@ body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; 
 .overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:999; }
 .overlay.active { display:block; }
 
-/* ALARM */
 .alarm-modal { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.85); z-index:9998; justify-content:center; align-items:center; padding:20px; }
 .alarm-modal.active { display:flex; }
 .alarm-box { background:white; border-radius:24px; padding:35px 30px; text-align:center; max-width:400px; width:100%; box-shadow:0 25px 60px rgba(0,0,0,0.5); animation:alarmPulse 1s infinite; }
@@ -293,13 +273,10 @@ body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; 
 .alarm-btn-stop { background:linear-gradient(135deg,#e53e3e,#c53030); color:white; border:none; padding:14px 36px; border-radius:12px; font-size:15px; font-weight:800; cursor:pointer; margin-top:18px; box-shadow:0 10px 25px rgba(229,62,62,0.4); transition:.3s; }
 .alarm-btn-stop:hover { transform:translateY(-3px); box-shadow:0 15px 35px rgba(229,62,62,0.6); }
 
-/* FILTER BELANJA */
 .filter-belanja-bar { background:white; padding:14px 18px; border-radius:14px; margin-bottom:16px; box-shadow:0 4px 20px rgba(0,0,0,0.06); display:flex; flex-wrap:wrap; gap:10px; align-items:center; justify-content:space-between; }
 .filter-belanja-btns { display:flex; gap:8px; flex-wrap:wrap; }
 
-/* ============================================ */
 /* RESPONSIVE */
-/* ============================================ */
 @media (max-width: 900px) {
   .sidebar { transform:translateX(-100%); box-shadow:0 0 40px rgba(0,0,0,0.3); }
   .sidebar.active { transform:translateX(0); }
@@ -307,7 +284,6 @@ body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; 
   .hamburger { display:block; }
   .user-info { display:none; }
 }
-
 @media (max-width: 700px) {
   .hero-banner { flex-direction:column; text-align:center; padding:26px 22px; gap:18px; border-radius:20px; }
   .hero-text h1 { font-size:22px; }
@@ -319,7 +295,6 @@ body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; 
   .cta-emoji { font-size:42px; }
   .cta-btn { width:100%; }
 }
-
 @media (max-width: 600px) {
   .content { padding:14px 12px; }
   .topbar { padding:12px 14px; }
@@ -328,19 +303,16 @@ body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; 
   .hamburger { font-size:22px; padding:6px; }
   .user-avatar { width:36px; height:36px; font-size:14px; }
   .btn-logout-top { padding:7px 12px; font-size:12px; }
-  
   .hero-banner { padding:20px 18px; border-radius:18px; margin-bottom:18px; }
   .hero-text h1 { font-size:19px; margin-bottom:8px; }
   .hero-text .hero-greeting { font-size:10px; margin-bottom:8px; }
   .hero-text .hero-sub { font-size:12px; line-height:1.4; }
   .btn-audio { font-size:10px; padding:5px 10px; top:10px; right:10px; }
-  
   .jam-digital { padding:16px 18px; border-radius:16px; }
   .jam-digital .hari-ini { font-size:10px; margin-bottom:4px; }
   .jam-digital .tanggal-ini { font-size:12px; margin-bottom:10px; }
   .jam-digital .jam-besar { font-size:28px; letter-spacing:1px; }
   .jam-digital .jam-besar .detik { font-size:23px; }
-  
   .section-title { font-size:15px; margin-bottom:12px; }
   .section-title .section-sub { font-size:11px; }
   .menu-grid { grid-template-columns:repeat(2,1fr); gap:10px; margin-bottom:20px; }
@@ -349,39 +321,33 @@ body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; 
   .menu-card-icon { width:40px; height:40px; border-radius:12px; font-size:19px; margin-bottom:10px; }
   .menu-card h4 { font-size:13px; margin-bottom:4px; }
   .menu-card p { font-size:10.5px; line-height:1.3; }
-  
   .cta-banner { padding:18px 16px; border-radius:16px; }
   .cta-text h3 { font-size:15px; }
   .cta-text p { font-size:12px; }
   .cta-btn { padding:10px 16px; font-size:12.5px; }
   .cta-emoji { font-size:36px; }
-  
   .page-header { padding:14px 16px; border-radius:12px; margin-bottom:14px; }
   .page-header h2 { font-size:16px; }
   .btn-tambah { padding:9px 14px; font-size:12.5px; border-radius:8px; }
   .tabs { padding:4px; gap:3px; border-radius:10px; }
   .tab { padding:8px 13px; font-size:12px; }
-  
   .list-item { padding:12px 14px; border-radius:12px; gap:10px; }
   .list-item-info h4 { font-size:13.5px; margin-bottom:3px; }
   .list-item-info p { font-size:11.5px; }
   .btn-icon { width:32px; height:32px; font-size:13px; border-radius:8px; }
   .check-selesai { width:24px; height:24px; font-size:13px; border-radius:7px; }
-  
   .habit-card { padding:14px; }
   .habit-header h4 { font-size:13.5px; }
   .habit-target { font-size:11px; margin-bottom:10px; }
   .progress-text { font-size:12px; }
   .progress-text .status { font-size:10px; }
   .btn-progress { padding:5px 10px; font-size:11px; }
-  
   .sidebar-logo { width:36px; height:36px; font-size:15px; border-radius:10px; }
   .sidebar-title h2 { font-size:13.5px; }
   .sidebar-title p { font-size:10px; }
   .sidebar-header { padding:18px 16px; }
   .menu-item { font-size:13px; padding:10px 18px; }
   .menu-category { font-size:10px; padding:12px 18px 4px; }
-  
   .modal { padding:14px; }
   .modal-content { padding:20px 18px; border-radius:16px; }
   .modal-content h2 { font-size:17px; margin-bottom:14px; }
@@ -390,10 +356,8 @@ body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; 
   .form-group input, .form-group textarea, .form-group select { padding:10px; font-size:13.5px; border-radius:8px; }
   .form-group textarea { min-height:75px; }
   .modal-buttons button { padding:11px; font-size:13px; }
-  
   .toast { top:12px; right:12px; left:12px; font-size:12.5px; padding:12px 16px; transform:translateY(-120px); }
   .toast.show { transform:translateY(0); }
-  
   .saldo-utama { padding:20px; border-radius:16px; }
   .saldo-utama .label { font-size:12px; }
   .saldo-utama .amount { font-size:24px; }
@@ -412,7 +376,6 @@ body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; 
   .filter-bulan { padding:12px 14px; }
   .filter-bulan label { font-size:12px; }
   .filter-bulan input { font-size:12.5px; padding:7px 10px; margin-left:8px; }
-  
   .nav-hari { padding:12px 14px; border-radius:14px; }
   .nav-hari-icon { width:44px; height:44px; font-size:21px; border-radius:12px; }
   .nav-hari-text h3 { font-size:15px; }
@@ -421,7 +384,6 @@ body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; 
   .nav-hari-controls { gap:6px; }
   .btn-nav-hari { width:36px; height:36px; font-size:14px; border-radius:10px; }
   .btn-nav-today { height:36px; padding:0 12px; font-size:11.5px; }
-  
   .sched-item-keren { padding:12px; gap:10px; border-radius:14px; }
   .sched-jam-keren { min-width:72px; padding:9px 6px; border-radius:11px; }
   .sched-jam-mulai { font-size:13px; }
@@ -433,20 +395,16 @@ body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; 
   .sched-catatan-keren { font-size:10.5px; }
   .sched-actions-keren { flex-direction:row; gap:4px; }
   .sched-actions-keren .btn-icon { width:30px; height:30px; font-size:12px; }
-  
   .alarm-box { padding:28px 22px; border-radius:20px; }
   .alarm-icon { font-size:60px; }
   .alarm-box h2 { font-size:19px; }
   .alarm-box p { font-size:13px; }
   .alarm-box .alarm-judul { font-size:15px; padding:12px; }
   .alarm-btn-stop { padding:12px 28px; font-size:14px; }
-  
   .filter-belanja-bar { padding:12px 14px; }
   .filter-belanja-btns { gap:6px; }
   .filter-belanja-btns button { padding:7px 10px !important; font-size:11px !important; }
-  .filter-belanja-bar > button { padding:7px 10px !important; font-size:11px !important; }
 }
-
 @media (max-width: 400px) {
   .menu-grid { grid-template-columns:1fr; gap:8px; }
   .menu-card { min-height:110px; padding:14px; }
@@ -458,7 +416,6 @@ body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; 
   .filter-belanja-btns button { flex:1; }
 }
 
-/* WARNA MENU CARD */
 .bg1 { background:linear-gradient(135deg,#667eea,#764ba2); }
 .bg2 { background:linear-gradient(135deg,#f093fb,#f5576c); }
 .bg3 { background:linear-gradient(135deg,#4facfe,#00f2fe); }
@@ -493,7 +450,7 @@ body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; 
 
     <div class="menu-category">📝 List & Tracking</div>
     <a class="menu-item" onclick="bukaHalaman('belanja', this)"><span class="icon">📋</span> Daftar / List</a>
-    <a class="menu-item" onclick="bukaHalaman('target', this)"><span class="icon">🎯</span> Target & Habit</a>
+    <a class="menu-item" onclick="bukaHalaman('target', this)"><span class="icon">✅</span> Habit</a>
 
     <div class="menu-category">💰 Keuangan</div>
     <a class="menu-item" onclick="bukaHalaman('keuangan', this)"><span class="icon">💰</span> Keuangan</a>
@@ -570,9 +527,9 @@ body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; 
         </div>
         <div class="menu-card" onclick="bukaHalaman('target')">
           <div>
-            <div class="menu-card-icon bg4">🎯</div>
-            <h4>Target & Habit</h4>
-            <p>Rencana & kebiasaan</p>
+            <div class="menu-card-icon bg4">✅</div>
+            <h4>Habit</h4>
+            <p>Tracking kebiasaan</p>
           </div>
         </div>
         <div class="menu-card" onclick="bukaHalaman('belanja')">
@@ -754,17 +711,23 @@ const MENU_CONFIG = {
       jurnal:[{name:"tanggal",label:"Tanggal",type:"date",required:true},{name:"kegiatan",label:"Kegiatan",type:"textarea",required:true},{name:"perasaan",label:"Perasaan",type:"text",required:false}]
     }
   },
-  target: { title:"🎯 Target & Habit", collection:"target_habit",
-    tabs:[{id:'target',label:'🎯 Target'},{id:'habit',label:'✅ Habit'}],
-    fieldsPerTab:{
-      target:[{name:"judul",label:"Nama Target",type:"text",required:true},{name:"deskripsi",label:"Deskripsi",type:"textarea",required:false},{name:"deadline",label:"Deadline",type:"date",required:true},{name:"status",label:"Status",type:"select",options:["Belum Mulai","Proses","Selesai"],required:true}],
-      habit:[{name:"kebiasaan",label:"Nama Kebiasaan",type:"text",required:true},{name:"target_harian",label:"Target Harian",type:"text",required:true},{name:"progress",label:"Progress Awal (%)",type:"number",required:false}]
-    }
+  target: { title:"✅ Habit Tracker", collection:"target_habit", tabs:null,
+    fields:[
+      {name:"kebiasaan",label:"Nama Kebiasaan",type:"text",required:true},
+      {name:"target_harian",label:"Target Harian",type:"text",required:true},
+      {name:"progress",label:"Progress Awal (%)",type:"number",required:false}
+    ]
   },
   tugas_agenda: { title:"📋 Tugas & Agenda", collection:"tugas_agenda",
-    tabs:[{id:'todo',label:'✔️ To-Do'},{id:'agenda',label:'📋 Agenda'},{id:'pengingat',label:'🔔 Pengingat'}],
+    tabs:[{id:'todo',label:'✔️ To-Do'},{id:'target',label:'🎯 Target'},{id:'agenda',label:'📋 Agenda'},{id:'pengingat',label:'🔔 Pengingat'}],
     fieldsPerTab:{
       todo:[{name:"tugas",label:"Nama Tugas",type:"text",required:true},{name:"deadline",label:"Deadline",type:"date",required:false},{name:"prioritas",label:"Prioritas",type:"select",options:["Rendah","Sedang","Tinggi"],required:true}],
+      target:[
+        {name:"judul",label:"Nama Target",type:"text",required:true},
+        {name:"deskripsi",label:"Deskripsi",type:"textarea",required:false},
+        {name:"deadline",label:"Deadline",type:"date",required:true},
+        {name:"status",label:"Status",type:"select",options:["Belum Mulai","Proses","Selesai"],required:true}
+      ],
       agenda:[{name:"judul",label:"Judul Agenda",type:"text",required:true},{name:"tanggal",label:"Tanggal",type:"date",required:true},{name:"waktu",label:"Waktu",type:"time",required:false},{name:"lokasi",label:"Lokasi",type:"text",required:false},{name:"catatan",label:"Catatan",type:"textarea",required:false}],
       pengingat:[{name:"judul",label:"Judul Pengingat",type:"text",required:true},{name:"waktu",label:"Waktu Alarm",type:"datetime-local",required:true},{name:"catatan",label:"Catatan",type:"textarea",required:false}]
     }
@@ -830,6 +793,24 @@ window.toggleSidebar = function() {
   document.getElementById('sidebar').classList.toggle('active');
   document.getElementById('overlay').classList.toggle('active');
 };
+
+/* ⭐ SOFT DELETE - Pindahkan ke Arsip */
+async function softDelete(koleksi, id, data, label) {
+  try {
+    await addDoc(collection(db, 'arsip_sampah'), {
+      koleksiAsal: koleksi,
+      dataAsli: data,
+      idAsli: id,
+      label: label || 'Item',
+      deletedAt: serverTimestamp()
+    });
+    await deleteDoc(doc(db, koleksi, id));
+    return true;
+  } catch (e) {
+    console.error('Soft delete gagal:', e);
+    throw e;
+  }
+}
 
 window.bukaHalaman = async function(namaMenu, el) {
   try {
@@ -1035,14 +1016,14 @@ async function tampilkanJadwal(tabJadwal) {
         </div>
         <div class="sched-actions-keren">
           <button class="btn-icon btn-edit" title="Edit">✏️</button>
-          <button class="btn-icon btn-hapus" title="Hapus">🗑️</button>
+          <button class="btn-icon btn-hapus" title="Pindah ke Arsip">🗑️</button>
         </div>
       `;
       item.querySelector('.btn-edit').onclick = () => editData(id, data, 'jadwal');
       item.querySelector('.btn-hapus').onclick = async () => {
-        if (confirm('Hapus jadwal ini?')) {
-          await deleteDoc(doc(db, 'jadwal', id));
-          showToast('🗑️ Jadwal dihapus!');
+        if (confirm('Pindahkan ke Arsip?')) {
+          await softDelete('jadwal', id, data, judul || 'Jadwal');
+          showToast('🗑️ Dipindahkan ke Arsip!');
           await tampilkanJadwal(tabJadwal);
         }
       };
@@ -1061,17 +1042,18 @@ window.setFilterBelanja = function(f) {
 };
 
 window.hapusYangSudahDibeli = async function() {
-  if (!confirm('Hapus semua item yang sudah selesai?')) return;
+  if (!confirm('Pindahkan semua item yang sudah selesai ke Arsip?')) return;
   try {
     const snap = await getDocs(collection(db, 'belanja'));
     let count = 0;
     for (const docSnap of snap.docs) {
-      if (docSnap.data().dibeli === true) {
-        await deleteDoc(doc(db, 'belanja', docSnap.id));
+      const d = docSnap.data();
+      if (d.dibeli === true) {
+        await softDelete('belanja', docSnap.id, d, d.nama || 'Item');
         count++;
       }
     }
-    showToast(`🗑️ ${count} item dihapus!`);
+    showToast(`🗑️ ${count} item dipindah ke Arsip!`);
     await tampilkanData('belanja', null);
   } catch (e) { showToast('❌ Gagal: ' + e.message, 'error'); }
 };
@@ -1111,7 +1093,7 @@ async function tampilkanBelanja() {
         <button onclick="setFilterBelanja('sudah')" style="padding:8px 14px;border:2px solid ${filterBelanja === 'sudah' ? '#48bb78' : '#e2e8f0'};background:${filterBelanja === 'sudah' ? 'linear-gradient(135deg,#48bb78,#38a169)' : 'white'};color:${filterBelanja === 'sudah' ? 'white' : '#4a5568'};border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;">✅ Selesai (${sudahSelesai})</button>
         <button onclick="setFilterBelanja('semua')" style="padding:8px 14px;border:2px solid ${filterBelanja === 'semua' ? '#667eea' : '#e2e8f0'};background:${filterBelanja === 'semua' ? 'linear-gradient(135deg,#667eea,#764ba2)' : 'white'};color:${filterBelanja === 'semua' ? 'white' : '#4a5568'};border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;">📋 Semua (${totalItems})</button>
       </div>
-      ${sudahSelesai > 0 ? `<button onclick="hapusYangSudahDibeli()" style="padding:8px 14px;border:none;background:#fee2e2;color:#991b1b;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;">🗑️ Hapus yang Selesai</button>` : ''}
+      ${sudahSelesai > 0 ? `<button onclick="hapusYangSudahDibeli()" style="padding:8px 14px;border:none;background:#fee2e2;color:#991b1b;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;">🗑️ Pindah yang Selesai ke Arsip</button>` : ''}
     `;
     listData.appendChild(infoBar);
 
@@ -1155,7 +1137,7 @@ async function tampilkanBelanja() {
           </div>
           <div class="list-item-actions">
             <button class="btn-icon btn-edit" title="Edit">✏️</button>
-            <button class="btn-icon btn-hapus" title="Hapus">🗑️</button>
+            <button class="btn-icon btn-hapus" title="Pindah ke Arsip">🗑️</button>
           </div>
         `;
         item.querySelector('.check-selesai').onclick = async () => {
@@ -1165,9 +1147,9 @@ async function tampilkanBelanja() {
         };
         item.querySelector('.btn-edit').onclick = () => editData(id, data, 'belanja');
         item.querySelector('.btn-hapus').onclick = async () => {
-          if (confirm('Hapus ' + data.nama + '?')) {
-            await deleteDoc(doc(db, 'belanja', id));
-            showToast('🗑️ Item dihapus!');
+          if (confirm('Pindahkan ke Arsip?')) {
+            await softDelete('belanja', id, data, data.nama || 'Item');
+            showToast('🗑️ Dipindahkan ke Arsip!');
             await tampilkanData('belanja', null);
           }
         };
@@ -1204,7 +1186,7 @@ async function tampilkanData(koleksi, tab) {
 
     listData.innerHTML = '';
 
-    if (tab === 'habit') {
+    if (tab === 'habit' || koleksi === 'target_habit') {
       items.forEach(data => {
         const id = data.id;
         const progress = Number(data.progress) || 0;
@@ -1213,7 +1195,7 @@ async function tampilkanData(koleksi, tab) {
         const card = document.createElement('div');
         card.className = 'habit-card';
         card.innerHTML = `
-          <div class="habit-header"><h4>${escapeHtml(data.kebiasaan || 'Tanpa Nama')}</h4><button class="btn-icon btn-hapus">🗑️</button></div>
+          <div class="habit-header"><h4>${escapeHtml(data.kebiasaan || 'Tanpa Nama')}</h4><button class="btn-icon btn-hapus" title="Pindah ke Arsip">🗑️</button></div>
           <div class="habit-target">🎯 Target: ${escapeHtml(data.target_harian || '-')}</div>
           <div class="progress-bar"><div class="progress-fill ${progressClass}" style="width:${progress}%"></div></div>
           <div class="progress-text"><span class="persen">${progress}%</span><span class="status">${statusText}</span></div>
@@ -1226,9 +1208,9 @@ async function tampilkanData(koleksi, tab) {
           </div>
         `;
         card.querySelector('.btn-hapus').onclick = async () => {
-          if (confirm('Hapus habit ini?')) {
-            await deleteDoc(doc(db, koleksi, id));
-            showToast('🗑️ Habit dihapus!');
+          if (confirm('Pindahkan ke Arsip?')) {
+            await softDelete(koleksi, id, data, data.kebiasaan || 'Habit');
+            showToast('🗑️ Dipindahkan ke Arsip!');
             await tampilkanData(koleksi, tab);
           }
         };
@@ -1266,15 +1248,15 @@ async function tampilkanData(koleksi, tab) {
           <div class="list-item-actions">
             <button class="btn-icon" style="background:#dbeafe;color:#1e40af;" title="Buka">🔗</button>
             <button class="btn-icon btn-edit">✏️</button>
-            <button class="btn-icon btn-hapus">🗑️</button>
+            <button class="btn-icon btn-hapus" title="Pindah ke Arsip">🗑️</button>
           </div>
         `;
         item.querySelector('.btn-icon[title="Buka"]').onclick = () => window.open(url, '_blank');
         item.querySelector('.btn-edit').onclick = () => editData(id, data, koleksi);
         item.querySelector('.btn-hapus').onclick = async () => {
-          if (confirm('Hapus link ini?')) {
-            await deleteDoc(doc(db, koleksi, id));
-            showToast('🗑️ Link dihapus!');
+          if (confirm('Pindahkan ke Arsip?')) {
+            await softDelete(koleksi, id, data, data.nama || 'Link');
+            showToast('🗑️ Dipindahkan ke Arsip!');
             await tampilkanData(koleksi, tab);
           }
         };
@@ -1310,7 +1292,7 @@ async function tampilkanData(koleksi, tab) {
         </div>
         <div class="list-item-actions">
           ${!pakaiCheckbox ? `<button class="btn-icon btn-edit">✏️</button>` : ''}
-          <button class="btn-icon btn-hapus">🗑️</button>
+          <button class="btn-icon btn-hapus" title="Pindah ke Arsip">🗑️</button>
         </div>
       `;
       if (pakaiCheckbox) {
@@ -1323,9 +1305,9 @@ async function tampilkanData(koleksi, tab) {
       const editBtn = item.querySelector('.btn-edit');
       if (editBtn) editBtn.onclick = () => editData(id, data, koleksi);
       item.querySelector('.btn-hapus').onclick = async () => {
-        if (confirm('Hapus data ini?')) {
-          await deleteDoc(doc(db, koleksi, id));
-          showToast('🗑️ Data dihapus!');
+        if (confirm('Pindahkan ke Arsip?')) {
+          await softDelete(koleksi, id, data, title);
+          showToast('🗑️ Dipindahkan ke Arsip!');
           await tampilkanData(koleksi, tab);
         }
       };
@@ -1414,6 +1396,7 @@ window.simpanData = async function(e) {
     } else {
       if (currentTab === 'habit') data.progress = Number(data.progress) || 0;
       if (currentTab === 'todo') data.selesai = false;
+      if (currentTab === 'target') data.status = data.status || 'Belum Mulai';
       if (currentMenu === 'belanja') data.dibeli = false;
       await addDoc(collection(db, koleksi), {...data, createdAt: serverTimestamp()});
       showToast('✅ Data disimpan!');
@@ -1463,145 +1446,146 @@ window.logout = function() {
   }
 };
 
+/* ⭐ TAMPILKAN ARSIP - RECYCLE BIN */
 async function tampilkanArsip() {
   const listData = document.getElementById('listData');
   listData.innerHTML = '<div class="empty-state"><div class="icon-big">⏳</div>Memuat arsip...</div>';
-  
+
   try {
-    const arsipItems = [];
-    const today = new Date().toISOString().slice(0, 10);
-
-    try {
-      const snapTugas = await getDocs(collection(db, 'tugas_agenda'));
-      snapTugas.forEach(docSnap => {
-        const d = docSnap.data();
-        if (d.jenis === 'todo' && d.selesai === true) {
-          arsipItems.push({
-            id: docSnap.id, judul: d.tugas || 'Tanpa Judul',
-            kategori: '✔️ To-Do', icon: '✔️',
-            deskripsi: d.prioritas ? `Prioritas: ${d.prioritas}` : '',
-            tanggal: d.deadline || (d.createdAt?.seconds ? new Date(d.createdAt.seconds * 1000).toLocaleDateString('id-ID') : '-'),
-            sumber: 'tugas_agenda', warna: '#48bb78'
-          });
-        }
-        if (d.jenis === 'agenda' && d.tanggal && d.tanggal < today) {
-          arsipItems.push({
-            id: docSnap.id, judul: d.judul || 'Tanpa Judul',
-            kategori: '📋 Agenda (lewat)', icon: '📋',
-            deskripsi: d.lokasi ? `Lokasi: ${d.lokasi}` : '',
-            tanggal: d.tanggal, sumber: 'tugas_agenda', warna: '#667eea'
-          });
-        }
-        if (d.jenis === 'pengingat' && d.waktu && d.waktu.split('T')[0] < today) {
-          arsipItems.push({
-            id: docSnap.id, judul: d.judul || 'Tanpa Judul',
-            kategori: '🔔 Pengingat (lewat)', icon: '🔔',
-            deskripsi: d.catatan || '',
-            tanggal: d.waktu.split('T')[0], sumber: 'tugas_agenda', warna: '#ed8936'
-          });
-        }
-      });
-    } catch(e) {}
-
-    try {
-      const snapKerja = await getDocs(collection(db, 'pekerjaan'));
-      snapKerja.forEach(docSnap => {
-        const d = docSnap.data();
-        if (d.status === 'Selesai') {
-          const jenisLabel = d.jenis === 'proyek' ? '🚀 Proyek' : '💼 Pekerjaan';
-          const icon = d.jenis === 'proyek' ? '🚀' : '💼';
-          arsipItems.push({
-            id: docSnap.id, judul: d.judul || d.nama || 'Tanpa Judul',
-            kategori: jenisLabel, icon: icon,
-            deskripsi: d.deskripsi || '',
-            tanggal: d.deadline || d.selesai || '-',
-            sumber: 'pekerjaan', warna: '#4facfe'
-          });
-        }
-      });
-    } catch(e) {}
-
-    try {
-      const snapTarget = await getDocs(collection(db, 'target_habit'));
-      snapTarget.forEach(docSnap => {
-        const d = docSnap.data();
-        if (d.jenis === 'target' && d.status === 'Selesai') {
-          arsipItems.push({
-            id: docSnap.id, judul: d.judul || 'Tanpa Judul',
-            kategori: '🎯 Target', icon: '🎯',
-            deskripsi: d.deskripsi || '',
-            tanggal: d.deadline || '-',
-            sumber: 'target_habit', warna: '#43e97b'
-          });
-        }
-      });
-    } catch(e) {}
-
-    try {
-      const snapBelanja = await getDocs(collection(db, 'belanja'));
-      snapBelanja.forEach(docSnap => {
-        const d = docSnap.data();
-        if (d.dibeli === true) {
-          arsipItems.push({
-            id: docSnap.id, judul: d.nama || 'Tanpa Nama',
-            kategori: '📋 Daftar / List', icon: '📋',
-            deskripsi: (d.jumlah ? `${d.jumlah}` : '') + (d.kategori ? ` • ${d.kategori}` : ''),
-            tanggal: d.createdAt?.seconds ? new Date(d.createdAt.seconds * 1000).toLocaleDateString('id-ID') : '-',
-            sumber: 'belanja', warna: '#fa709a'
-          });
-        }
-      });
-    } catch(e) {}
-
-    arsipItems.sort((a, b) => (b.tanggal || '').localeCompare(a.tanggal || ''));
-
-    if (arsipItems.length === 0) {
+    const snap = await getDocs(collection(db, 'arsip_sampah'));
+    
+    if (snap.empty) {
       listData.innerHTML = `
         <div class="empty-state">
-          <div class="icon-big">📭</div>
-          <p>Arsip masih kosong.</p>
-          <p style="margin-top:12px;font-size:12.5px;color:#a0aec0;line-height:1.7;">
-            Arsip otomatis terisi dari:<br>
-            ✔️ To-Do yang dicentang<br>
-            📋 Agenda yang lewat tanggal<br>
-            🔔 Pengingat yang lewat waktu<br>
-            💼 Pekerjaan yang selesai<br>
-            🎯 Target yang selesai<br>
-            📋 List yang sudah selesai
+          <div class="icon-big">🗃️</div>
+          <p style="font-size:16px;font-weight:600;color:var(--text);margin-bottom:8px;">Arsip Kosong</p>
+          <p style="font-size:13px;color:#a0aec0;line-height:1.6;">
+            Data yang Anda hapus akan muncul di sini.<br>
+            Anda bisa mengembalikannya atau menghapus permanen.
           </p>
         </div>`;
       return;
     }
 
+    const arsipItems = [];
+    snap.forEach(docSnap => {
+      arsipItems.push({ id: docSnap.id, ...docSnap.data() });
+    });
+    arsipItems.sort((a, b) => (b.deletedAt?.seconds || 0) - (a.deletedAt?.seconds || 0));
+
+    const iconKoleksi = {
+      'catatan_jurnal': '📝',
+      'tugas_agenda': '📋',
+      'jadwal': '⏰',
+      'pekerjaan': '💼',
+      'belanja': '📋',
+      'target_habit': '✅',
+      'link': '⭐'
+    };
+
+    const namaKoleksi = {
+      'catatan_jurnal': 'Catatan / Jurnal',
+      'tugas_agenda': 'Tugas & Agenda',
+      'jadwal': 'Jadwal',
+      'pekerjaan': 'Pekerjaan',
+      'belanja': 'Daftar / List',
+      'target_habit': 'Habit',
+      'link': 'Link Penting'
+    };
+
     listData.innerHTML = `
-      <div style="background:white;padding:14px 18px;border-radius:12px;margin-bottom:14px;box-shadow:0 4px 20px rgba(0,0,0,0.06);font-size:12.5px;color:#718096;">
-        📦 <strong>${arsipItems.length}</strong> item arsip otomatis
+      <div style="background:linear-gradient(135deg,#667eea,#764ba2);color:white;padding:16px 20px;border-radius:14px;margin-bottom:16px;box-shadow:0 8px 25px rgba(102,126,234,0.3);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;">
+        <div>
+          <div style="font-size:15px;font-weight:700;margin-bottom:4px;">🗃️ Keranjang Arsip</div>
+          <div style="font-size:12px;opacity:0.9;">Data terhapus - bisa dikembalikan</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.25);padding:6px 14px;border-radius:20px;font-size:13px;font-weight:700;">
+          ${arsipItems.length} item
+        </div>
       </div>
+      ${arsipItems.length > 1 ? `
+        <button onclick="hapusSemuaArsip()" style="width:100%;padding:12px;border:none;background:#fee2e2;color:#991b1b;border-radius:12px;font-size:13px;font-weight:700;cursor:pointer;margin-bottom:16px;">
+          🗑️ Hapus Semua Arsip Permanen
+        </button>
+      ` : ''}
     `;
 
     arsipItems.forEach(item => {
       const el = document.createElement('div');
       el.className = 'list-item';
-      el.style.borderLeftColor = item.warna;
+      el.style.borderLeftColor = '#e53e3e';
+      el.style.flexWrap = 'wrap';
+
+      const icon = iconKoleksi[item.koleksiAsal] || '📄';
+      const namaMenu = namaKoleksi[item.koleksiAsal] || item.koleksiAsal;
+      
+      const data = item.dataAsli || {};
+      let judul = data.judul || data.nama || data.tugas || data.kebiasaan || data.kegiatan || data.mapel || item.label || 'Tanpa Judul';
+      
+      let waktuHapus = '-';
+      if (item.deletedAt?.seconds) {
+        const d = new Date(item.deletedAt.seconds * 1000);
+        waktuHapus = d.toLocaleString('id-ID', { day:'numeric', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit' });
+      }
+
+      const infoTambahan = [];
+      if (data.tanggal) infoTambahan.push(`📅 ${data.tanggal}`);
+      if (data.deadline) infoTambahan.push(`⏰ ${data.deadline}`);
+      if (data.waktu) infoTambahan.push(`🕐 ${data.waktu.replace('T',' ')}`);
+      if (data.jumlah) infoTambahan.push(`📦 ${data.jumlah}`);
+      if (data.kategori) infoTambahan.push(`🏷️ ${data.kategori}`);
+      if (data.status) infoTambahan.push(`📌 ${data.status}`);
+      if (data.prioritas) infoTambahan.push(`⚡ ${data.prioritas}`);
+
       el.innerHTML = `
         <div class="list-item-info">
-          <h4>${item.icon} ${escapeHtml(item.judul)}</h4>
-          ${item.deskripsi ? `<p>${escapeHtml(String(item.deskripsi).substring(0, 100))}</p>` : ''}
-          <div style="margin-top:5px;font-size:11.5px;color:#718096;">🏷️ ${item.kategori} • 📅 ${item.tanggal}</div>
+          <h4 style="opacity:0.85;">${icon} ${escapeHtml(String(judul))}</h4>
+          <div style="margin-top:6px;font-size:11.5px;color:#718096;display:flex;flex-wrap:wrap;gap:8px;">
+            <span style="background:#fef3c7;color:#92400e;padding:2px 10px;border-radius:20px;font-weight:600;">
+              📁 ${namaMenu}
+            </span>
+            <span style="background:#fee2e2;color:#991b1b;padding:2px 10px;border-radius:20px;font-weight:600;">
+              🗑️ ${waktuHapus}
+            </span>
+          </div>
+          ${infoTambahan.length > 0 ? `<div style="margin-top:6px;font-size:11.5px;color:#a0aec0;">${infoTambahan.join(' • ')}</div>` : ''}
         </div>
-        <div class="list-item-actions">
-          <button class="btn-icon btn-hapus" title="Hapus">🗑️</button>
+        <div class="list-item-actions" style="width:100%;justify-content:flex-end;margin-top:8px;gap:8px;">
+          <button class="btn-icon" style="background:#d1fae5;color:#065f46;width:auto;padding:0 14px;font-size:12px;font-weight:700;gap:5px;height:34px;" title="Kembalikan">
+            ↩️ Kembalikan
+          </button>
+          <button class="btn-icon" style="background:#fee2e2;color:#991b1b;width:auto;padding:0 14px;font-size:12px;font-weight:700;gap:5px;height:34px;" title="Hapus Permanen">
+            🗑️ Hapus
+          </button>
         </div>
       `;
-      el.querySelector('.btn-hapus').onclick = async () => {
-        if (confirm('Hapus item ini permanen?')) {
-          try {
-            await deleteDoc(doc(db, item.sumber, item.id));
-            showToast('🗑️ Item dihapus!');
-            await tampilkanArsip();
-          } catch (e) { showToast('❌ Gagal: ' + e.message, 'error'); }
+
+      el.querySelector('button[title="Kembalikan"]').onclick = async () => {
+        if (!confirm(`Kembalikan "${judul}" ke menu ${namaMenu}?`)) return;
+        try {
+          await addDoc(collection(db, item.koleksiAsal), {
+            ...item.dataAsli,
+            restoredAt: serverTimestamp()
+          });
+          await deleteDoc(doc(db, 'arsip_sampah', item.id));
+          showToast('↩️ Data dikembalikan!');
+          await tampilkanArsip();
+        } catch (e) {
+          showToast('❌ Gagal: ' + e.message, 'error');
         }
       };
+
+      el.querySelector('button[title="Hapus Permanen"]').onclick = async () => {
+        if (!confirm(`Hapus permanen "${judul}"?\n\nData tidak bisa dikembalikan lagi!`)) return;
+        try {
+          await deleteDoc(doc(db, 'arsip_sampah', item.id));
+          showToast('🗑️ Dihapus permanen!');
+          await tampilkanArsip();
+        } catch (e) {
+          showToast('❌ Gagal: ' + e.message, 'error');
+        }
+      };
+
       listData.appendChild(el);
     });
 
@@ -1610,6 +1594,23 @@ async function tampilkanArsip() {
     listData.innerHTML = `<div class="empty-state"><div class="icon-big">❌</div><p>Gagal: ${error.message}</p></div>`;
   }
 }
+
+window.hapusSemuaArsip = async function() {
+  if (!confirm('Hapus SEMUA arsip secara permanen?\n\nData tidak bisa dikembalikan lagi!')) return;
+  if (!confirm('YAKIN? Ini akan menghapus semua data di arsip.')) return;
+  try {
+    const snap = await getDocs(collection(db, 'arsip_sampah'));
+    let count = 0;
+    for (const docSnap of snap.docs) {
+      await deleteDoc(doc(db, 'arsip_sampah', docSnap.id));
+      count++;
+    }
+    showToast(`🗑️ ${count} item dihapus permanen!`);
+    await tampilkanArsip();
+  } catch (e) {
+    showToast('❌ Gagal: ' + e.message, 'error');
+  }
+};
 
 window.bukaModalKeuangan = function(jenis) {
   editId = null;
@@ -1646,12 +1647,12 @@ window.lihatSemuaKeuangan = async function() {
           <p style="color:${isMasuk ? 'var(--green)' : 'var(--red)'};font-weight:700">${isMasuk ? '+' : '-'} Rp ${Number(d.jumlah || 0).toLocaleString('id-ID')}</p>
           <div style="margin-top:5px;font-size:11.5px;color:#718096;">📅 ${d.tanggal || '-'} • 🏷️ ${d.kategori || 'Umum'}</div>
         </div>
-        <div class="list-item-actions"><button class="btn-icon btn-hapus">🗑️</button></div>
+        <div class="list-item-actions"><button class="btn-icon btn-hapus" title="Pindah ke Arsip">🗑️</button></div>
       `;
       item.querySelector('.btn-hapus').onclick = async () => {
-        if (confirm('Hapus transaksi ini?')) {
-          await deleteDoc(doc(db, 'transaksi', id));
-          showToast('🗑️ Terhapus!');
+        if (confirm('Pindahkan transaksi ke Arsip?')) {
+          await softDelete('transaksi', id, d, d.keterangan || 'Transaksi');
+          showToast('🗑️ Dipindahkan ke Arsip!');
           await loadKeuangan();
           await lihatSemuaKeuangan();
         }
