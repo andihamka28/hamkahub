@@ -69,7 +69,13 @@ body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; 
 .section-title { font-size:19px; font-weight:800; margin-bottom:18px; display:flex; justify-content:space-between; align-items:center; letter-spacing:-0.3px; }
 .section-title .section-sub { font-size:12px; color:var(--text-light); font-weight:500; }
 
-.menu-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px; margin-bottom:32px; }
+/* ⭐ MENU GRID - 3 KOLOM DESKTOP */
+.menu-grid { 
+  display:grid; 
+  grid-template-columns:repeat(3, 1fr); 
+  gap:16px; 
+  margin-bottom:32px; 
+}
 .menu-card { background:white; border-radius:20px; padding:22px; box-shadow:0 6px 20px rgba(0,0,0,0.06); cursor:pointer; transition:all .35s cubic-bezier(0.4,0,0.2,1); border:1px solid rgba(0,0,0,0.03); position:relative; overflow:hidden; min-height:150px; display:flex; flex-direction:column; justify-content:space-between; }
 .menu-card::after { content:'→'; position:absolute; bottom:18px; right:20px; font-size:20px; opacity:0; transform:translateX(-10px); transition:all .3s; color:var(--primary); font-weight:700; }
 .menu-card:hover { transform:translateY(-6px); box-shadow:0 20px 50px rgba(0,0,0,0.13); border-color:rgba(102,126,234,0.2); }
@@ -277,6 +283,9 @@ body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; 
 .filter-belanja-btns { display:flex; gap:8px; flex-wrap:wrap; }
 
 /* RESPONSIVE */
+@media (max-width: 1100px) {
+  .menu-grid { grid-template-columns:repeat(3, 1fr); }
+}
 @media (max-width: 900px) {
   .sidebar { transform:translateX(-100%); box-shadow:0 0 40px rgba(0,0,0,0.3); }
   .sidebar.active { transform:translateX(0); }
@@ -284,7 +293,7 @@ body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; 
   .hamburger { display:block; }
   .user-info { display:none; }
 }
-@media (max-width: 700px) {
+@media (max-width: 800px) {
   .hero-banner { flex-direction:column; text-align:center; padding:26px 22px; gap:18px; border-radius:20px; }
   .hero-text h1 { font-size:22px; }
   .hero-text .hero-sub { font-size:13px; margin:0 auto; }
@@ -294,6 +303,10 @@ body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; 
   .cta-banner { flex-direction:column; text-align:center; padding:22px 20px; gap:14px; }
   .cta-emoji { font-size:42px; }
   .cta-btn { width:100%; }
+  .menu-grid { grid-template-columns:repeat(3, 1fr); gap:12px; }
+}
+@media (max-width: 700px) {
+  .menu-grid { grid-template-columns:repeat(2, 1fr); gap:12px; }
 }
 @media (max-width: 600px) {
   .content { padding:14px 12px; }
@@ -315,7 +328,7 @@ body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; 
   .jam-digital .jam-besar .detik { font-size:23px; }
   .section-title { font-size:15px; margin-bottom:12px; }
   .section-title .section-sub { font-size:11px; }
-  .menu-grid { grid-template-columns:repeat(2,1fr); gap:10px; margin-bottom:20px; }
+  .menu-grid { grid-template-columns:repeat(2, 1fr); gap:10px; margin-bottom:20px; }
   .menu-card { padding:14px; border-radius:16px; min-height:130px; }
   .menu-card::after { display:none; }
   .menu-card-icon { width:40px; height:40px; border-radius:12px; font-size:19px; margin-bottom:10px; }
@@ -405,9 +418,12 @@ body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; 
   .filter-belanja-btns { gap:6px; }
   .filter-belanja-btns button { padding:7px 10px !important; font-size:11px !important; }
 }
-@media (max-width: 400px) {
-  .menu-grid { grid-template-columns:1fr; gap:8px; }
-  .menu-card { min-height:110px; padding:14px; }
+@media (max-width: 380px) {
+  .menu-grid { grid-template-columns:repeat(2, 1fr); gap:8px; }
+  .menu-card { min-height:110px; padding:12px; }
+  .menu-card-icon { width:36px; height:36px; font-size:17px; }
+  .menu-card h4 { font-size:12.5px; }
+  .menu-card p { font-size:10px; }
   .keuangan-grid { grid-template-columns:1fr; }
   .hero-text h1 { font-size:17px; }
   .jam-digital .jam-besar { font-size:24px; }
@@ -794,7 +810,6 @@ window.toggleSidebar = function() {
   document.getElementById('overlay').classList.toggle('active');
 };
 
-/* ⭐ SOFT DELETE - Pindahkan ke Arsip */
 async function softDelete(koleksi, id, data, label) {
   try {
     await addDoc(collection(db, 'arsip_sampah'), {
@@ -1446,7 +1461,6 @@ window.logout = function() {
   }
 };
 
-/* ⭐ TAMPILKAN ARSIP - RECYCLE BIN */
 async function tampilkanArsip() {
   const listData = document.getElementById('listData');
   listData.innerHTML = '<div class="empty-state"><div class="icon-big">⏳</div>Memuat arsip...</div>';
@@ -1480,7 +1494,8 @@ async function tampilkanArsip() {
       'pekerjaan': '💼',
       'belanja': '📋',
       'target_habit': '✅',
-      'link': '⭐'
+      'link': '⭐',
+      'transaksi': '💰'
     };
 
     const namaKoleksi = {
@@ -1490,7 +1505,8 @@ async function tampilkanArsip() {
       'pekerjaan': 'Pekerjaan',
       'belanja': 'Daftar / List',
       'target_habit': 'Habit',
-      'link': 'Link Penting'
+      'link': 'Link Penting',
+      'transaksi': 'Keuangan'
     };
 
     listData.innerHTML = `
@@ -1520,7 +1536,7 @@ async function tampilkanArsip() {
       const namaMenu = namaKoleksi[item.koleksiAsal] || item.koleksiAsal;
       
       const data = item.dataAsli || {};
-      let judul = data.judul || data.nama || data.tugas || data.kebiasaan || data.kegiatan || data.mapel || item.label || 'Tanpa Judul';
+      let judul = data.judul || data.nama || data.tugas || data.kebiasaan || data.kegiatan || data.mapel || data.keterangan || item.label || 'Tanpa Judul';
       
       let waktuHapus = '-';
       if (item.deletedAt?.seconds) {
@@ -1538,7 +1554,7 @@ async function tampilkanArsip() {
       if (data.prioritas) infoTambahan.push(`⚡ ${data.prioritas}`);
 
       el.innerHTML = `
-        <div class="list-item-info">
+        <div class="list-item-info" style="width:100%;">
           <h4 style="opacity:0.85;">${icon} ${escapeHtml(String(judul))}</h4>
           <div style="margin-top:6px;font-size:11.5px;color:#718096;display:flex;flex-wrap:wrap;gap:8px;">
             <span style="background:#fef3c7;color:#92400e;padding:2px 10px;border-radius:20px;font-weight:600;">
