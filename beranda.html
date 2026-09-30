@@ -69,7 +69,6 @@ body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; 
 .section-title { font-size:19px; font-weight:800; margin-bottom:18px; display:flex; justify-content:space-between; align-items:center; letter-spacing:-0.3px; }
 .section-title .section-sub { font-size:12px; color:var(--text-light); font-weight:500; }
 
-/* ⭐ MENU GRID - 3 KOLOM DESKTOP */
 .menu-grid { 
   display:grid; 
   grid-template-columns:repeat(3, 1fr); 
@@ -282,10 +281,6 @@ body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; 
 .filter-belanja-bar { background:white; padding:14px 18px; border-radius:14px; margin-bottom:16px; box-shadow:0 4px 20px rgba(0,0,0,0.06); display:flex; flex-wrap:wrap; gap:10px; align-items:center; justify-content:space-between; }
 .filter-belanja-btns { display:flex; gap:8px; flex-wrap:wrap; }
 
-/* RESPONSIVE */
-@media (max-width: 1100px) {
-  .menu-grid { grid-template-columns:repeat(3, 1fr); }
-}
 @media (max-width: 900px) {
   .sidebar { transform:translateX(-100%); box-shadow:0 0 40px rgba(0,0,0,0.3); }
   .sidebar.active { transform:translateX(0); }
@@ -1401,8 +1396,18 @@ window.simpanData = async function(e) {
   });
 
   try {
-    const config = MENU_CONFIG[currentMenu];
-    let koleksi = config.collection;
+    let koleksi;
+    if (currentMenu === 'keuangan') {
+      koleksi = 'transaksi';
+    } else {
+      const config = MENU_CONFIG[currentMenu];
+      if (!config) {
+        showToast('❌ Menu tidak valid!', 'error');
+        return;
+      }
+      koleksi = config.collection;
+    }
+    
     if (currentTab) data.jenis = currentTab;
 
     if (editId) {
@@ -1418,6 +1423,10 @@ window.simpanData = async function(e) {
     }
     tutupModal();
     if (currentMenu === 'jadwal') await tampilkanJadwal(currentTab);
+    else if (currentMenu === 'keuangan') {
+      await loadKeuangan();
+      await lihatSemuaKeuangan();
+    }
     else await tampilkanData(koleksi, currentTab);
   } catch (error) {
     console.error('Error:', error);
@@ -1629,6 +1638,7 @@ window.hapusSemuaArsip = async function() {
 };
 
 window.bukaModalKeuangan = function(jenis) {
+  currentMenu = 'keuangan';
   editId = null;
   document.getElementById('modalTitle').textContent = jenis === 'pemasukan' ? '📥 Pemasukan' : '📤 Pengeluaran';
   const formFields = document.getElementById('formFields');
