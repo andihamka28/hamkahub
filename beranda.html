@@ -1075,7 +1075,28 @@ async function simpanEditRekening(e, namaLama) {
     warnaBaru = warnaArr[Math.floor(Math.random() * warnaArr.length)];
   }
 
+  const namaBerubah = namaBaru.toLowerCase() !== namaLama.toLowerCase();
+
   try {
+    // ⭐ STEP 1: Update semua TRANSAKSI yang pakai nama lama
+    if (namaBerubah) {
+      const snapTrx = await getDocs(collection(db, 'transaksi'));
+      let countUpdate = 0;
+      
+      for (const docSnap of snapTrx.docs) {
+        const d = docSnap.data();
+        if ((d.rekening || 'Tunai').toLowerCase() === namaLama.toLowerCase()) {
+          await updateDoc(doc(db, 'transaksi', docSnap.id), {
+            rekening: namaBaru
+          });
+          countUpdate++;
+        }
+      }
+      
+      console.log(`✅ Update ${countUpdate} transaksi dari "${namaLama}" ke "${namaBaru}"`);
+    }
+
+    // ⭐ STEP 2: Update/tambah record di rekening_custom
     const snap = await getDocs(collection(db, 'rekening_custom'));
     let foundId = null;
     
@@ -1087,10 +1108,12 @@ async function simpanEditRekening(e, namaLama) {
     }
 
     if (foundId) {
+      // Update record yang sudah ada
       await updateDoc(doc(db, 'rekening_custom', foundId), {
         nama: namaBaru,
         icon: iconBaru,
         warna: warnaBaru,
+        hidden: false,
         updatedAt: serverTimestamp()
       });
     } else {
@@ -1103,9 +1126,27 @@ async function simpanEditRekening(e, namaLama) {
         originalName: namaLama,
         createdAt: serverTimestamp()
       });
+    }
 
-      // Sembunyikan nama lama kalau beda
-      if (namaBaru.toLowerCase() !== namaLama.toLowerCase()) {
+    // ⭐ STEP 3: Sembunyikan nama lama kalau berubah
+    if (namaBerubah) {
+      // Cek apakah nama lama masih ada sebagai record terpisah
+      const snapAfter = await getDocs(collection(db, 'rekening_custom'));
+      let sudahHidden = false;
+      
+      for (const docSnap of snapAfter.docs) {
+        const d = docSnap.data();
+        if (d.nama.toLowerCase() === namaLama.toLowerCase() && d.hidden !== true) {
+          await updateDoc(doc(db, 'rekening_custom', docSnap.id), {
+            hidden: true,
+            replacedBy: namaBaru
+          });
+          sudahHidden = true;
+        }
+      }
+      
+      // Kalau nama lama tidak ada record, buatkan sebagai hidden
+      if (!sudahHidden) {
         await addDoc(collection(db, 'rekening_custom'), {
           nama: namaLama,
           icon: '🏦',
@@ -1121,6 +1162,7 @@ async function simpanEditRekening(e, namaLama) {
     tutupModal();
     await loadRekeningCustom();
     await loadKeuangan();
+    
   } catch (err) {
     console.error('Error edit rekening:', err);
     showToast('❌ Gagal: ' + err.message, 'error');
