@@ -861,18 +861,13 @@ const MENU_CONFIG = {
       proyek:[{name:"nama",label:"Nama Proyek",type:"text",required:true},{name:"deskripsi",label:"Deskripsi",type:"textarea",required:false},{name:"mulai",label:"Tanggal Mulai",type:"date",required:true},{name:"selesai",label:"Target Selesai",type:"date",required:true},{name:"progress",label:"Progress (%)",type:"number",required:false}]
     }
   },
-  belanja: { title:"📋 Daftar / List", collection:"belanja", tabs:null,
+    belanja: { title:"📋 Daftar / List", collection:"belanja", tabs:null,
     fields:[
-      {name:"nama",label:"Nama / Judul Item",type:"text",required:true},
-      {name:"jumlah",label:"Jumlah / Keterangan (opsional)",type:"text",required:false},
-      {name:"kategori",label:"Kategori",type:"select",options:["🛒 Belanja Harian","📚 Buku / Bacaan","🎬 Film / Series","🎵 Musik","🎮 Game","🎁 Wishlist","📦 Inventaris","💊 Kesehatan","🧴 Kebutuhan Rumah","✈️ Travel / Tempat","🍽️ Tempat Makan","💡 Ide / Inspirasi","📝 Lainnya"],required:false},
-      {name:"catatan",label:"Catatan",type:"textarea",required:false}
+      {name:"nama",label:"Nama Barang / Item",type:"text",required:true},
+      {name:"kategori",label:"Kategori",type:"select",options:["🎒 Barang Bawaan","🛒 Belanja Harian","📚 Buku / Bacaan","🎬 Film / Series","🎮 Game","🎁 Wishlist","📦 Inventaris","💊 Kesehatan","🧴 Kebutuhan Rumah","✈️ Travel","🍽️ Tempat Makan","💡 Ide / Inspirasi","📝 Lainnya"],required:false},
+      {name:"catatan",label:"Keterangan (opsional)",type:"text",required:false}
     ]
   },
-  link: { title:"⭐ Link Penting", collection:"link", tabs:null,
-    fields:[{name:"nama",label:"Nama Link",type:"text",required:true},{name:"url",label:"URL",type:"url",required:true},{name:"kategori",label:"Kategori",type:"text",required:false},{name:"catatan",label:"Catatan",type:"textarea",required:false}]
-  }
-};
 
 let currentMenu = null;
 let currentTab = null;
@@ -1620,6 +1615,13 @@ window.hapusYangSudahDibeli = async function() {
   } catch (e) { showToast('❌ Gagal: ' + e.message, 'error'); }
 };
 
+let filterKategoriBelanja = 'semua';
+
+window.setKategoriBelanja = function(kat) {
+  filterKategoriBelanja = kat;
+  tampilkanData('belanja', null);
+};
+
 async function tampilkanBelanja() {
   const listData = document.getElementById('listData');
   listData.innerHTML = '<div class="empty-state"><div class="icon-big">⏳</div>Memuat...</div>';
@@ -1631,93 +1633,177 @@ async function tampilkanBelanja() {
       items.push({ id: docSnap.id, ...docSnap.data() });
     });
 
-    const totalItems = items.length;
-    const belumSelesai = items.filter(i => i.dibeli !== true).length;
-    const sudahSelesai = items.filter(i => i.dibeli === true).length;
+    // Hitung per kategori
+    const perKategori = {};
+    items.forEach(item => {
+      const kat = item.kategori || '📝 Lainnya';
+      if (!perKategori[kat]) perKategori[kat] = { total: 0, belum: 0 };
+      perKategori[kat].total++;
+      if (item.dibeli !== true) perKategori[kat].belum++;
+    });
 
-    if (filterBelanja === 'belum') items = items.filter(i => i.dibeli !== true);
-    else if (filterBelanja === 'sudah') items = items.filter(i => i.dibeli === true);
+    // Filter
+    let itemsFiltered = items;
+    if (filterKategoriBelanja !== 'semua') {
+      itemsFiltered = items.filter(i => (i.kategori || '📝 Lainnya') === filterKategoriBelanja);
+    }
 
-    items.sort((a, b) => {
+    // Sort: belum selesai dulu
+    itemsFiltered.sort((a, b) => {
       const aS = a.dibeli === true ? 1 : 0;
       const bS = b.dibeli === true ? 1 : 0;
       if (aS !== bS) return aS - bS;
-      return (a.kategori || '').localeCompare(b.kategori || '');
+      return (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0);
     });
 
     listData.innerHTML = '';
 
-    const infoBar = document.createElement('div');
-    infoBar.className = 'filter-belanja-bar';
-    infoBar.innerHTML = `
-      <div class="filter-belanja-btns">
-        <button onclick="setFilterBelanja('belum')" style="padding:8px 14px;border:2px solid ${filterBelanja === 'belum' ? '#667eea' : '#e2e8f0'};background:${filterBelanja === 'belum' ? 'linear-gradient(135deg,#667eea,#764ba2)' : 'white'};color:${filterBelanja === 'belum' ? 'white' : '#4a5568'};border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;">⏳ Belum (${belumSelesai})</button>
-        <button onclick="setFilterBelanja('sudah')" style="padding:8px 14px;border:2px solid ${filterBelanja === 'sudah' ? '#48bb78' : '#e2e8f0'};background:${filterBelanja === 'sudah' ? 'linear-gradient(135deg,#48bb78,#38a169)' : 'white'};color:${filterBelanja === 'sudah' ? 'white' : '#4a5568'};border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;">✅ Selesai (${sudahSelesai})</button>
-        <button onclick="setFilterBelanja('semua')" style="padding:8px 14px;border:2px solid ${filterBelanja === 'semua' ? '#667eea' : '#e2e8f0'};background:${filterBelanja === 'semua' ? 'linear-gradient(135deg,#667eea,#764ba2)' : 'white'};color:${filterBelanja === 'semua' ? 'white' : '#4a5568'};border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;">📋 Semua (${totalItems})</button>
+    // ⭐ HEADER - Quick Add
+    const header = document.createElement('div');
+    header.style.cssText = 'background:white;padding:16px;border-radius:16px;box-shadow:0 4px 15px rgba(0,0,0,0.06);margin-bottom:14px;';
+    header.innerHTML = `
+      <div style="display:flex;gap:8px;align-items:center;margin-bottom:12px;">
+        <input type="text" id="quickInput" placeholder="⚡ Ketik nama item, tekan Enter..." style="flex:1;padding:14px 16px;border:2px solid #e2e8f0;border-radius:12px;font-size:15px;outline:none;font-family:inherit;transition:.3s;" onfocus="this.style.borderColor='#667eea';this.style.boxShadow='0 0 0 4px rgba(102,126,234,0.1)'" onblur="this.style.borderColor='#e2e8f0';this.style.boxShadow='none'">
+        <button type="button" id="quickAddBtn" style="padding:14px 20px;border:none;background:linear-gradient(135deg,#667eea,#764ba2);color:white;border-radius:12px;font-size:15px;font-weight:800;cursor:pointer;white-space:nowrap;box-shadow:0 6px 16px rgba(102,126,234,0.35);transition:.3s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">+ Tambah</button>
       </div>
-      ${sudahSelesai > 0 ? `<button onclick="hapusYangSudahDibeli()" style="padding:8px 14px;border:none;background:#fee2e2;color:#991b1b;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;">🗑️ Pindah yang Selesai ke Arsip</button>` : ''}
+      <div style="font-size:11.5px;color:#718096;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;">
+        <span>💡 Ketik cepat, otomatis masuk ke kategori terpilih</span>
+        <span style="background:linear-gradient(135deg,#e0e7ff,#c7d2fe);color:#667eea;padding:3px 10px;border-radius:20px;font-weight:700;">${items.length} total • ${items.filter(i => i.dibeli !== true).length} belum</span>
+      </div>
     `;
-    listData.appendChild(infoBar);
+    listData.appendChild(header);
 
-    if (items.length === 0) {
+    // ⭐ TABS KATEGORI
+    const tabsContainer = document.createElement('div');
+    tabsContainer.style.cssText = 'display:flex;gap:8px;overflow-x:auto;padding-bottom:10px;margin-bottom:14px;-webkit-overflow-scrolling:touch;scrollbar-width:thin;';
+
+    const totalBelum = items.filter(i => i.dibeli !== true).length;
+
+    let tabsHtml = `<button onclick="setKategoriBelanja('semua')" style="padding:10px 16px;border:2px solid ${filterKategoriBelanja === 'semua' ? '#667eea' : '#e2e8f0'};background:${filterKategoriBelanja === 'semua' ? 'linear-gradient(135deg,#667eea,#764ba2)' : 'white'};color:${filterKategoriBelanja === 'semua' ? 'white' : '#4a5568'};border-radius:12px;font-size:12.5px;font-weight:800;cursor:pointer;white-space:nowrap;transition:.3s;flex-shrink:0;">📊 Semua (${totalBelum})</button>`;
+
+    Object.keys(perKategori).sort().forEach(kat => {
+      const data = perKategori[kat];
+      const isActive = filterKategoriBelanja === kat;
+      tabsHtml += `<button onclick="setKategoriBelanja('${kat.replace(/'/g, "\\'")}')" style="padding:10px 16px;border:2px solid ${isActive ? '#48bb78' : '#e2e8f0'};background:${isActive ? 'linear-gradient(135deg,#48bb78,#38a169)' : 'white'};color:${isActive ? 'white' : '#4a5568'};border-radius:12px;font-size:12.5px;font-weight:800;cursor:pointer;white-space:nowrap;transition:.3s;flex-shrink:0;">${kat} (${data.belum})</button>`;
+    });
+
+    tabsContainer.innerHTML = tabsHtml;
+    listData.appendChild(tabsContainer);
+
+    // ⭐ LIST ITEMS
+    if (itemsFiltered.length === 0) {
       const empty = document.createElement('div');
       empty.className = 'empty-state';
-      const pesan = filterBelanja === 'belum' ? 'Semua item sudah selesai! 🎉' : filterBelanja === 'sudah' ? 'Belum ada item yang selesai.' : 'Daftar masih kosong.';
-      empty.innerHTML = `<div class="icon-big">${filterBelanja === 'belum' && totalItems > 0 ? '🎉' : '📋'}</div><p>${pesan}</p><p style="margin-top:8px;font-size:13px;color:#a0aec0;">Klik <strong>"+ Tambah"</strong> untuk menambah item.</p>`;
+      const pesan = filterKategoriBelanja === 'semua' 
+        ? 'Belum ada item. Ketik di atas untuk menambah!' 
+        : `Belum ada item di kategori "${filterKategoriBelanja}".`;
+      empty.innerHTML = `
+        <div class="icon-big">📋</div>
+        <p>${pesan}</p>
+        <p style="margin-top:8px;font-size:13px;color:#a0aec0;">💡 Ketik nama item di kolom atas, tekan <strong>Enter</strong></p>
+      `;
       listData.appendChild(empty);
       return;
     }
 
-    const perKategori = {};
-    items.forEach(item => {
-      const kat = item.kategori || '📝 Lainnya';
-      if (!perKategori[kat]) perKategori[kat] = [];
-      perKategori[kat].push(item);
+    const listWrap = document.createElement('div');
+    listWrap.style.cssText = 'display:flex;flex-direction:column;gap:6px;';
+
+    itemsFiltered.forEach(data => {
+      const id = data.id;
+      const sudahSelesai = data.dibeli === true;
+      const katLabel = data.kategori || '📝 Lainnya';
+
+      const item = document.createElement('div');
+      item.className = 'list-item' + (sudahSelesai ? ' selesai' : '');
+      item.style.cssText = `padding:12px 14px;border-radius:12px;border-left:4px solid ${sudahSelesai ? 'var(--green)' : '#fa709a'};gap:10px;`;
+
+      item.innerHTML = `
+        <div class="check-selesai ${sudahSelesai ? 'checked' : ''}" style="width:28px;height:28px;font-size:14px;border-radius:9px;flex-shrink:0;">✓</div>
+        <div class="list-item-info">
+          <h4 class="${sudahSelesai ? 'selesai-teks' : ''}" style="font-size:14.5px;margin-bottom:3px;">${escapeHtml(data.nama || '-')}</h4>
+          ${data.catatan ? `<div style="font-size:11.5px;color:#a0aec0;font-style:italic;" class="${sudahSelesai ? 'selesai-teks' : ''}">📝 ${escapeHtml(data.catatan)}</div>` : ''}
+          <div style="margin-top:4px;"><span style="background:#f1f5f9;color:#718096;padding:2px 8px;border-radius:20px;font-size:10.5px;font-weight:600;">${katLabel}</span></div>
+        </div>
+        <div class="list-item-actions" style="gap:6px;">
+          <button class="btn-edit-item" title="Edit" style="width:30px;height:30px;border:none;border-radius:8px;background:#fef3c7;color:#92400e;cursor:pointer;font-size:13px;display:flex;align-items:center;justify-content:center;">✏️</button>
+          <button class="btn-hapus-item" title="Hapus" style="width:30px;height:30px;border:none;border-radius:8px;background:#fee2e2;color:#991b1b;cursor:pointer;font-size:13px;display:flex;align-items:center;justify-content:center;">🗑️</button>
+        </div>
+      `;
+
+      // Checkbox
+      item.querySelector('.check-selesai').onclick = async () => {
+        await updateDoc(doc(db, 'belanja', id), { dibeli: !sudahSelesai });
+        await tampilkanData('belanja', null);
+        showToast(!sudahSelesai ? '✅ Selesai!' : '↩️ Dikembalikan');
+      };
+
+      // Edit
+      item.querySelector('.btn-edit-item').onclick = () => {
+        editData(id, data, 'belanja');
+      };
+
+      // Hapus
+      item.querySelector('.btn-hapus-item').onclick = async () => {
+        if (confirm(`Hapus "${data.nama}"?`)) {
+          await softDelete('belanja', id, data, data.nama || 'Item');
+          showToast('🗑️ Dihapus!');
+          await tampilkanData('belanja', null);
+        }
+      };
+
+      listWrap.appendChild(item);
     });
 
-    const katKeys = Object.keys(perKategori).sort((a, b) => a.localeCompare(b));
+    listData.appendChild(listWrap);
 
-    katKeys.forEach(kategori => {
-      const header = document.createElement('div');
-      header.style.cssText = 'background:linear-gradient(135deg,#667eea,#764ba2);color:white;padding:10px 16px;border-radius:12px;font-weight:700;font-size:13.5px;margin-bottom:10px;margin-top:14px;display:flex;justify-content:space-between;align-items:center;gap:10px;';
-      header.innerHTML = `<span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${kategori}</span><span style="background:rgba(255,255,255,0.25);padding:3px 10px;border-radius:20px;font-size:11px;flex-shrink:0;">${perKategori[kategori].length}</span>`;
-      listData.appendChild(header);
-
-      perKategori[kategori].forEach(data => {
-        const id = data.id;
-        const sudahSelesai2 = data.dibeli === true;
-        const item = document.createElement('div');
-        item.className = 'list-item' + (sudahSelesai2 ? ' selesai' : '');
-        item.style.borderLeftColor = sudahSelesai2 ? 'var(--green)' : '#fa709a';
-        item.style.marginBottom = '8px';
-        item.innerHTML = `
-          <div class="check-selesai ${sudahSelesai2 ? 'checked' : ''}" style="width:30px;height:30px;font-size:15px;">✓</div>
-          <div class="list-item-info">
-            <h4 class="${sudahSelesai2 ? 'selesai-teks' : ''}" style="font-size:15px;">📌 ${escapeHtml(data.nama || '-')}</h4>
-            ${data.jumlah ? `<p class="${sudahSelesai2 ? 'selesai-teks' : ''}" style="font-weight:600;color:#667eea;">📦 ${escapeHtml(data.jumlah)}</p>` : ''}
-            ${data.catatan ? `<div style="margin-top:4px;font-size:12px;color:#a0aec0;font-style:italic;" class="${sudahSelesai2 ? 'selesai-teks' : ''}">📝 ${escapeHtml(data.catatan)}</div>` : ''}
-          </div>
-          <div class="list-item-actions">
-            <button class="btn-icon btn-edit" title="Edit">✏️</button>
-            <button class="btn-icon btn-hapus" title="Pindah ke Arsip">🗑️</button>
-          </div>
-        `;
-        item.querySelector('.check-selesai').onclick = async () => {
-          await updateDoc(doc(db, 'belanja', id), { dibeli: !sudahSelesai2 });
-          await tampilkanData('belanja', null);
-          showToast(!sudahSelesai2 ? '✅ ' + data.nama + ' selesai!' : '↩️ Dikembalikan');
-        };
-        item.querySelector('.btn-edit').onclick = () => editData(id, data, 'belanja');
-        item.querySelector('.btn-hapus').onclick = async () => {
-          if (confirm('Pindahkan ke Arsip?')) {
-            await softDelete('belanja', id, data, data.nama || 'Item');
-            showToast('🗑️ Dipindahkan ke Arsip!');
+    // ⭐ AKTIFKAN QUICK INPUT
+    setTimeout(() => {
+      const input = document.getElementById('quickInput');
+      const btn = document.getElementById('quickAddBtn');
+      if (input) {
+        input.focus();
+        
+        const doQuickAdd = async () => {
+          const nama = input.value.trim();
+          if (!nama) return;
+          
+          const kategori = filterKategoriBelanja === 'semua' 
+            ? '🎒 Barang Bawaan'  // default kalau "semua"
+            : filterKategoriBelanja;
+          
+          try {
+            await addDoc(collection(db, 'belanja'), {
+              nama: nama,
+              kategori: kategori,
+              catatan: '',
+              dibeli: false,
+              createdAt: serverTimestamp()
+            });
+            input.value = '';
+            input.focus();
+            showToast('✅ "' + nama + '" ditambahkan!');
             await tampilkanData('belanja', null);
+          } catch (err) {
+            showToast('❌ Gagal: ' + err.message, 'error');
           }
         };
-        listData.appendChild(item);
-      });
-    });
+
+        input.addEventListener('keypress', (e) => {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            doQuickAdd();
+          }
+        });
+
+        if (btn) {
+          btn.onclick = (e) => {
+            e.preventDefault();
+            doQuickAdd();
+          };
+        }
+      }
+    }, 100);
 
   } catch (error) {
     console.error('Error:', error);
@@ -2031,6 +2117,7 @@ window.simpanData = async function(e) {
       if (currentTab === 'todo') data.selesai = false;
       if (currentTab === 'target') data.status = data.status || 'Belum Mulai';
       if (currentMenu === 'belanja') data.dibeli = false;
+      if (currentMenu === 'belanja' && !data.kategori) data.kategori = '🎒 Barang Bawaan';
       await addDoc(collection(db, koleksi), {...data, createdAt: serverTimestamp()});
       showToast('✅ Data disimpan!');
     }
