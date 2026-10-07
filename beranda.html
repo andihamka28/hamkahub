@@ -148,6 +148,7 @@ body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; 
 .btn-progress.reset { background:#fef3c7; color:#92400e; }
 .btn-progress.selesai { background:#dbeafe; color:#1e40af; }
 
+/* KEUANGAN */
 .keuangan-container { display:flex; flex-direction:column; gap:20px; }
 .filter-bulan { background:white; padding:15px 20px; border-radius:15px; box-shadow:var(--shadow); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; }
 .filter-bulan label { font-size:13px; font-weight:600; color:var(--text); }
@@ -187,6 +188,51 @@ body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; 
 .btn-keuangan .ico.masuk { background:linear-gradient(135deg,#d1fae5,#a7f3d0); }
 .btn-keuangan .ico.keluar { background:linear-gradient(135deg,#fee2e2,#fecaca); }
 .btn-keuangan .ico.semua { background:linear-gradient(135deg,#e0e7ff,#c7d2fe); }
+
+/* ⭐ KARTU REKENING */
+.rek-card {
+  background: white;
+  border-radius: 18px;
+  padding: 18px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+  transition: all .35s cubic-bezier(0.4, 0, 0.2, 1);
+  min-width: 0;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+.rek-card::before {
+  content: '';
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  width: 150px;
+  height: 150px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 50%;
+}
+.rek-card::after {
+  content: '';
+  position: absolute;
+  bottom: -30px;
+  left: -30px;
+  width: 100px;
+  height: 100px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 50%;
+}
+.rek-card:hover {
+  transform: translateY(-6px) scale(1.02);
+}
+.rek-card.is-active {
+  transform: translateY(-6px) scale(1.02);
+}
+.rek-card-click {
+  position: absolute;
+  inset: 0;
+  cursor: pointer;
+  z-index: 1;
+}
 
 .nav-hari { background:white; padding:16px 18px; border-radius:16px; box-shadow:0 8px 30px rgba(0,0,0,0.08); display:flex; justify-content:space-between; align-items:center; margin-bottom:22px; gap:12px; flex-wrap:wrap; }
 .nav-hari-info { display:flex; align-items:center; gap:14px; flex:1; min-width:200px; }
@@ -412,6 +458,8 @@ body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; 
   .filter-belanja-bar { padding:12px 14px; }
   .filter-belanja-btns { gap:6px; }
   .filter-belanja-btns button { padding:7px 10px !important; font-size:11px !important; }
+  .rek-card { padding: 14px; border-radius: 16px; }
+  .rek-card .rek-total-besar { font-size: 20px; }
 }
 @media (max-width: 380px) {
   .menu-grid { grid-template-columns:repeat(2, 1fr); gap:8px; }
@@ -601,18 +649,26 @@ body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; 
             <label>📅 Pilih Bulan:</label>
             <input type="month" id="filterBulanKeuangan">
           </div>
+          <div id="filterRekeningContainer" style="background:white;padding:14px 16px;border-radius:14px;box-shadow:var(--shadow);display:flex;gap:8px;overflow-x:auto;flex-wrap:wrap;-webkit-overflow-scrolling:touch;"></div>
           <div class="saldo-utama">
-            <div class="label">💰 Total Saldo</div>
+            <div class="label">💰 Total Saldo (Semua Rekening)</div>
             <div class="amount" id="saldoBulan">Rp 0</div>
             <div class="periode" id="periodeKeuangan">-</div>
           </div>
+
+          <div class="rekening-summary-title" style="font-size:15px;font-weight:800;color:var(--text);margin-bottom:12px;margin-top:4px;display:flex;justify-content:space-between;align-items:center;">
+            <span>💳 Saldo Setiap Rekening</span>
+            <span id="totalRekeningCount" style="font-size:12px;color:var(--text-light);font-weight:500;"></span>
+          </div>
+          <div id="ringkasanRekeningGrid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;"></div>
+
           <div class="keuangan-grid">
             <div class="keuangan-card masuk">
-              <div class="label">📥 Pemasukan</div>
+              <div class="label">📥 Total Pemasukan</div>
               <div class="value" id="totalMasukBulan">Rp 0</div>
             </div>
             <div class="keuangan-card keluar">
-              <div class="label">📤 Pengeluaran</div>
+              <div class="label">📤 Total Pengeluaran</div>
               <div class="value" id="totalKeluarBulan">Rp 0</div>
             </div>
           </div>
@@ -789,8 +845,29 @@ let currentTab = null;
 let editId = null;
 let hariAktif = null;
 let filterBelanja = 'belum';
+let filterRekening = 'semua';
 const HARI_URUT = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
 function getHariIni() { return HARI_URUT[new Date().getDay()]; }
+
+// Style per rekening
+const REK_STYLE = {
+  'Tunai':      { icon: '💵', bg: 'linear-gradient(135deg,#48bb78,#38a169)', shadow: 'rgba(72,187,120,0.35)' },
+  'BCA':        { icon: '🏦', bg: 'linear-gradient(135deg,#1e40af,#1e3a8a)', shadow: 'rgba(30,64,175,0.35)' },
+  'Mandiri':    { icon: '🏦', bg: 'linear-gradient(135deg,#0369a1,#075985)', shadow: 'rgba(3,105,161,0.35)' },
+  'BRI':        { icon: '🏦', bg: 'linear-gradient(135deg,#1d4ed8,#1e3a8a)', shadow: 'rgba(29,78,216,0.35)' },
+  'BNI':        { icon: '🏦', bg: 'linear-gradient(135deg,#dc2626,#991b1b)', shadow: 'rgba(220,38,38,0.35)' },
+  'BSI':        { icon: '🏦', bg: 'linear-gradient(135deg,#16a34a,#15803d)', shadow: 'rgba(22,163,74,0.35)' },
+  'CIMB':       { icon: '🏦', bg: 'linear-gradient(135deg,#dc2626,#7f1d1d)', shadow: 'rgba(220,38,38,0.35)' },
+  'Permata':    { icon: '🏦', bg: 'linear-gradient(135deg,#0d9488,#0f766e)', shadow: 'rgba(13,148,136,0.35)' },
+  'Danamon':    { icon: '🏦', bg: 'linear-gradient(135deg,#ea580c,#c2410c)', shadow: 'rgba(234,88,12,0.35)' },
+  'BTN':        { icon: '🏦', bg: 'linear-gradient(135deg,#0369a1,#0c4a6e)', shadow: 'rgba(3,105,161,0.35)' },
+  'Dana':       { icon: '📱', bg: 'linear-gradient(135deg,#0ea5e9,#0284c7)', shadow: 'rgba(14,165,233,0.35)' },
+  'OVO':        { icon: '📱', bg: 'linear-gradient(135deg,#7c3aed,#6d28d9)', shadow: 'rgba(124,58,237,0.35)' },
+  'GoPay':      { icon: '📱', bg: 'linear-gradient(135deg,#0ea5e9,#0369a1)', shadow: 'rgba(14,165,233,0.35)' },
+  'ShopeePay':  { icon: '📱', bg: 'linear-gradient(135deg,#f97316,#ea580c)', shadow: 'rgba(249,115,22,0.35)' },
+  'LinkAja':    { icon: '📱', bg: 'linear-gradient(135deg,#dc2626,#b91c1c)', shadow: 'rgba(220,38,38,0.35)' },
+  'Lainnya':    { icon: '📝', bg: 'linear-gradient(135deg,#64748b,#475569)', shadow: 'rgba(100,116,139,0.35)' }
+};
 
 const toast = document.getElementById('toast');
 window.showToast = function(msg, type='success') {
@@ -1049,6 +1126,12 @@ async function tampilkanJadwal(tabJadwal) {
 window.setFilterBelanja = function(f) {
   filterBelanja = f;
   tampilkanData('belanja', null);
+};
+
+window.setFilterRekening = function(rek) {
+  filterRekening = rek;
+  loadKeuangan();
+  lihatSemuaKeuangan();
 };
 
 window.hapusYangSudahDibeli = async function() {
@@ -1561,6 +1644,7 @@ async function tampilkanArsip() {
       if (data.kategori) infoTambahan.push(`🏷️ ${data.kategori}`);
       if (data.status) infoTambahan.push(`📌 ${data.status}`);
       if (data.prioritas) infoTambahan.push(`⚡ ${data.prioritas}`);
+      if (data.rekening) infoTambahan.push(`🏦 ${data.rekening}`);
 
       el.innerHTML = `
         <div class="list-item-info" style="width:100%;">
@@ -1644,6 +1728,27 @@ window.bukaModalKeuangan = function(jenis) {
   const formFields = document.getElementById('formFields');
   formFields.innerHTML = `
     <input type="hidden" name="jenis" value="${jenis}">
+    <div class="form-group">
+      <label>Rekening / Tujuan *</label>
+      <select name="rekening" required>
+        <option value="Tunai">💵 Tunai</option>
+        <option value="BCA">🏦 BCA</option>
+        <option value="Mandiri">🏦 Mandiri</option>
+        <option value="BRI">🏦 BRI</option>
+        <option value="BNI">🏦 BNI</option>
+        <option value="BSI">🏦 BSI</option>
+        <option value="CIMB">🏦 CIMB Niaga</option>
+        <option value="Permata">🏦 Permata</option>
+        <option value="Danamon">🏦 Danamon</option>
+        <option value="BTN">🏦 BTN</option>
+        <option value="Dana">📱 DANA</option>
+        <option value="OVO">📱 OVO</option>
+        <option value="GoPay">📱 GoPay</option>
+        <option value="ShopeePay">📱 ShopeePay</option>
+        <option value="LinkAja">📱 LinkAja</option>
+        <option value="Lainnya">📝 Lainnya</option>
+      </select>
+    </div>
     <div class="form-group"><label>Keterangan *</label><input type="text" name="keterangan" required placeholder="Contoh: Gaji bulanan..."></div>
     <div class="form-group"><label>Jumlah (Rp) *</label><input type="text" name="jumlah" required placeholder="Contoh: 800000" class="input-currency" inputmode="numeric"></div>
     <div class="form-group"><label>Tanggal *</label><input type="date" name="tanggal" required value="${new Date().toISOString().slice(0,10)}"></div>
@@ -1658,11 +1763,23 @@ window.lihatSemuaKeuangan = async function() {
   listEl.innerHTML = '<div class="empty-state"><div class="icon-big">⏳</div>Memuat...</div>';
   try {
     const snap = await getDocs(query(collection(db, 'transaksi'), orderBy('createdAt', 'desc')));
-    if (snap.empty) { listEl.innerHTML = '<div class="empty-state"><div class="icon-big">📭</div><p>Belum ada transaksi.</p></div>'; return; }
-    listEl.innerHTML = '';
+    let items = [];
     snap.forEach(docSnap => {
-      const d = docSnap.data();
-      const id = docSnap.id;
+      items.push({ id: docSnap.id, ...docSnap.data() });
+    });
+
+    if (filterRekening !== 'semua') {
+      items = items.filter(i => (i.rekening || 'Tunai') === filterRekening);
+    }
+
+    if (items.length === 0) {
+      listEl.innerHTML = '<div class="empty-state"><div class="icon-big">📭</div><p>Belum ada transaksi.</p></div>';
+      return;
+    }
+
+    listEl.innerHTML = '';
+    items.forEach(d => {
+      const id = d.id;
       const isMasuk = d.jenis === 'pemasukan';
       const item = document.createElement('div');
       item.className = 'list-item';
@@ -1671,7 +1788,11 @@ window.lihatSemuaKeuangan = async function() {
         <div class="list-item-info">
           <h4>${isMasuk ? '📥' : '📤'} ${escapeHtml(d.keterangan || '-')}</h4>
           <p style="color:${isMasuk ? 'var(--green)' : 'var(--red)'};font-weight:700">${isMasuk ? '+' : '-'} Rp ${Number(d.jumlah || 0).toLocaleString('id-ID')}</p>
-          <div style="margin-top:5px;font-size:11.5px;color:#718096;">📅 ${d.tanggal || '-'} • 🏷️ ${d.kategori || 'Umum'}</div>
+          <div style="margin-top:5px;font-size:11.5px;color:#718096;display:flex;flex-wrap:wrap;gap:6px;">
+            <span style="background:#e0e7ff;color:#3730a3;padding:2px 8px;border-radius:20px;font-weight:600;">🏦 ${d.rekening || 'Tunai'}</span>
+            <span>📅 ${d.tanggal || '-'}</span>
+            <span>🏷️ ${d.kategori || 'Umum'}</span>
+          </div>
         </div>
         <div class="list-item-actions"><button class="btn-icon btn-hapus" title="Pindah ke Arsip">🗑️</button></div>
       `;
@@ -1693,27 +1814,131 @@ async function loadKeuangan() {
   if (!bulan) return;
   const [tahun, bln] = bulan.split('-');
   const namaBulan = new Date(tahun, bln - 1).toLocaleDateString('id-ID', { month: 'long', year: 'numeric' });
-  document.getElementById('periodeKeuangan').textContent = 'Periode: ' + namaBulan;
+
   try {
     const snap = await getDocs(collection(db, 'transaksi'));
     let masuk = 0, keluar = 0;
+    const perRekening = {};
+
     snap.forEach(docSnap => {
       const d = docSnap.data();
       if (!d.tanggal) return;
-      if (d.tanggal.startsWith(bulan)) {
-        if (d.jenis === 'pemasukan') masuk += Number(d.jumlah) || 0;
-        else keluar += Number(d.jumlah) || 0;
+      if (!d.tanggal.startsWith(bulan)) return;
+      
+      const rek = d.rekening || 'Tunai';
+      if (!perRekening[rek]) perRekening[rek] = { masuk: 0, keluar: 0 };
+      
+      if (d.jenis === 'pemasukan') {
+        perRekening[rek].masuk += Number(d.jumlah) || 0;
+        if (filterRekening === 'semua' || filterRekening === rek) masuk += Number(d.jumlah) || 0;
+      } else {
+        perRekening[rek].keluar += Number(d.jumlah) || 0;
+        if (filterRekening === 'semua' || filterRekening === rek) keluar += Number(d.jumlah) || 0;
       }
     });
+
     const saldo = masuk - keluar;
+    const labelRek = filterRekening === 'semua' ? 'Semua Rekening' : filterRekening;
+    
     document.getElementById('saldoBulan').textContent = 'Rp ' + saldo.toLocaleString('id-ID');
     document.getElementById('totalMasukBulan').textContent = 'Rp ' + masuk.toLocaleString('id-ID');
     document.getElementById('totalKeluarBulan').textContent = 'Rp ' + keluar.toLocaleString('id-ID');
+    document.getElementById('periodeKeuangan').textContent = `${namaBulan} • ${labelRek}`;
+
     const max = Math.max(masuk, keluar, 1);
     document.getElementById('barMasuk').style.height = Math.max(5, (masuk/max) * 160) + 'px';
     document.getElementById('barKeluar').style.height = Math.max(5, (keluar/max) * 160) + 'px';
     document.getElementById('labelBarMasuk').textContent = 'Rp ' + masuk.toLocaleString('id-ID');
     document.getElementById('labelBarKeluar').textContent = 'Rp ' + keluar.toLocaleString('id-ID');
+
+    // Render filter rekening buttons
+    const containerRek = document.getElementById('filterRekeningContainer');
+    if (containerRek) {
+      const listRek = Object.keys(perRekening).sort();
+      let totalSemua = 0;
+      Object.keys(perRekening).forEach(k => {
+        totalSemua += perRekening[k].masuk - perRekening[k].keluar;
+      });
+
+      let html = `<button onclick="setFilterRekening('semua')" style="padding:8px 14px;border:2px solid ${filterRekening === 'semua' ? '#667eea' : '#e2e8f0'};background:${filterRekening === 'semua' ? 'linear-gradient(135deg,#667eea,#764ba2)' : 'white'};color:${filterRekening === 'semua' ? 'white' : '#4a5568'};border-radius:10px;font-size:12.5px;font-weight:700;cursor:pointer;white-space:nowrap;">📊 Semua (Rp ${totalSemua.toLocaleString('id-ID')})</button>`;
+
+      listRek.forEach(rek => {
+        const sld = perRekening[rek].masuk - perRekening[rek].keluar;
+        const isActive = filterRekening === rek;
+        html += `<button onclick="setFilterRekening('${rek}')" style="padding:8px 14px;border:2px solid ${isActive ? '#48bb78' : '#e2e8f0'};background:${isActive ? 'linear-gradient(135deg,#48bb78,#38a169)' : 'white'};color:${isActive ? 'white' : '#4a5568'};border-radius:10px;font-size:12.5px;font-weight:700;cursor:pointer;white-space:nowrap;">🏦 ${rek} (Rp ${sld.toLocaleString('id-ID')})</button>`;
+      });
+
+      containerRek.innerHTML = html;
+    }
+
+    // Render kartu per rekening
+    const grid = document.getElementById('ringkasanRekeningGrid');
+    const countEl = document.getElementById('totalRekeningCount');
+    if (!grid) return;
+
+    const listRekSort = Object.keys(perRekening).sort((a, b) => {
+      const sa = perRekening[a].masuk - perRekening[a].keluar;
+      const sb = perRekening[b].masuk - perRekening[b].keluar;
+      return sb - sa;
+    });
+
+    if (countEl) countEl.textContent = `${listRekSort.length} rekening aktif`;
+
+    if (listRekSort.length === 0) {
+      grid.innerHTML = `
+        <div style="grid-column:1/-1;text-align:center;padding:30px 20px;background:white;border-radius:14px;box-shadow:var(--shadow);color:var(--text-light);">
+          <div style="font-size:40px;margin-bottom:8px;">💳</div>
+          <p style="font-size:13px;">Belum ada transaksi bulan ini</p>
+        </div>
+      `;
+      return;
+    }
+
+    grid.innerHTML = '';
+    listRekSort.forEach(rek => {
+      const data = perRekening[rek];
+      const sld = data.masuk - data.keluar;
+      const style = REK_STYLE[rek] || REK_STYLE['Lainnya'];
+      const isActive = filterRekening === rek;
+
+      const card = document.createElement('div');
+      card.className = 'rek-card' + (isActive ? ' is-active' : '');
+      card.style.background = style.bg;
+      card.style.color = 'white';
+      card.style.boxShadow = isActive 
+        ? `0 15px 40px ${style.shadow}, 0 0 0 3px rgba(255,255,255,0.3)` 
+        : `0 8px 25px ${style.shadow}`;
+
+      card.innerHTML = `
+        <div class="rek-card-click" onclick="setFilterRekening('${rek}')"></div>
+        <div style="position:relative;z-index:2;pointer-events:none;">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+            <div style="width:42px;height:42px;border-radius:12px;background:rgba(255,255,255,0.25);display:flex;align-items:center;justify-content:center;font-size:20px;backdrop-filter:blur(10px);">
+              ${style.icon}
+            </div>
+            <div style="min-width:0;flex:1;">
+              <div style="font-size:15px;font-weight:800;letter-spacing:-0.3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${escapeHtml(rek)}</div>
+              <div style="font-size:10px;opacity:0.8;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;">Saldo Rekening</div>
+            </div>
+          </div>
+          <div style="font-size:22px;font-weight:800;margin-bottom:14px;letter-spacing:-0.5px;word-break:break-all;text-shadow:0 2px 8px rgba(0,0,0,0.15);">
+            Rp ${sld.toLocaleString('id-ID')}
+          </div>
+          <div style="display:flex;flex-direction:column;gap:5px;font-size:11.5px;background:rgba(255,255,255,0.15);border-radius:10px;padding:8px 10px;backdrop-filter:blur(10px);">
+            <div style="display:flex;justify-content:space-between;">
+              <span style="opacity:0.85;">📥 Masuk</span>
+              <span style="font-weight:700;">+Rp ${data.masuk.toLocaleString('id-ID')}</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;">
+              <span style="opacity:0.85;">📤 Keluar</span>
+              <span style="font-weight:700;">-Rp ${data.keluar.toLocaleString('id-ID')}</span>
+            </div>
+          </div>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+
   } catch (e) { console.error(e); }
 }
 
