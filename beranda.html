@@ -743,8 +743,6 @@ body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; 
     <button class="alarm-btn-stop" onclick="matikanAlarm()">🔕 Matikan Alarm</button>
   </div>
 </div>
-
-<div class="toast" id="toast"></div>
   
 <script type="module">
 import { db, collection, addDoc, getDocs, doc, updateDoc, deleteDoc, query, orderBy, serverTimestamp } from './firebase.js';
@@ -947,7 +945,6 @@ async function loadRekeningCustom() {
     });
     updateSemuaRekening();
     console.log('📋 Rekening aktif:', semuaRekening);
-    console.log('🎨 Rekening custom:', daftarRekeningCustom);
     console.log('🚫 Rekening hidden:', rekeningHidden);
   } catch (e) { console.error('Load rekening gagal:', e); }
 }
@@ -1058,7 +1055,7 @@ async function simpanRekeningBaru(e) {
 }
 
 window.hapusRekening = async function(namaRek) {
-  if (!confirm(`Hapus rekening "${namaRek}"?\n\nRekening ini tidak akan muncul lagi di filter & form input.`)) return;
+  if (!confirm(`Hapus rekening "${namaRek}"?\n\nRekening ini tidak akan muncul lagi.`)) return;
   try {
     const snap = await getDocs(collection(db, 'rekening_custom'));
     let found = false;
@@ -1073,11 +1070,8 @@ window.hapusRekening = async function(namaRek) {
     
     if (!found) {
       await addDoc(collection(db, 'rekening_custom'), {
-        nama: namaRek,
-        icon: '🏦',
-        warna: 'auto',
-        hidden: true,
-        createdAt: serverTimestamp()
+        nama: namaRek, icon: '🏦', warna: 'auto',
+        hidden: true, createdAt: serverTimestamp()
       });
     }
     
@@ -1095,7 +1089,7 @@ window.hapusRekening = async function(namaRek) {
 };
 
 window.hapusRekeningDariModal = async function(namaRek, jenis) {
-  if (!confirm(`Hapus rekening "${namaRek}" dari daftar?\n\nTransaksi lama tetap ada, tapi rekening ini tidak muncul lagi.`)) return;
+  if (!confirm(`Hapus rekening "${namaRek}" dari daftar?`)) return;
   
   try {
     const snap = await getDocs(collection(db, 'rekening_custom'));
@@ -1111,11 +1105,8 @@ window.hapusRekeningDariModal = async function(namaRek, jenis) {
     
     if (!found) {
       await addDoc(collection(db, 'rekening_custom'), {
-        nama: namaRek,
-        icon: '🏦',
-        warna: 'auto',
-        hidden: true,
-        createdAt: serverTimestamp()
+        nama: namaRek, icon: '🏦', warna: 'auto',
+        hidden: true, createdAt: serverTimestamp()
       });
     }
     
@@ -1123,11 +1114,8 @@ window.hapusRekeningDariModal = async function(namaRek, jenis) {
     
     await loadRekeningCustom();
     
-    if (currentMenu === 'keuangan') {
-      if (document.getElementById('modalTitle').textContent.includes('Pemasukan') || 
-          document.getElementById('modalTitle').textContent.includes('Pengeluaran')) {
-        renderOpsiRekening(jenis);
-      }
+    if (currentMenu === 'keuangan' && document.getElementById('modal').classList.contains('active')) {
+      renderOpsiRekening(jenis);
     }
     
     await loadKeuangan();
@@ -2025,6 +2013,9 @@ window.lihatSemuaKeuangan = async function() {
       items.push({ id: docSnap.id, ...docSnap.data() });
     });
 
+    // ⭐ Filter rekening hidden
+    items = items.filter(i => !rekeningHidden.includes(i.rekening || 'Tunai'));
+
     if (filterRekening !== 'semua') {
       items = items.filter(i => (i.rekening || 'Tunai') === filterRekening);
     }
@@ -2083,6 +2074,10 @@ async function loadKeuangan() {
       if (!d.tanggal.startsWith(bulan)) return;
       
       const rek = d.rekening || 'Tunai';
+      
+      // ⭐ SKIP rekening yang sudah dihapus/hidden
+      if (rekeningHidden.includes(rek)) return;
+      
       if (!perRekening[rek]) perRekening[rek] = { masuk: 0, keluar: 0 };
       
       if (d.jenis === 'pemasukan') {
@@ -2325,3 +2320,5 @@ loadRekeningCustom();
 </script>
 </body>
 </html>
+
+<div class="toast" id="toast"></div>
