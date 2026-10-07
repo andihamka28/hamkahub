@@ -148,91 +148,94 @@ body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; 
 .btn-progress.reset { background:#fef3c7; color:#92400e; }
 .btn-progress.selesai { background:#dbeafe; color:#1e40af; }
 
-/* KEUANGAN */
-.keuangan-container { display:flex; flex-direction:column; gap:20px; }
-.filter-bulan { background:white; padding:15px 20px; border-radius:15px; box-shadow:var(--shadow); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; }
-.filter-bulan label { font-size:13px; font-weight:600; color:var(--text); }
-.filter-bulan input { padding:8px 12px; border:2px solid var(--border); border-radius:8px; font-size:14px; outline:none; margin-left:10px; font-family:inherit; }
-.filter-bulan input:focus { border-color:var(--primary); }
-.saldo-utama { background:linear-gradient(135deg,#667eea,#764ba2); color:white; padding:28px; border-radius:20px; box-shadow:0 15px 35px rgba(102,126,234,0.3); position:relative; overflow:hidden; }
-.saldo-utama::before { content:''; position:absolute; width:200px; height:200px; background:rgba(255,255,255,0.1); border-radius:50%; top:-80px; right:-50px; }
-.saldo-utama .label { font-size:13px; opacity:0.9; margin-bottom:8px; position:relative; z-index:1; }
-.saldo-utama .amount { font-size:34px; font-weight:700; margin-bottom:5px; position:relative; z-index:1; word-break:break-all; }
-.saldo-utama .periode { font-size:12px; opacity:0.8; position:relative; z-index:1; }
-.keuangan-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:15px; }
-.keuangan-card { background:white; padding:18px; border-radius:16px; box-shadow:var(--shadow); border-left:4px solid var(--primary); min-width:0; }
-.keuangan-card.masuk { border-left-color:var(--green); }
-.keuangan-card.keluar { border-left-color:var(--red); }
-.keuangan-card .label { font-size:12px; color:var(--text-light); margin-bottom:5px; font-weight:600; text-transform:uppercase; }
-.keuangan-card .value { font-size:20px; font-weight:700; word-break:break-all; }
-.keuangan-card.masuk .value { color:var(--green); }
-.keuangan-card.keluar .value { color:var(--red); }
-.grafik-mini { background:white; padding:22px; border-radius:16px; box-shadow:var(--shadow); }
-.grafik-mini h3 { font-size:15px; margin-bottom:20px; }
-.bar-chart { display:flex; align-items:flex-end; gap:20px; height:180px; padding:10px 0; border-bottom:2px solid var(--border); margin-bottom:15px; }
-.bar-item { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; height:100%; position:relative; min-width:0; }
-.bar { width:100%; border-radius:8px 8px 0 0; transition:all .5s; min-height:5px; }
-.bar.masuk { background:linear-gradient(180deg,#48bb78,#38a169); }
-.bar.keluar { background:linear-gradient(180deg,#fc8181,#e53e3e); }
-.bar-label { font-size:12px; color:var(--text-light); margin-top:8px; font-weight:600; }
-.bar-value { position:absolute; top:-22px; font-size:11px; font-weight:700; color:var(--text); white-space:nowrap; }
-.legend { display:flex; gap:20px; justify-content:center; font-size:12px; color:var(--text-light); flex-wrap:wrap; }
-.legend span { display:flex; align-items:center; gap:5px; }
-.dot { width:12px; height:12px; border-radius:3px; }
-.dot.masuk { background:#38a169; }
-.dot.keluar { background:#e53e3e; }
-.keuangan-tombol { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; }
-.btn-keuangan { background:white; padding:16px; border-radius:14px; box-shadow:var(--shadow); border:2px solid transparent; cursor:pointer; transition:.3s; display:flex; align-items:center; gap:12px; font-size:14px; font-weight:600; color:var(--text); }
-.btn-keuangan:hover { transform:translateY(-3px); border-color:var(--primary); box-shadow:0 10px 25px rgba(102,126,234,0.15); }
-.btn-keuangan .ico { width:38px; height:38px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0; }
-.btn-keuangan .ico.masuk { background:linear-gradient(135deg,#d1fae5,#a7f3d0); }
-.btn-keuangan .ico.keluar { background:linear-gradient(135deg,#fee2e2,#fecaca); }
-.btn-keuangan .ico.semua { background:linear-gradient(135deg,#e0e7ff,#c7d2fe); }
+/* ⭐ KEUANGAN - VERSI PREMIUM */
+.keuangan-container { display:flex; flex-direction:column; gap:20px; padding-bottom:30px; }
 
-/* ⭐ KARTU REKENING */
-.rek-card {
-  background: white;
-  border-radius: 18px;
-  padding: 18px;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-  transition: all .35s cubic-bezier(0.4, 0, 0.2, 1);
-  min-width: 0;
-  position: relative;
-  overflow: hidden;
-  cursor: pointer;
-}
-.rek-card::before {
-  content: '';
-  position: absolute;
-  top: -50px;
-  right: -50px;
-  width: 150px;
-  height: 150px;
-  background: rgba(255,255,255,0.08);
-  border-radius: 50%;
-}
-.rek-card::after {
-  content: '';
-  position: absolute;
-  bottom: -30px;
-  left: -30px;
-  width: 100px;
-  height: 100px;
-  background: rgba(255,255,255,0.06);
-  border-radius: 50%;
-}
-.rek-card:hover {
-  transform: translateY(-6px) scale(1.02);
-}
-.rek-card.is-active {
-  transform: translateY(-6px) scale(1.02);
-}
-.rek-card-click {
-  position: absolute;
-  inset: 0;
-  cursor: pointer;
-  z-index: 1;
-}
+.keuangan-header { display:flex; justify-content:space-between; align-items:center; gap:14px; flex-wrap:wrap; margin-bottom:4px; }
+.keuangan-header-title { display:flex; align-items:center; gap:10px; min-width:0; }
+.keuangan-header-icon { width:40px; height:40px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:18px; color:white; flex-shrink:0; box-shadow:0 6px 15px rgba(0,0,0,0.15); }
+.keuangan-header-title h3 { font-size:15px; font-weight:800; color:var(--text); margin:0; line-height:1.3; letter-spacing:-0.3px; }
+.keuangan-header-title small { display:block; font-size:11.5px; color:var(--text-light); font-weight:500; margin-top:2px; }
+
+.keuangan-filter-bulan { background:linear-gradient(135deg, #ffffff 0%, #f8fafc 100%); padding:14px 18px; border-radius:16px; border:1px solid rgba(102,126,234,0.12); box-shadow:0 4px 20px rgba(102,126,234,0.08); display:flex; align-items:center; gap:12px; flex-wrap:wrap; position:relative; overflow:hidden; }
+.keuangan-filter-bulan::before { content:''; position:absolute; top:0; left:0; width:4px; height:100%; background:linear-gradient(180deg,#667eea,#f093fb); border-radius:4px 0 0 4px; }
+.keuangan-filter-bulan label { font-size:13px; font-weight:800; color:var(--text); display:flex; align-items:center; gap:8px; padding-left:6px; }
+.keuangan-filter-bulan label .icon-box { width:32px; height:32px; border-radius:10px; background:linear-gradient(135deg,#e0e7ff,#c7d2fe); display:flex; align-items:center; justify-content:center; font-size:15px; }
+.keuangan-filter-bulan input[type="month"] { padding:10px 16px; border:2px solid rgba(102,126,234,0.15); border-radius:11px; font-size:13.5px; outline:none; font-family:inherit; font-weight:700; color:var(--text); background:white; cursor:pointer; flex:1; min-width:140px; max-width:220px; transition:all .3s; }
+.keuangan-filter-bulan input[type="month"]:focus { border-color:var(--primary); box-shadow:0 0 0 4px rgba(102,126,234,0.1); }
+
+.keuangan-panel-rekening { background:white; padding:20px 22px; border-radius:18px; box-shadow:0 4px 20px rgba(0,0,0,0.05); border:1px solid rgba(102,126,234,0.08); position:relative; overflow:hidden; }
+.keuangan-panel-rekening::before { content:''; position:absolute; top:-60px; right:-60px; width:180px; height:180px; background:radial-gradient(circle, rgba(102,126,234,0.08) 0%, transparent 70%); border-radius:50%; pointer-events:none; }
+.btn-tambah-rekening { display:inline-flex; align-items:center; gap:7px; padding:10px 18px; background:linear-gradient(135deg, #667eea 0%, #764ba2 100%); color:white; border:none; border-radius:11px; font-size:13px; font-weight:800; cursor:pointer; box-shadow:0 8px 20px rgba(102,126,234,0.35); transition:all .3s cubic-bezier(0.4,0,0.2,1); white-space:nowrap; position:relative; overflow:hidden; z-index:1; }
+.btn-tambah-rekening::before { content:''; position:absolute; top:0; left:-100%; width:100%; height:100%; background:linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent); transition:left .6s; }
+.btn-tambah-rekening:hover { transform:translateY(-3px); box-shadow:0 12px 30px rgba(102,126,234,0.5); }
+.btn-tambah-rekening:hover::before { left:100%; }
+
+.keuangan-filter-rekening { display:flex; gap:8px; overflow-x:auto; padding:4px 2px 10px; margin-top:14px; -webkit-overflow-scrolling:touch; scrollbar-width:thin; scrollbar-color:rgba(102,126,234,0.3) transparent; }
+.keuangan-filter-rekening::-webkit-scrollbar { height:5px; }
+.keuangan-filter-rekening::-webkit-scrollbar-thumb { background:rgba(102,126,234,0.3); border-radius:10px; }
+.keuangan-filter-rekening::-webkit-scrollbar-track { background:transparent; }
+
+.rek-filter-btn { padding:10px 16px; border:2px solid #e2e8f0; background:white; color:#4a5568; border-radius:12px; font-size:12.5px; font-weight:800; cursor:pointer; white-space:nowrap; transition:all .3s cubic-bezier(0.4,0,0.2,1); display:inline-flex; align-items:center; gap:6px; flex-shrink:0; }
+.rek-filter-btn:hover { transform:translateY(-2px); box-shadow:0 6px 16px rgba(102,126,234,0.15); border-color:rgba(102,126,234,0.3); }
+.rek-filter-btn.active { background:linear-gradient(135deg, #667eea, #764ba2); color:white; border-color:transparent; box-shadow:0 8px 20px rgba(102,126,234,0.4); }
+
+.saldo-utama { background:linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%); background-size:200% 200%; animation:gradientShift 8s ease infinite; color:white; padding:32px 34px; border-radius:24px; box-shadow:0 20px 50px rgba(102,126,234,0.4); position:relative; overflow:hidden; }
+@keyframes gradientShift { 0%,100%{background-position:0% 50%;} 50%{background-position:100% 50%;} }
+.saldo-utama::before { content:''; position:absolute; width:260px; height:260px; background:rgba(255,255,255,0.1); border-radius:50%; top:-100px; right:-70px; }
+.saldo-utama::after { content:''; position:absolute; width:140px; height:140px; background:rgba(255,255,255,0.08); border-radius:50%; bottom:-50px; right:120px; }
+.saldo-utama-content { position:relative; z-index:1; }
+.saldo-utama .label { font-size:13px; opacity:0.9; margin-bottom:10px; display:flex; align-items:center; gap:8px; font-weight:700; text-transform:uppercase; letter-spacing:0.8px; }
+.saldo-utama .amount { font-size:42px; font-weight:900; margin-bottom:10px; letter-spacing:-1.5px; word-break:break-all; text-shadow:0 4px 20px rgba(0,0,0,0.2); line-height:1; }
+.saldo-utama .periode { font-size:13px; opacity:0.85; font-weight:600; display:inline-flex; align-items:center; gap:6px; padding:6px 14px; background:rgba(255,255,255,0.15); backdrop-filter:blur(10px); border-radius:20px; border:1px solid rgba(255,255,255,0.2); }
+
+.keuangan-section-title { font-size:15px; font-weight:800; color:var(--text); display:flex; justify-content:space-between; align-items:center; gap:10px; padding:0 4px; margin-top:4px; }
+.keuangan-section-title .badge-count { font-size:11.5px; font-weight:700; color:#667eea; background:linear-gradient(135deg,#e0e7ff,#c7d2fe); padding:5px 12px; border-radius:20px; box-shadow:0 2px 8px rgba(102,126,234,0.15); }
+
+.ringkasan-rekening-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(220px, 1fr)); gap:14px; }
+
+.keuangan-grid { display:grid; grid-template-columns:repeat(2, 1fr); gap:14px; }
+.keuangan-card { background:white; padding:20px 22px; border-radius:18px; box-shadow:0 4px 20px rgba(0,0,0,0.06); border:1px solid rgba(0,0,0,0.03); min-width:0; position:relative; overflow:hidden; transition:all .35s; }
+.keuangan-card:hover { transform:translateY(-4px); box-shadow:0 15px 40px rgba(0,0,0,0.1); }
+.keuangan-card::before { content:''; position:absolute; top:0; left:0; width:100%; height:4px; border-radius:18px 18px 0 0; }
+.keuangan-card.masuk::before { background:linear-gradient(90deg, #48bb78, #38a169); }
+.keuangan-card.keluar::before { background:linear-gradient(90deg, #fc8181, #e53e3e); }
+.keuangan-card .label { font-size:11.5px; color:var(--text-light); margin-bottom:10px; font-weight:800; text-transform:uppercase; letter-spacing:0.8px; display:flex; align-items:center; gap:5px; }
+.keuangan-card .value { font-size:22px; font-weight:900; word-break:break-all; letter-spacing:-0.5px; }
+.keuangan-card.masuk .value { color:#38a169; }
+.keuangan-card.keluar .value { color:#e53e3e; }
+
+.grafik-mini { background:white; padding:24px 26px; border-radius:20px; box-shadow:0 4px 20px rgba(0,0,0,0.06); border:1px solid rgba(0,0,0,0.03); }
+.grafik-mini h3 { font-size:14.5px; font-weight:800; margin-bottom:24px; display:flex; align-items:center; gap:8px; color:var(--text); letter-spacing:-0.2px; }
+.bar-chart { display:flex; align-items:flex-end; gap:30px; height:190px; padding:14px 0 0; border-bottom:2px solid #f1f5f9; margin-bottom:18px; }
+.bar-item { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; height:100%; position:relative; min-width:0; }
+.bar { width:100%; max-width:80px; border-radius:12px 12px 0 0; transition:all .6s cubic-bezier(0.4,0,0.2,1); min-height:6px; position:relative; }
+.bar.masuk { background:linear-gradient(180deg, #48bb78 0%, #38a169 100%); box-shadow:0 8px 25px rgba(72,187,120,0.4); }
+.bar.keluar { background:linear-gradient(180deg, #fc8181 0%, #e53e3e 100%); box-shadow:0 8px 25px rgba(229,62,62,0.4); }
+.bar-label { font-size:12.5px; color:var(--text-light); margin-top:12px; font-weight:800; text-transform:uppercase; letter-spacing:0.5px; }
+.bar-value { position:absolute; top:-28px; font-size:11.5px; font-weight:800; color:var(--text); white-space:nowrap; background:white; padding:4px 10px; border-radius:20px; box-shadow:0 4px 12px rgba(0,0,0,0.1); border:1px solid #f1f5f9; }
+.legend { display:flex; gap:24px; justify-content:center; font-size:12.5px; color:var(--text-light); flex-wrap:wrap; font-weight:700; }
+.legend span { display:flex; align-items:center; gap:8px; }
+.dot { width:14px; height:14px; border-radius:5px; }
+.dot.masuk { background:linear-gradient(135deg, #48bb78, #38a169); box-shadow:0 3px 8px rgba(72,187,120,0.4); }
+.dot.keluar { background:linear-gradient(135deg, #fc8181, #e53e3e); box-shadow:0 3px 8px rgba(229,62,62,0.4); }
+
+.keuangan-tombol { display:grid; grid-template-columns:repeat(3, 1fr); gap:12px; }
+.btn-keuangan { background:white; padding:20px 14px; border-radius:16px; box-shadow:0 4px 20px rgba(0,0,0,0.06); border:2px solid transparent; cursor:pointer; transition:all .35s cubic-bezier(0.4,0,0.2,1); display:flex; flex-direction:column; align-items:center; gap:10px; font-size:13px; font-weight:800; color:var(--text); text-align:center; position:relative; overflow:hidden; }
+.btn-keuangan:hover { transform:translateY(-4px); box-shadow:0 15px 40px rgba(102,126,234,0.2); border-color:rgba(102,126,234,0.2); }
+.btn-keuangan .ico { width:48px; height:48px; border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:22px; flex-shrink:0; transition:all .35s; }
+.btn-keuangan:hover .ico { transform:scale(1.1) rotate(-5deg); }
+.btn-keuangan .ico.masuk { background:linear-gradient(135deg, #d1fae5, #a7f3d0); box-shadow:0 6px 15px rgba(72,187,120,0.25); }
+.btn-keuangan .ico.keluar { background:linear-gradient(135deg, #fee2e2, #fecaca); box-shadow:0 6px 15px rgba(229,62,62,0.25); }
+.btn-keuangan .ico.semua { background:linear-gradient(135deg, #e0e7ff, #c7d2fe); box-shadow:0 6px 15px rgba(102,126,234,0.25); }
+
+/* ⭐ KARTU REKENING PREMIUM */
+.rek-card { background:white; border-radius:20px; padding:20px; box-shadow:0 8px 30px rgba(0,0,0,0.12); transition:all .4s cubic-bezier(0.4, 0, 0.2, 1); min-width:0; position:relative; overflow:hidden; cursor:pointer; border:1px solid rgba(255,255,255,0.1); }
+.rek-card::before { content:''; position:absolute; top:-60px; right:-60px; width:180px; height:180px; background:rgba(255,255,255,0.1); border-radius:50%; }
+.rek-card::after { content:''; position:absolute; bottom:-40px; left:-40px; width:120px; height:120px; background:rgba(255,255,255,0.08); border-radius:50%; }
+.rek-card:hover { transform:translateY(-8px) scale(1.02); box-shadow:0 20px 50px rgba(0,0,0,0.2); }
+.rek-card.is-active { transform:translateY(-6px) scale(1.02); box-shadow:0 20px 50px rgba(0,0,0,0.2); }
+.rek-card-click { position:absolute; inset:0; cursor:pointer; z-index:1; }
 
 .nav-hari { background:white; padding:16px 18px; border-radius:16px; box-shadow:0 8px 30px rgba(0,0,0,0.08); display:flex; justify-content:space-between; align-items:center; margin-bottom:22px; gap:12px; flex-wrap:wrap; }
 .nav-hari-info { display:flex; align-items:center; gap:14px; flex:1; min-width:200px; }
@@ -412,53 +415,47 @@ body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; 
   .modal-buttons button { padding:11px; font-size:13px; }
   .toast { top:12px; right:12px; left:12px; font-size:12.5px; padding:12px 16px; transform:translateY(-120px); }
   .toast.show { transform:translateY(0); }
-  .saldo-utama { padding:20px; border-radius:16px; }
-  .saldo-utama .label { font-size:12px; }
-  .saldo-utama .amount { font-size:24px; }
-  .saldo-utama .periode { font-size:11px; }
-  .keuangan-grid { grid-template-columns:repeat(2,1fr); gap:10px; }
-  .keuangan-card { padding:12px; border-radius:12px; }
-  .keuangan-card .label { font-size:10px; margin-bottom:3px; }
-  .keuangan-card .value { font-size:14px; }
-  .grafik-mini { padding:16px; }
-  .grafik-mini h3 { font-size:13px; margin-bottom:14px; }
-  .bar-chart { height:120px; gap:14px; }
-  .bar-label { font-size:10.5px; }
-  .bar-value { font-size:10px; top:-18px; }
-  .btn-keuangan { padding:11px; font-size:12px; gap:8px; }
-  .btn-keuangan .ico { width:32px; height:32px; font-size:15px; }
-  .filter-bulan { padding:12px 14px; }
-  .filter-bulan label { font-size:12px; }
-  .filter-bulan input { font-size:12.5px; padding:7px 10px; margin-left:8px; }
-  .nav-hari { padding:12px 14px; border-radius:14px; }
-  .nav-hari-icon { width:44px; height:44px; font-size:21px; border-radius:12px; }
-  .nav-hari-text h3 { font-size:15px; }
-  .nav-hari-text p { font-size:10.5px; }
-  .nav-hari-text .badge-hari-ini { font-size:8px; padding:2px 7px; margin-left:5px; }
-  .nav-hari-controls { gap:6px; }
-  .btn-nav-hari { width:36px; height:36px; font-size:14px; border-radius:10px; }
-  .btn-nav-today { height:36px; padding:0 12px; font-size:11.5px; }
-  .sched-item-keren { padding:12px; gap:10px; border-radius:14px; }
-  .sched-jam-keren { min-width:72px; padding:9px 6px; border-radius:11px; }
-  .sched-jam-mulai { font-size:13px; }
-  .sched-jam-selesai { font-size:9px; }
-  .sched-jam-label { font-size:8px; }
-  .sched-judul-keren { font-size:13px; margin-bottom:4px; }
-  .sched-meta-keren { font-size:10.5px; gap:5px; }
-  .sched-meta-keren span { padding:2px 8px; }
-  .sched-catatan-keren { font-size:10.5px; }
-  .sched-actions-keren { flex-direction:row; gap:4px; }
-  .sched-actions-keren .btn-icon { width:30px; height:30px; font-size:12px; }
-  .alarm-box { padding:28px 22px; border-radius:20px; }
-  .alarm-icon { font-size:60px; }
-  .alarm-box h2 { font-size:19px; }
-  .alarm-box p { font-size:13px; }
-  .alarm-box .alarm-judul { font-size:15px; padding:12px; }
-  .alarm-btn-stop { padding:12px 28px; font-size:14px; }
-  .filter-belanja-bar { padding:12px 14px; }
-  .filter-belanja-btns { gap:6px; }
-  .filter-belanja-btns button { padding:7px 10px !important; font-size:11px !important; }
-  .rek-card { padding: 14px; border-radius: 16px; }
+  
+  .saldo-utama { padding:22px 20px; border-radius:18px; }
+  .saldo-utama .label { font-size:11px; margin-bottom:8px; }
+  .saldo-utama .amount { font-size:28px; letter-spacing:-1px; }
+  .saldo-utama .periode { font-size:11.5px; padding:4px 10px; }
+  
+  .keuangan-filter-bulan { padding:12px 14px; }
+  .keuangan-filter-bulan label { font-size:12px; gap:6px; padding-left:2px; }
+  .keuangan-filter-bulan label .icon-box { width:28px; height:28px; font-size:13px; border-radius:8px; }
+  .keuangan-filter-bulan input[type="month"] { padding:9px 12px; font-size:12.5px; }
+  
+  .keuangan-panel-rekening { padding:14px 16px; border-radius:14px; }
+  .keuangan-header-icon { width:36px; height:36px; font-size:16px; }
+  .keuangan-header-title h3 { font-size:14px; }
+  .keuangan-header-title small { font-size:10.5px; }
+  .btn-tambah-rekening { padding:9px 14px; font-size:12px; }
+  .rek-filter-btn { padding:8px 13px; font-size:11.5px; border-radius:10px; }
+  
+  .ringkasan-rekening-grid { grid-template-columns:repeat(2, 1fr); gap:10px; }
+  .rek-card { padding:14px; border-radius:16px; }
+  
+  .keuangan-grid { gap:10px; }
+  .keuangan-card { padding:14px 16px; border-radius:14px; }
+  .keuangan-card .label { font-size:10.5px; margin-bottom:6px; }
+  .keuangan-card .value { font-size:16px; }
+  
+  .grafik-mini { padding:18px; border-radius:16px; }
+  .grafik-mini h3 { font-size:13px; margin-bottom:18px; }
+  .bar-chart { height:140px; gap:20px; }
+  .bar { max-width:60px; border-radius:10px 10px 0 0; }
+  .bar-value { font-size:10px; padding:3px 8px; top:-24px; }
+  .bar-label { font-size:11px; }
+  .legend { font-size:11.5px; gap:16px; }
+  .dot { width:12px; height:12px; }
+  
+  .keuangan-tombol { gap:8px; }
+  .btn-keuangan { padding:14px 8px; font-size:11.5px; gap:8px; border-radius:14px; }
+  .btn-keuangan .ico { width:40px; height:40px; font-size:18px; border-radius:11px; }
+  
+  .keuangan-section-title { font-size:13.5px; }
+  .keuangan-section-title .badge-count { font-size:10.5px; padding:4px 10px; }
 }
 @media (max-width: 380px) {
   .menu-grid { grid-template-columns:repeat(2, 1fr); gap:8px; }
@@ -467,11 +464,13 @@ body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; 
   .menu-card h4 { font-size:12.5px; }
   .menu-card p { font-size:10px; }
   .keuangan-grid { grid-template-columns:1fr; }
+  .ringkasan-rekening-grid { grid-template-columns:1fr; }
   .hero-text h1 { font-size:17px; }
   .jam-digital .jam-besar { font-size:24px; }
   .jam-digital .jam-besar .detik { font-size:20px; }
-  .filter-belanja-btns { width:100%; }
-  .filter-belanja-btns button { flex:1; }
+  .keuangan-tombol { grid-template-columns:1fr; }
+  .btn-keuangan { flex-direction:row; padding:14px; }
+  .btn-keuangan .ico { width:36px; height:36px; font-size:16px; }
 }
 
 .bg1 { background:linear-gradient(135deg,#667eea,#764ba2); }
@@ -642,52 +641,70 @@ body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; 
         <div class="list-data" id="listData"></div>
       </div>
 
+      <!-- ⭐ KEUANGAN PREMIUM -->
       <div id="menuKeuangan" style="display:none">
         <div class="keuangan-container">
-          <div class="filter-bulan">
-            <label>📅 Pilih Bulan:</label>
+          
+          <div class="keuangan-filter-bulan">
+            <label>
+              <span class="icon-box">📅</span>
+              Pilih Bulan
+            </label>
             <input type="month" id="filterBulanKeuangan">
           </div>
-          <div style="background:white;padding:14px 16px;border-radius:14px;box-shadow:var(--shadow);">
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px;">
-              <span style="font-size:13px;font-weight:700;color:var(--text);">🏦 Pilih Rekening</span>
-              <button onclick="bukaModalTambahRekening()" style="padding:7px 14px;border:none;background:linear-gradient(135deg,#667eea,#764ba2);color:white;border-radius:10px;font-size:12px;font-weight:700;cursor:pointer;box-shadow:0 4px 12px rgba(102,126,234,0.3);">+ Tambah Rekening</button>
+
+          <div class="keuangan-panel-rekening">
+            <div class="keuangan-header">
+              <div class="keuangan-header-title">
+                <div class="keuangan-header-icon" style="background:linear-gradient(135deg,#667eea,#764ba2);">🏦</div>
+                <div>
+                  <h3>Kelola Rekening</h3>
+                  <small id="totalRekeningCount">Pilih rekening untuk filter</small>
+                </div>
+              </div>
+              <button class="btn-tambah-rekening" onclick="bukaModalTambahRekening()">
+                <span style="font-size:15px;">＋</span> Tambah Rekening
+              </button>
             </div>
-            <div id="filterRekeningContainer" style="display:flex;gap:8px;overflow-x:auto;flex-wrap:wrap;-webkit-overflow-scrolling:touch;"></div>
-          </div>
-          <div class="saldo-utama">
-            <div class="label">💰 Total Saldo (Semua Rekening)</div>
-            <div class="amount" id="saldoBulan">Rp 0</div>
-            <div class="periode" id="periodeKeuangan">-</div>
+            <div class="keuangan-filter-rekening" id="filterRekeningContainer"></div>
           </div>
 
-          <div class="rekening-summary-title" style="font-size:15px;font-weight:800;color:var(--text);margin-bottom:12px;margin-top:4px;display:flex;justify-content:space-between;align-items:center;">
-            <span>💳 Saldo Setiap Rekening</span>
-            <span id="totalRekeningCount" style="font-size:12px;color:var(--text-light);font-weight:500;"></span>
+          <div class="saldo-utama">
+            <div class="saldo-utama-content">
+              <div class="label">💰 Total Saldo</div>
+              <div class="amount" id="saldoBulan">Rp 0</div>
+              <div class="periode" id="periodeKeuangan">Memuat...</div>
+            </div>
           </div>
-          <div id="ringkasanRekeningGrid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;"></div>
+
+          <div class="keuangan-section-title">
+            <span>💳 Saldo Setiap Rekening</span>
+            <span class="badge-count" id="totalRekeningCount2">0 rekening</span>
+          </div>
+          <div class="ringkasan-rekening-grid" id="ringkasanRekeningGrid"></div>
 
           <div class="keuangan-grid">
             <div class="keuangan-card masuk">
-              <div class="label">📥 Total Pemasukan</div>
+              <div class="label">📥 Pemasukan</div>
               <div class="value" id="totalMasukBulan">Rp 0</div>
             </div>
             <div class="keuangan-card keluar">
-              <div class="label">📤 Total Pengeluaran</div>
+              <div class="label">📤 Pengeluaran</div>
               <div class="value" id="totalKeluarBulan">Rp 0</div>
             </div>
           </div>
+
           <div class="grafik-mini">
             <h3>📊 Perbandingan Pemasukan & Pengeluaran</h3>
             <div class="bar-chart">
               <div class="bar-item">
                 <div class="bar-value" id="labelBarMasuk">Rp 0</div>
-                <div class="bar masuk" id="barMasuk" style="height:5px"></div>
+                <div class="bar masuk" id="barMasuk" style="height:6px"></div>
                 <div class="bar-label">Pemasukan</div>
               </div>
               <div class="bar-item">
                 <div class="bar-value" id="labelBarKeluar">Rp 0</div>
-                <div class="bar keluar" id="barKeluar" style="height:5px"></div>
+                <div class="bar keluar" id="barKeluar" style="height:6px"></div>
                 <div class="bar-label">Pengeluaran</div>
               </div>
             </div>
@@ -696,18 +713,24 @@ body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; 
               <span><div class="dot keluar"></div> Pengeluaran</span>
             </div>
           </div>
+
           <div class="keuangan-tombol">
             <button class="btn-keuangan" onclick="bukaModalKeuangan('pemasukan')">
-              <div class="ico masuk">📥</div> Tambah Pemasukan
+              <div class="ico masuk">📥</div>
+              <span>Tambah Pemasukan</span>
             </button>
             <button class="btn-keuangan" onclick="bukaModalKeuangan('pengeluaran')">
-              <div class="ico keluar">📤</div> Tambah Pengeluaran
+              <div class="ico keluar">📤</div>
+              <span>Tambah Pengeluaran</span>
             </button>
             <button class="btn-keuangan" onclick="lihatSemuaKeuangan()">
-              <div class="ico semua">📋</div> Lihat Semua Transaksi
+              <div class="ico semua">📋</div>
+              <span>Lihat Transaksi</span>
             </button>
           </div>
-          <div class="list-data" id="listKeuangan" style="margin-top:20px"></div>
+
+          <div class="list-data" id="listKeuangan"></div>
+
         </div>
       </div>
     </div>
@@ -852,6 +875,7 @@ let hariAktif = null;
 let filterBelanja = 'belum';
 let filterRekening = 'semua';
 let daftarRekeningCustom = [];
+let rekeningHidden = [];
 let semuaRekening = [];
 const HARI_URUT = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
 function getHariIni() { return HARI_URUT[new Date().getDay()]; }
@@ -929,20 +953,46 @@ async function loadRekeningCustom() {
   try {
     const snap = await getDocs(collection(db, 'rekening_custom'));
     daftarRekeningCustom = [];
+    rekeningHidden = [];
     snap.forEach(docSnap => {
-      daftarRekeningCustom.push({ id: docSnap.id, ...docSnap.data() });
+      const data = docSnap.data();
+      if (data.hidden === true) {
+        rekeningHidden.push(data.nama);
+      } else {
+        daftarRekeningCustom.push({ id: docSnap.id, ...data });
+      }
     });
     updateSemuaRekening();
+    
+    const modalTitle = document.getElementById('modalTitle').textContent;
+    if (modalTitle.includes('Pemasukan') || modalTitle.includes('Pengeluaran')) {
+      const selectRek = document.querySelector('select[name="rekening"]');
+      if (selectRek) {
+        const currentVal = selectRek.value;
+        selectRek.innerHTML = semuaRekening.map(r => {
+          const style = getRekStyle(r);
+          return `<option value="${r}" ${r === currentVal ? 'selected' : ''}>${style.icon} ${r}</option>`;
+        }).join('');
+      }
+    }
   } catch (e) { console.error('Load rekening gagal:', e); }
 }
 
 function updateSemuaRekening() {
   const defaultRek = ['Tunai','BCA','Mandiri','BRI','BNI','BSI','CIMB','Permata','Danamon','BTN','Dana','OVO','GoPay','ShopeePay','LinkAja'];
   const customNama = daftarRekeningCustom.map(r => r.nama);
-  semuaRekening = [...defaultRek];
+  
+  semuaRekening = defaultRek.filter(r => !rekeningHidden.includes(r));
+  
   customNama.forEach(n => {
-    if (!semuaRekening.includes(n)) semuaRekening.push(n);
+    if (!semuaRekening.includes(n) && !rekeningHidden.includes(n)) {
+      semuaRekening.push(n);
+    }
   });
+  
+  console.log('📋 Rekening aktif:', semuaRekening);
+  console.log('🎨 Rekening custom:', daftarRekeningCustom);
+  console.log('🚫 Rekening hidden:', rekeningHidden);
 }
 
 window.bukaModalTambahRekening = function() {
@@ -982,27 +1032,57 @@ async function simpanRekeningBaru(e) {
   const formData = new FormData(e.target);
   const nama = (formData.get('nama_rekening') || '').trim();
   const icon = (formData.get('icon_rekening') || '🏦').trim() || '🏦';
-  const warna = formData.get('warna_rekening') || 'auto';
+  let warna = formData.get('warna_rekening') || 'auto';
 
   if (!nama) {
     showToast('❌ Nama rekening wajib diisi!', 'error');
     return;
   }
-  if (semuaRekening.includes(nama)) {
+
+  const snap = await getDocs(collection(db, 'rekening_custom'));
+  let sudahAda = false;
+  let hiddenId = null;
+  snap.forEach(docSnap => {
+    const d = docSnap.data();
+    if (d.nama.toLowerCase() === nama.toLowerCase()) {
+      if (d.hidden === true) {
+        hiddenId = docSnap.id;
+      } else {
+        sudahAda = true;
+      }
+    }
+  });
+
+  if (sudahAda) {
     showToast('⚠️ Rekening "' + nama + '" sudah ada!', 'error');
     return;
   }
 
+  if (warna === 'auto') {
+    const warnaArr = ['biru','hijau','merah','ungu','oranye','cyan','pink','abu'];
+    warna = warnaArr[Math.floor(Math.random() * warnaArr.length)];
+  }
+
   try {
-    await addDoc(collection(db, 'rekening_custom'), {
-      nama, icon, warna,
-      createdAt: serverTimestamp()
-    });
+    if (hiddenId) {
+      await updateDoc(doc(db, 'rekening_custom', hiddenId), {
+        nama, icon, warna, hidden: false,
+        updatedAt: serverTimestamp()
+      });
+    } else {
+      await addDoc(collection(db, 'rekening_custom'), {
+        nama, icon, warna, hidden: false,
+        createdAt: serverTimestamp()
+      });
+    }
+    
     showToast('✅ Rekening "' + nama + '" ditambahkan!');
     tutupModal();
+    
     await loadRekeningCustom();
     await loadKeuangan();
   } catch (err) {
+    console.error('Error tambah rekening:', err);
     showToast('❌ Gagal: ' + err.message, 'error');
   }
 }
@@ -1012,18 +1092,31 @@ window.hapusRekening = async function(namaRek) {
   try {
     const snap = await getDocs(collection(db, 'rekening_custom'));
     let deleted = false;
+    let alreadyHidden = false;
+    
     for (const docSnap of snap.docs) {
       if (docSnap.data().nama === namaRek) {
-        await deleteDoc(doc(db, 'rekening_custom', docSnap.id));
+        if (docSnap.data().hidden === true) {
+          alreadyHidden = true;
+        } else {
+          await updateDoc(doc(db, 'rekening_custom', docSnap.id), { hidden: true });
+        }
         deleted = true;
       }
     }
+    
+    if (!deleted && !alreadyHidden) {
+      await addDoc(collection(db, 'rekening_custom'), {
+        nama: namaRek, icon: '🏦', warna: 'auto',
+        hidden: true, createdAt: serverTimestamp()
+      });
+      deleted = true;
+    }
+    
     if (deleted) {
       showToast('🗑️ Rekening "' + namaRek + '" dihapus!');
-    } else {
-      showToast('⚠️ Rekening default tidak bisa dihapus', 'error');
-      return;
     }
+    
     if (filterRekening === namaRek) filterRekening = 'semua';
     await loadRekeningCustom();
     await loadKeuangan();
@@ -1064,6 +1157,7 @@ window.bukaHalaman = async function(namaMenu, el) {
       filterBulan.onchange = () => loadKeuangan();
       await loadRekeningCustom();
       await loadKeuangan();
+      await lihatSemuaKeuangan();
     } else if (namaMenu === 'arsip') {
       document.getElementById('pageTitle').textContent = '🗃️ Arsip';
       document.getElementById('menuNormal').style.display = 'block';
@@ -1976,8 +2070,8 @@ async function loadKeuangan() {
     document.getElementById('periodeKeuangan').textContent = `${namaBulan} • ${labelRek}`;
 
     const max = Math.max(masuk, keluar, 1);
-    document.getElementById('barMasuk').style.height = Math.max(5, (masuk/max) * 160) + 'px';
-    document.getElementById('barKeluar').style.height = Math.max(5, (keluar/max) * 160) + 'px';
+    document.getElementById('barMasuk').style.height = Math.max(6, (masuk/max) * 170) + 'px';
+    document.getElementById('barKeluar').style.height = Math.max(6, (keluar/max) * 170) + 'px';
     document.getElementById('labelBarMasuk').textContent = 'Rp ' + masuk.toLocaleString('id-ID');
     document.getElementById('labelBarKeluar').textContent = 'Rp ' + keluar.toLocaleString('id-ID');
 
@@ -1989,12 +2083,13 @@ async function loadKeuangan() {
         totalSemua += perRekening[k].masuk - perRekening[k].keluar;
       });
 
-      let html = `<button onclick="setFilterRekening('semua')" style="padding:8px 14px;border:2px solid ${filterRekening === 'semua' ? '#667eea' : '#e2e8f0'};background:${filterRekening === 'semua' ? 'linear-gradient(135deg,#667eea,#764ba2)' : 'white'};color:${filterRekening === 'semua' ? 'white' : '#4a5568'};border-radius:10px;font-size:12.5px;font-weight:700;cursor:pointer;white-space:nowrap;">📊 Semua (Rp ${totalSemua.toLocaleString('id-ID')})</button>`;
+      let html = `<button onclick="setFilterRekening('semua')" class="rek-filter-btn ${filterRekening === 'semua' ? 'active' : ''}">📊 Semua <span style="opacity:0.7;margin-left:4px;">(Rp ${totalSemua.toLocaleString('id-ID')})</span></button>`;
 
       listRek.forEach(rek => {
         const sld = perRekening[rek].masuk - perRekening[rek].keluar;
         const isActive = filterRekening === rek;
-        html += `<button onclick="setFilterRekening('${rek}')" style="padding:8px 14px;border:2px solid ${isActive ? '#48bb78' : '#e2e8f0'};background:${isActive ? 'linear-gradient(135deg,#48bb78,#38a169)' : 'white'};color:${isActive ? 'white' : '#4a5568'};border-radius:10px;font-size:12.5px;font-weight:700;cursor:pointer;white-space:nowrap;">🏦 ${rek} (Rp ${sld.toLocaleString('id-ID')})</button>`;
+        const styleRek = getRekStyle(rek);
+        html += `<button onclick="setFilterRekening('${rek}')" class="rek-filter-btn ${isActive ? 'active' : ''}">${styleRek.icon} ${rek} <span style="opacity:0.7;margin-left:4px;">(Rp ${sld.toLocaleString('id-ID')})</span></button>`;
       });
 
       containerRek.innerHTML = html;
@@ -2010,7 +2105,9 @@ async function loadKeuangan() {
       return sb - sa;
     });
 
-    if (countEl) countEl.textContent = `${listRekSort.length} rekening aktif`;
+    if (countEl) countEl.textContent = `${listRekSort.length} rekening tersedia`;
+    const countEl2 = document.getElementById('totalRekeningCount2');
+    if (countEl2) countEl2.textContent = `${listRekSort.length} rekening`;
 
     if (listRekSort.length === 0) {
       grid.innerHTML = `
@@ -2034,7 +2131,7 @@ async function loadKeuangan() {
       card.style.background = style.bg;
       card.style.color = 'white';
       card.style.boxShadow = isActive 
-        ? `0 15px 40px ${style.shadow}, 0 0 0 3px rgba(255,255,255,0.3)` 
+        ? `0 20px 50px ${style.shadow}, 0 0 0 3px rgba(255,255,255,0.3)` 
         : `0 8px 25px ${style.shadow}`;
 
       card.innerHTML = `
@@ -2191,7 +2288,6 @@ if ('Notification' in window && Notification.permission === 'default') {
 setInterval(cekPengingat, 5000);
 setTimeout(cekPengingat, 2000);
 
-// Load rekening custom saat halaman dibuka
 loadRekeningCustom();
 </script>
 </body>
