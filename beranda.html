@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Beranda - Dashboard HamkaHub</title>
+<title>Beranda - Dashboard Andi Raman</title>
 <style>
 * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI',Tahoma,sans-serif; -webkit-tap-highlight-color:transparent; }
 :root {
@@ -153,7 +153,6 @@ body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; 
 .keuangan-filter-bulan input[type="month"] { padding:10px 16px; border:2px solid rgba(102,126,234,0.15); border-radius:11px; font-size:13.5px; outline:none; font-family:inherit; font-weight:700; color:var(--text); background:white; cursor:pointer; flex:1; min-width:140px; max-width:220px; transition:all .3s; }
 .keuangan-filter-bulan input[type="month"]:focus { border-color:var(--primary); box-shadow:0 0 0 4px rgba(102,126,234,0.1); }
 
-/* ⭐ PANEL KELOLA REKENING */
 .keuangan-panel-rekening { background:white; padding:20px 22px; border-radius:18px; box-shadow:0 4px 20px rgba(0,0,0,0.05); border:1px solid rgba(102,126,234,0.08); position:relative; overflow:hidden; }
 .keuangan-panel-rekening::before { content:''; position:absolute; top:-60px; right:-60px; width:180px; height:180px; background:radial-gradient(circle, rgba(102,126,234,0.08) 0%, transparent 70%); border-radius:50%; pointer-events:none; }
 .keuangan-header { display:flex; justify-content:space-between; align-items:center; gap:14px; flex-wrap:wrap; margin-bottom:14px; position:relative; z-index:1; }
@@ -162,63 +161,38 @@ body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; 
 .keuangan-header-title h3 { font-size:15px; font-weight:800; color:var(--text); margin:0; line-height:1.3; letter-spacing:-0.3px; }
 .keuangan-header-title small { display:block; font-size:11.5px; color:var(--text-light); font-weight:500; margin-top:2px; }
 
-.btn-tambah-rekening { display:inline-flex; align-items:center; gap:7px; padding:10px 18px; background:linear-gradient(135deg, #667eea 0%, #764ba2 100%); color:white; border:none; border-radius:11px; font-size:13px; font-weight:800; cursor:pointer; box-shadow:0 8px 20px rgba(102,126,234,0.35); transition:all .3s cubic-bezier(0.4,0,0.2,1); white-space:nowrap; position:relative; overflow:hidden; z-index:1; }
-.btn-tambah-rekening::before { content:''; position:absolute; top:0; left:-100%; width:100%; height:100%; background:linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent); transition:left .6s; }
-.btn-tambah-rekening:hover { transform:translateY(-3px); box-shadow:0 12px 30px rgba(102,126,234,0.5); }
-.btn-tambah-rekening:hover::before { left:100%; }
+.kelola-rekening-list { display:grid; grid-template-columns:repeat(auto-fill, minmax(200px, 1fr)); gap:10px; position:relative; z-index:1; margin-top:14px; }
+.kelola-rekening-item { display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:12px; background:#f8fafc; border:2px solid #e2e8f0; transition:all .3s; min-width:0; }
+.kelola-rekening-item:hover { background:white; border-color:rgba(102,126,234,0.3); box-shadow:0 6px 20px rgba(102,126,234,0.1); }
+.kelola-rekening-item .icon-box { width:36px; height:36px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:17px; color:white; flex-shrink:0; box-shadow:0 4px 10px rgba(0,0,0,0.12); }
+.kelola-rekening-item .rekening-name { flex:1; min-width:0; font-size:13px; font-weight:700; color:var(--text); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.btn-edit-rek { width:30px; height:30px; border:none; border-radius:8px; background:#dbeafe; color:#1e40af; cursor:pointer; font-size:13px; display:flex; align-items:center; justify-content:center; flex-shrink:0; transition:all .3s; }
+.btn-edit-rek:hover { background:#bfdbfe; transform:scale(1.1); }
+.btn-hapus-rek { width:30px; height:30px; border:none; border-radius:8px; background:#fee2e2; color:#991b1b; cursor:pointer; font-size:13px; display:flex; align-items:center; justify-content:center; flex-shrink:0; transition:all .3s; }
+.btn-hapus-rek:hover { background:#fecaca; transform:scale(1.1); }
 
-/* ⭐ DAFTAR KELOLA REKENING (KOTAK) */
-.kelola-rekening-list { display:grid; grid-template-columns:repeat(auto-fill, minmax(180px, 1fr)); gap:10px; position:relative; z-index:1; margin-top:14px; }
-.kelola-rekening-item {
-  display:flex; align-items:center; gap:10px;
-  padding:12px 14px;
-  border-radius:12px;
-  background:#f8fafc;
-  border:2px solid #e2e8f0;
-  transition:all .3s;
-  min-width:0;
-}
-.kelola-rekening-item:hover {
-  background:white;
-  border-color:rgba(102,126,234,0.3);
-  box-shadow:0 6px 20px rgba(102,126,234,0.1);
-  transform:translateY(-2px);
-}
-.kelola-rekening-item .icon-box {
-  width:38px; height:38px;
-  border-radius:10px;
-  display:flex; align-items:center; justify-content:center;
-  font-size:18px; color:white;
-  flex-shrink:0;
-  box-shadow:0 4px 10px rgba(0,0,0,0.12);
-}
-.kelola-rekening-item .rekening-name {
-  flex:1; min-width:0;
-  font-size:13.5px; font-weight:700;
-  color:var(--text);
-  overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
-}
-.btn-hapus-rek {
-  width:32px; height:32px;
-  border:none; border-radius:8px;
-  background:#fee2e2; color:#991b1b;
-  cursor:pointer; font-size:14px;
-  display:flex; align-items:center; justify-content:center;
-  flex-shrink:0;
-  transition:all .3s;
-}
-.btn-hapus-rek:hover {
-  background:#fecaca;
-  transform:scale(1.1);
-}
-
-/* ⭐ KARTU REKENING (SALDO) */
-.ringkasan-rekening-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(240px, 1fr)); gap:14px; }
-.rek-card { background:white; border-radius:20px; padding:20px; box-shadow:0 8px 30px rgba(0,0,0,0.12); transition:all .4s cubic-bezier(0.4, 0, 0.2, 1); min-width:0; position:relative; overflow:hidden; border:1px solid rgba(255,255,255,0.1); }
-.rek-card::before { content:''; position:absolute; top:-60px; right:-60px; width:180px; height:180px; background:rgba(255,255,255,0.1); border-radius:50%; }
-.rek-card::after { content:''; position:absolute; bottom:-40px; left:-40px; width:120px; height:120px; background:rgba(255,255,255,0.08); border-radius:50%; }
-.rek-card:hover { transform:translateY(-6px); box-shadow:0 20px 50px rgba(0,0,0,0.2); }
-.rek-card.is-active { transform:translateY(-4px); box-shadow:0 20px 50px rgba(0,0,0,0.2); }
+/* ⭐ RIWAYAT TRANSAKSI COMPACT */
+.riwayat-container { display:none; margin-top:20px; background:white; border-radius:16px; padding:16px 18px; box-shadow:0 4px 15px rgba(0,0,0,0.05); border:1px solid rgba(102,126,234,0.08); }
+.riwayat-container.active { display:block; }
+.riwayat-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; padding-bottom:10px; border-bottom:2px solid #f1f5f9; }
+.riwayat-header h3 { font-size:14px; font-weight:800; color:var(--text); display:flex; align-items:center; gap:6px; }
+.riwayat-close { background:#fee2e2; color:#991b1b; border:none; padding:6px 12px; border-radius:8px; font-size:11.5px; font-weight:700; cursor:pointer; transition:.3s; }
+.riwayat-close:hover { background:#fecaca; }
+.riwayat-list { display:flex; flex-direction:column; gap:6px; max-height:400px; overflow-y:auto; padding-right:4px; }
+.riwayat-list::-webkit-scrollbar { width:5px; }
+.riwayat-list::-webkit-scrollbar-thumb { background:rgba(102,126,234,0.2); border-radius:10px; }
+.riwayat-item { display:flex; align-items:center; gap:10px; padding:8px 10px; border-radius:10px; background:#fafbfc; border-left:3px solid var(--green); transition:.25s; font-size:12px; min-width:0; }
+.riwayat-item:hover { background:#f1f5f9; transform:translateX(3px); }
+.riwayat-item.keluar { border-left-color:var(--red); }
+.riwayat-item .r-jenis { font-size:14px; flex-shrink:0; }
+.riwayat-item .r-info { flex:1; min-width:0; }
+.riwayat-item .r-ket { font-weight:700; color:var(--text); font-size:12px; margin-bottom:2px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.riwayat-item .r-meta { font-size:10px; color:var(--text-light); display:flex; gap:6px; flex-wrap:wrap; }
+.riwayat-item .r-meta span { background:#e2e8f0; padding:1px 6px; border-radius:8px; }
+.riwayat-item .r-jumlah { font-weight:800; font-size:12px; flex-shrink:0; color:var(--green); white-space:nowrap; }
+.riwayat-item.keluar .r-jumlah { color:var(--red); }
+.riwayat-item .btn-hapus-r { width:26px; height:26px; border:none; border-radius:7px; background:#fee2e2; color:#991b1b; cursor:pointer; font-size:12px; display:flex; align-items:center; justify-content:center; flex-shrink:0; transition:.3s; }
+.riwayat-item .btn-hapus-r:hover { background:#fecaca; }
 
 .saldo-utama { background:linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%); background-size:200% 200%; animation:gradientShift 8s ease infinite; color:white; padding:32px 34px; border-radius:24px; box-shadow:0 20px 50px rgba(102,126,234,0.4); position:relative; overflow:hidden; }
 @keyframes gradientShift { 0%,100%{background-position:0% 50%;} 50%{background-position:100% 50%;} }
@@ -231,6 +205,12 @@ body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; 
 
 .keuangan-section-title { font-size:15px; font-weight:800; color:var(--text); display:flex; justify-content:space-between; align-items:center; gap:10px; padding:0 4px; margin-top:4px; }
 .keuangan-section-title .badge-count { font-size:11.5px; font-weight:700; color:#667eea; background:linear-gradient(135deg,#e0e7ff,#c7d2fe); padding:5px 12px; border-radius:20px; box-shadow:0 2px 8px rgba(102,126,234,0.15); }
+
+.ringkasan-rekening-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(240px, 1fr)); gap:14px; }
+.rek-card { background:white; border-radius:20px; padding:20px; box-shadow:0 8px 30px rgba(0,0,0,0.12); transition:all .4s cubic-bezier(0.4, 0, 0.2, 1); min-width:0; position:relative; overflow:hidden; border:1px solid rgba(255,255,255,0.1); }
+.rek-card::before { content:''; position:absolute; top:-60px; right:-60px; width:180px; height:180px; background:rgba(255,255,255,0.1); border-radius:50%; }
+.rek-card::after { content:''; position:absolute; bottom:-40px; left:-40px; width:120px; height:120px; background:rgba(255,255,255,0.08); border-radius:50%; }
+.rek-card:hover { transform:translateY(-6px); box-shadow:0 20px 50px rgba(0,0,0,0.2); }
 
 .keuangan-grid { display:grid; grid-template-columns:repeat(2, 1fr); gap:14px; }
 .keuangan-card { background:white; padding:20px 22px; border-radius:18px; box-shadow:0 4px 20px rgba(0,0,0,0.06); border:1px solid rgba(0,0,0,0.03); min-width:0; position:relative; overflow:hidden; transition:all .35s; }
@@ -270,7 +250,6 @@ body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; 
 .filter-belanja-bar { background:white; padding:14px 18px; border-radius:14px; margin-bottom:16px; box-shadow:0 4px 20px rgba(0,0,0,0.06); display:flex; flex-wrap:wrap; gap:10px; align-items:center; justify-content:space-between; }
 .filter-belanja-btns { display:flex; gap:8px; flex-wrap:wrap; }
 
-/* Nav hari, schedule */
 .nav-hari { background:white; padding:16px 18px; border-radius:16px; box-shadow:0 8px 30px rgba(0,0,0,0.08); display:flex; justify-content:space-between; align-items:center; margin-bottom:22px; gap:12px; flex-wrap:wrap; }
 .nav-hari-info { display:flex; align-items:center; gap:14px; flex:1; min-width:200px; }
 .nav-hari-icon { width:54px; height:54px; border-radius:16px; display:flex; align-items:center; justify-content:center; font-size:26px; color:white; flex-shrink:0; }
@@ -382,7 +361,6 @@ body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; 
 }
 @media (max-width: 700px) {
   .menu-grid { grid-template-columns:repeat(2, 1fr); gap:12px; }
-  .kelola-rekening-list { grid-template-columns:repeat(2, 1fr); }
 }
 @media (max-width: 600px) {
   .content { padding:14px 12px; }
@@ -459,7 +437,6 @@ body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; 
   .keuangan-header-icon { width:36px; height:36px; font-size:16px; }
   .keuangan-header-title h3 { font-size:14px; }
   .keuangan-header-title small { font-size:10.5px; }
-  .btn-tambah-rekening { padding:9px 14px; font-size:12px; }
   .kelola-rekening-list { grid-template-columns:1fr; gap:8px; }
   .kelola-rekening-item { padding:10px 12px; }
   .kelola-rekening-item .icon-box { width:34px; height:34px; font-size:16px; }
@@ -483,6 +460,12 @@ body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; 
   .btn-keuangan .ico { width:40px; height:40px; font-size:18px; border-radius:11px; }
   .keuangan-section-title { font-size:13.5px; }
   .keuangan-section-title .badge-count { font-size:10.5px; padding:4px 10px; }
+  .riwayat-container { padding:14px; border-radius:14px; }
+  .riwayat-header h3 { font-size:13px; }
+  .riwayat-item { padding:7px 8px; font-size:11.5px; }
+  .riwayat-item .r-ket { font-size:11.5px; }
+  .riwayat-item .r-meta { font-size:9.5px; }
+  .riwayat-item .r-jumlah { font-size:11.5px; }
 }
 @media (max-width: 380px) {
   .menu-grid { grid-template-columns:repeat(2, 1fr); gap:8px; }
@@ -671,7 +654,6 @@ body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; 
       <div id="menuKeuangan" style="display:none">
         <div class="keuangan-container">
           
-          <!-- Filter Bulan -->
           <div class="keuangan-filter-bulan">
             <label>
               <span class="icon-box">📅</span>
@@ -680,24 +662,19 @@ body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; 
             <input type="month" id="filterBulanKeuangan">
           </div>
 
-          <!-- ⭐ PANEL KELOLA REKENING -->
           <div class="keuangan-panel-rekening">
             <div class="keuangan-header">
               <div class="keuangan-header-title">
                 <div class="keuangan-header-icon" style="background:linear-gradient(135deg,#667eea,#764ba2);">🏦</div>
                 <div>
                   <h3>Kelola Rekening</h3>
-                  <small id="totalRekeningCount">Semua rekening Anda</small>
+                  <small id="totalRekeningCount">Kelola rekening Anda</small>
                 </div>
               </div>
-              <button class="btn-tambah-rekening" onclick="bukaModalTambahRekening()">
-                <span style="font-size:15px;">＋</span> Tambah Rekening
-              </button>
             </div>
             <div class="kelola-rekening-list" id="kelolaRekeningList"></div>
           </div>
 
-          <!-- Total Saldo -->
           <div class="saldo-utama">
             <div class="saldo-utama-content">
               <div class="label">💰 Total Saldo (Semua Rekening)</div>
@@ -706,14 +683,12 @@ body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; 
             </div>
           </div>
 
-          <!-- Saldo Per Rekening -->
           <div class="keuangan-section-title">
             <span>💳 Saldo Setiap Rekening</span>
             <span class="badge-count" id="totalRekeningCount2">0 rekening</span>
           </div>
           <div class="ringkasan-rekening-grid" id="ringkasanRekeningGrid"></div>
 
-          <!-- Pemasukan / Pengeluaran -->
           <div class="keuangan-grid">
             <div class="keuangan-card masuk">
               <div class="label">📥 Total Pemasukan</div>
@@ -725,7 +700,6 @@ body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; 
             </div>
           </div>
 
-          <!-- Grafik -->
           <div class="grafik-mini">
             <h3>📊 Perbandingan Pemasukan & Pengeluaran</h3>
             <div class="bar-chart">
@@ -746,7 +720,6 @@ body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; 
             </div>
           </div>
 
-          <!-- Tombol Aksi -->
           <div class="keuangan-tombol">
             <button class="btn-keuangan" onclick="bukaModalKeuangan('pemasukan')">
               <div class="ico masuk">📥</div>
@@ -762,8 +735,7 @@ body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; 
             </button>
           </div>
 
-          <!-- List Transaksi -->
-          <div class="list-data" id="listKeuangan"></div>
+          <div id="listKeuangan"></div>
 
         </div>
       </div>
@@ -794,7 +766,9 @@ body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; 
     <button class="alarm-btn-stop" onclick="matikanAlarm()">🔕 Matikan Alarm</button>
   </div>
 </div>
-  
+
+<div class="toast" id="toast"></div>
+
 <script type="module">
 import { db, collection, addDoc, getDocs, doc, updateDoc, deleteDoc, query, orderBy, serverTimestamp } from './firebase.js';
 
@@ -1012,7 +986,7 @@ function updateSemuaRekening() {
   });
 }
 
-/* ⭐ RENDER KELOLA REKENING (kotak-kotak dengan tombol hapus) */
+/* ⭐ RENDER KELOLA REKENING dengan tombol EDIT & HAPUS */
 function renderKelolaRekening() {
   const container = document.getElementById('kelolaRekeningList');
   if (!container) return;
@@ -1020,7 +994,7 @@ function renderKelolaRekening() {
   if (semuaRekening.length === 0) {
     container.innerHTML = `
       <div style="grid-column:1/-1;text-align:center;padding:20px;color:#a0aec0;font-size:13px;">
-        Belum ada rekening. Klik "+ Tambah Rekening" untuk membuat.
+        Belum ada rekening.
       </div>
     `;
     return;
@@ -1034,10 +1008,123 @@ function renderKelolaRekening() {
     item.innerHTML = `
       <div class="icon-box" style="background:${style.bg};">${style.icon}</div>
       <div class="rekening-name">${escapeHtml(rek)}</div>
+      <button class="btn-edit-rek" onclick="editRekeningFromKelola('${rek}')" title="Edit rekening">✏️</button>
       <button class="btn-hapus-rek" onclick="hapusRekeningFromKelola('${rek}')" title="Hapus rekening">🗑️</button>
     `;
     container.appendChild(item);
   });
+}
+
+/* ⭐ EDIT REKENING dari PANEL KELOLA */
+window.editRekeningFromKelola = function(namaLama) {
+  currentMenu = 'keuangan';
+  editId = null;
+  
+  const custom = daftarRekeningCustom.find(r => r.nama === namaLama);
+  const isCustom = custom ? true : false;
+  
+  const warnaSekarang = isCustom ? (custom.warna || 'auto') : 'auto';
+  const iconSekarang = isCustom ? (custom.icon || '🏦') : '🏦';
+  
+  document.getElementById('modalTitle').textContent = '✏️ Edit Rekening';
+  const formFields = document.getElementById('formFields');
+  formFields.innerHTML = `
+    <input type="hidden" name="nama_lama" value="${escapeHtml(namaLama)}">
+    <input type="hidden" name="is_custom" value="${isCustom ? 'true' : 'false'}">
+    <div class="form-group">
+      <label>Nama Rekening / Bank *</label>
+      <input type="text" name="nama_rekening" value="${escapeHtml(namaLama)}" required>
+    </div>
+    <div class="form-group">
+      <label>Icon (emoji, opsional)</label>
+      <input type="text" name="icon_rekening" value="${iconSekarang}" maxlength="4" placeholder="🏦">
+    </div>
+    <div class="form-group">
+      <label>Warna</label>
+      <select name="warna_rekening">
+        <option value="auto" ${warnaSekarang === 'auto' ? 'selected' : ''}>🎨 Otomatis</option>
+        <option value="biru" ${warnaSekarang === 'biru' ? 'selected' : ''}>🔵 Biru</option>
+        <option value="hijau" ${warnaSekarang === 'hijau' ? 'selected' : ''}>🟢 Hijau</option>
+        <option value="merah" ${warnaSekarang === 'merah' ? 'selected' : ''}>🔴 Merah</option>
+        <option value="ungu" ${warnaSekarang === 'ungu' ? 'selected' : ''}>🟣 Ungu</option>
+        <option value="oranye" ${warnaSekarang === 'oranye' ? 'selected' : ''}>🟠 Oranye</option>
+        <option value="cyan" ${warnaSekarang === 'cyan' ? 'selected' : ''}>💠 Cyan</option>
+        <option value="pink" ${warnaSekarang === 'pink' ? 'selected' : ''}>🌸 Pink</option>
+        <option value="abu" ${warnaSekarang === 'abu' ? 'selected' : ''}>⚫ Abu-abu</option>
+      </select>
+    </div>
+  `;
+  document.getElementById('modal').classList.add('active');
+};
+
+/* ⭐ SIMPAN EDIT REKENING */
+async function simpanEditRekening(e, namaLama) {
+  e.preventDefault();
+  const formData = new FormData(e.target);
+  const namaBaru = (formData.get('nama_rekening') || '').trim();
+  const iconBaru = (formData.get('icon_rekening') || '🏦').trim() || '🏦';
+  let warnaBaru = formData.get('warna_rekening') || 'auto';
+
+  if (!namaBaru) {
+    showToast('❌ Nama rekening wajib diisi!', 'error');
+    return;
+  }
+
+  if (warnaBaru === 'auto') {
+    const warnaArr = ['biru','hijau','merah','ungu','oranye','cyan','pink','abu'];
+    warnaBaru = warnaArr[Math.floor(Math.random() * warnaArr.length)];
+  }
+
+  try {
+    const snap = await getDocs(collection(db, 'rekening_custom'));
+    let foundId = null;
+    
+    for (const docSnap of snap.docs) {
+      if (docSnap.data().nama.toLowerCase() === namaLama.toLowerCase()) {
+        foundId = docSnap.id;
+        break;
+      }
+    }
+
+    if (foundId) {
+      await updateDoc(doc(db, 'rekening_custom', foundId), {
+        nama: namaBaru,
+        icon: iconBaru,
+        warna: warnaBaru,
+        updatedAt: serverTimestamp()
+      });
+    } else {
+      // Buat record baru (kalau ini rekening default)
+      await addDoc(collection(db, 'rekening_custom'), {
+        nama: namaBaru,
+        icon: iconBaru,
+        warna: warnaBaru,
+        hidden: false,
+        originalName: namaLama,
+        createdAt: serverTimestamp()
+      });
+
+      // Sembunyikan nama lama kalau beda
+      if (namaBaru.toLowerCase() !== namaLama.toLowerCase()) {
+        await addDoc(collection(db, 'rekening_custom'), {
+          nama: namaLama,
+          icon: '🏦',
+          warna: 'auto',
+          hidden: true,
+          replacedBy: namaBaru,
+          createdAt: serverTimestamp()
+        });
+      }
+    }
+
+    showToast('✅ Rekening berhasil diubah!');
+    tutupModal();
+    await loadRekeningCustom();
+    await loadKeuangan();
+  } catch (err) {
+    console.error('Error edit rekening:', err);
+    showToast('❌ Gagal: ' + err.message, 'error');
+  }
 }
 
 /* ⭐ HAPUS REKENING dari PANEL KELOLA */
@@ -1069,7 +1156,78 @@ window.hapusRekeningFromKelola = async function(namaRek) {
     
     await loadRekeningCustom();
     await loadKeuangan();
-    await lihatSemuaKeuangan();
+    
+  } catch (e) {
+    showToast('❌ Gagal: ' + e.message, 'error');
+  }
+};
+
+/* ⭐ HAPUS REKENING dari KARTU SALDO */
+window.hapusRekeningKartu = async function(namaRek) {
+  if (!confirm(`Hapus rekening "${namaRek}"?\n\nRekening ini akan hilang dari semua daftar.`)) return;
+  
+  try {
+    const snap = await getDocs(collection(db, 'rekening_custom'));
+    let found = false;
+    
+    for (const docSnap of snap.docs) {
+      const d = docSnap.data();
+      if (d.nama.toLowerCase() === namaRek.toLowerCase()) {
+        await updateDoc(doc(db, 'rekening_custom', docSnap.id), { hidden: true });
+        found = true;
+      }
+    }
+    
+    if (!found) {
+      await addDoc(collection(db, 'rekening_custom'), {
+        nama: namaRek, icon: '🏦', warna: 'auto',
+        hidden: true, createdAt: serverTimestamp()
+      });
+    }
+    
+    showToast('🗑️ Rekening "' + namaRek + '" dihapus!');
+    
+    if (filterRekening === namaRek) filterRekening = 'semua';
+    
+    await loadRekeningCustom();
+    await loadKeuangan();
+    
+  } catch (e) {
+    showToast('❌ Gagal: ' + e.message, 'error');
+  }
+};
+
+window.hapusRekeningDariModal = async function(namaRek, jenis) {
+  if (!confirm(`Hapus rekening "${namaRek}" dari daftar?`)) return;
+  
+  try {
+    const snap = await getDocs(collection(db, 'rekening_custom'));
+    let found = false;
+    
+    for (const docSnap of snap.docs) {
+      const d = docSnap.data();
+      if (d.nama.toLowerCase() === namaRek.toLowerCase()) {
+        await updateDoc(doc(db, 'rekening_custom', docSnap.id), { hidden: true });
+        found = true;
+      }
+    }
+    
+    if (!found) {
+      await addDoc(collection(db, 'rekening_custom'), {
+        nama: namaRek, icon: '🏦', warna: 'auto',
+        hidden: true, createdAt: serverTimestamp()
+      });
+    }
+    
+    showToast('🗑️ Rekening "' + namaRek + '" dihapus!');
+    
+    await loadRekeningCustom();
+    
+    if (currentMenu === 'keuangan' && document.getElementById('modal').classList.contains('active')) {
+      renderOpsiRekening(jenis);
+    }
+    
+    await loadKeuangan();
     
   } catch (e) {
     showToast('❌ Gagal: ' + e.message, 'error');
@@ -1168,80 +1326,6 @@ async function simpanRekeningBaru(e) {
   }
 }
 
-/* ⭐ HAPUS REKENING dari KARTU SALDO */
-window.hapusRekeningKartu = async function(namaRek) {
-  if (!confirm(`Hapus rekening "${namaRek}"?\n\nRekening ini akan hilang dari semua daftar.`)) return;
-  
-  try {
-    const snap = await getDocs(collection(db, 'rekening_custom'));
-    let found = false;
-    
-    for (const docSnap of snap.docs) {
-      const d = docSnap.data();
-      if (d.nama.toLowerCase() === namaRek.toLowerCase()) {
-        await updateDoc(doc(db, 'rekening_custom', docSnap.id), { hidden: true });
-        found = true;
-      }
-    }
-    
-    if (!found) {
-      await addDoc(collection(db, 'rekening_custom'), {
-        nama: namaRek, icon: '🏦', warna: 'auto',
-        hidden: true, createdAt: serverTimestamp()
-      });
-    }
-    
-    showToast('🗑️ Rekening "' + namaRek + '" dihapus!');
-    
-    if (filterRekening === namaRek) filterRekening = 'semua';
-    
-    await loadRekeningCustom();
-    await loadKeuangan();
-    await lihatSemuaKeuangan();
-    
-  } catch (e) {
-    showToast('❌ Gagal: ' + e.message, 'error');
-  }
-};
-
-window.hapusRekeningDariModal = async function(namaRek, jenis) {
-  if (!confirm(`Hapus rekening "${namaRek}" dari daftar?`)) return;
-  
-  try {
-    const snap = await getDocs(collection(db, 'rekening_custom'));
-    let found = false;
-    
-    for (const docSnap of snap.docs) {
-      const d = docSnap.data();
-      if (d.nama.toLowerCase() === namaRek.toLowerCase()) {
-        await updateDoc(doc(db, 'rekening_custom', docSnap.id), { hidden: true });
-        found = true;
-      }
-    }
-    
-    if (!found) {
-      await addDoc(collection(db, 'rekening_custom'), {
-        nama: namaRek, icon: '🏦', warna: 'auto',
-        hidden: true, createdAt: serverTimestamp()
-      });
-    }
-    
-    showToast('🗑️ Rekening "' + namaRek + '" dihapus!');
-    
-    await loadRekeningCustom();
-    
-    if (currentMenu === 'keuangan' && document.getElementById('modal').classList.contains('active')) {
-      renderOpsiRekening(jenis);
-    }
-    
-    await loadKeuangan();
-    await lihatSemuaKeuangan();
-    
-  } catch (e) {
-    showToast('❌ Gagal: ' + e.message, 'error');
-  }
-};
-
 window.bukaHalaman = async function(namaMenu, el) {
   try {
     if (el) {
@@ -1273,7 +1357,6 @@ window.bukaHalaman = async function(namaMenu, el) {
       filterBulan.onchange = () => loadKeuangan();
       await loadRekeningCustom();
       await loadKeuangan();
-      await lihatSemuaKeuangan();
     } else if (namaMenu === 'arsip') {
       document.getElementById('pageTitle').textContent = '🗃️ Arsip';
       document.getElementById('menuNormal').style.display = 'block';
@@ -1476,7 +1559,6 @@ window.setFilterBelanja = function(f) {
 window.setFilterRekening = function(rek) {
   filterRekening = rek;
   loadKeuangan();
-  lihatSemuaKeuangan();
 };
 
 window.hapusYangSudahDibeli = async function() {
@@ -1863,8 +1945,16 @@ function renderOpsiRekening(jenis) {
 window.simpanData = async function(e) {
   e.preventDefault();
 
-  const modalTitle = document.getElementById('modalTitle').textContent;
-  if (modalTitle.includes('Tambah Rekening')) {
+  const modalTitleCheck = document.getElementById('modalTitle').textContent;
+  
+  // ⭐ Cek kalau ini form edit rekening
+  if (modalTitleCheck.includes('Edit Rekening')) {
+    const formDataCheck = new FormData(e.target);
+    const namaLama = formDataCheck.get('nama_lama');
+    return simpanEditRekening(e, namaLama);
+  }
+
+  if (modalTitleCheck.includes('Tambah Rekening')) {
     return simpanRekeningBaru(e);
   }
 
@@ -1906,7 +1996,6 @@ window.simpanData = async function(e) {
     if (currentMenu === 'jadwal') await tampilkanJadwal(currentTab);
     else if (currentMenu === 'keuangan') {
       await loadKeuangan();
-      await lihatSemuaKeuangan();
     }
     else await tampilkanData(koleksi, currentTab);
   } catch (error) {
@@ -2119,9 +2208,28 @@ window.hapusSemuaArsip = async function() {
   }
 };
 
+/* ⭐ LIHAT TRANSAKSI - TOGGLE + COMPACT */
 window.lihatSemuaKeuangan = async function() {
   const listEl = document.getElementById('listKeuangan');
-  listEl.innerHTML = '<div class="empty-state"><div class="icon-big">⏳</div>Memuat...</div>';
+  
+  // Toggle: kalau sudah tampil, tutup
+  if (listEl.classList.contains('riwayat-container') && listEl.classList.contains('active')) {
+    listEl.classList.remove('active');
+    listEl.innerHTML = '';
+    return;
+  }
+
+  listEl.className = 'riwayat-container active';
+  listEl.innerHTML = `
+    <div class="riwayat-header">
+      <h3>📋 Riwayat Transaksi</h3>
+      <button class="riwayat-close" onclick="tutupRiwayat()">✕ Tutup</button>
+    </div>
+    <div class="riwayat-list" id="riwayatList">
+      <div style="text-align:center;padding:20px;color:#a0aec0;font-size:12px;">⏳ Memuat...</div>
+    </div>
+  `;
+
   try {
     const snap = await getDocs(query(collection(db, 'transaksi'), orderBy('createdAt', 'desc')));
     let items = [];
@@ -2135,41 +2243,52 @@ window.lihatSemuaKeuangan = async function() {
       items = items.filter(i => (i.rekening || 'Tunai') === filterRekening);
     }
 
+    const listContainer = document.getElementById('riwayatList');
+    
     if (items.length === 0) {
-      listEl.innerHTML = '<div class="empty-state"><div class="icon-big">📭</div><p>Belum ada transaksi.</p></div>';
+      listContainer.innerHTML = '<div style="text-align:center;padding:20px;color:#a0aec0;font-size:12px;">📭 Belum ada transaksi</div>';
       return;
     }
 
-    listEl.innerHTML = '';
+    listContainer.innerHTML = '';
     items.forEach(d => {
       const id = d.id;
       const isMasuk = d.jenis === 'pemasukan';
       const item = document.createElement('div');
-      item.className = 'list-item';
-      item.style.borderLeftColor = isMasuk ? 'var(--green)' : 'var(--red)';
+      item.className = 'riwayat-item' + (isMasuk ? '' : ' keluar');
       item.innerHTML = `
-        <div class="list-item-info">
-          <h4>${isMasuk ? '📥' : '📤'} ${escapeHtml(d.keterangan || '-')}</h4>
-          <p style="color:${isMasuk ? 'var(--green)' : 'var(--red)'};font-weight:700">${isMasuk ? '+' : '-'} Rp ${Number(d.jumlah || 0).toLocaleString('id-ID')}</p>
-          <div style="margin-top:5px;font-size:11.5px;color:#718096;display:flex;flex-wrap:wrap;gap:6px;">
-            <span style="background:#e0e7ff;color:#3730a3;padding:2px 8px;border-radius:20px;font-weight:600;">🏦 ${d.rekening || 'Tunai'}</span>
+        <div class="r-jenis">${isMasuk ? '📥' : '📤'}</div>
+        <div class="r-info">
+          <div class="r-ket">${escapeHtml(d.keterangan || '-')}</div>
+          <div class="r-meta">
+            <span>🏦 ${escapeHtml(d.rekening || 'Tunai')}</span>
             <span>📅 ${d.tanggal || '-'}</span>
-            <span>🏷️ ${d.kategori || 'Umum'}</span>
           </div>
         </div>
-        <div class="list-item-actions"><button class="btn-icon btn-hapus" title="Pindah ke Arsip">🗑️</button></div>
+        <div class="r-jumlah">${isMasuk ? '+' : '-'}Rp ${Number(d.jumlah || 0).toLocaleString('id-ID')}</div>
+        <button class="btn-hapus-r" title="Pindah ke Arsip">🗑️</button>
       `;
-      item.querySelector('.btn-hapus').onclick = async () => {
+      item.querySelector('.btn-hapus-r').onclick = async () => {
         if (confirm('Pindahkan transaksi ke Arsip?')) {
           await softDelete('transaksi', id, d, d.keterangan || 'Transaksi');
           showToast('🗑️ Dipindahkan ke Arsip!');
           await loadKeuangan();
+          listEl.classList.remove('active');
+          listEl.innerHTML = '';
           await lihatSemuaKeuangan();
         }
       };
-      listEl.appendChild(item);
+      listContainer.appendChild(item);
     });
-  } catch (e) { listEl.innerHTML = `<div class="empty-state">❌ ${e.message}</div>`; }
+  } catch (e) {
+    document.getElementById('riwayatList').innerHTML = `<div style="text-align:center;padding:20px;color:#e53e3e;font-size:12px;">❌ ${e.message}</div>`;
+  }
+};
+
+window.tutupRiwayat = function() {
+  const listEl = document.getElementById('listKeuangan');
+  listEl.classList.remove('active');
+  listEl.innerHTML = '';
 };
 
 async function loadKeuangan() {
@@ -2413,5 +2532,3 @@ loadRekeningCustom();
 </script>
 </body>
 </html>
-
-<div class="toast" id="toast"></div>
