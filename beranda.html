@@ -459,7 +459,6 @@ body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; 
   .filter-belanja-btns { gap:6px; }
   .filter-belanja-btns button { padding:7px 10px !important; font-size:11px !important; }
   .rek-card { padding: 14px; border-radius: 16px; }
-  .rek-card .rek-total-besar { font-size: 20px; }
 }
 @media (max-width: 380px) {
   .menu-grid { grid-template-columns:repeat(2, 1fr); gap:8px; }
@@ -649,7 +648,13 @@ body { background:var(--bg); color:var(--text); min-height:100vh; display:flex; 
             <label>📅 Pilih Bulan:</label>
             <input type="month" id="filterBulanKeuangan">
           </div>
-          <div id="filterRekeningContainer" style="background:white;padding:14px 16px;border-radius:14px;box-shadow:var(--shadow);display:flex;gap:8px;overflow-x:auto;flex-wrap:wrap;-webkit-overflow-scrolling:touch;"></div>
+          <div style="background:white;padding:14px 16px;border-radius:14px;box-shadow:var(--shadow);">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px;">
+              <span style="font-size:13px;font-weight:700;color:var(--text);">🏦 Pilih Rekening</span>
+              <button onclick="bukaModalTambahRekening()" style="padding:7px 14px;border:none;background:linear-gradient(135deg,#667eea,#764ba2);color:white;border-radius:10px;font-size:12px;font-weight:700;cursor:pointer;box-shadow:0 4px 12px rgba(102,126,234,0.3);">+ Tambah Rekening</button>
+            </div>
+            <div id="filterRekeningContainer" style="display:flex;gap:8px;overflow-x:auto;flex-wrap:wrap;-webkit-overflow-scrolling:touch;"></div>
+          </div>
           <div class="saldo-utama">
             <div class="label">💰 Total Saldo (Semua Rekening)</div>
             <div class="amount" id="saldoBulan">Rp 0</div>
@@ -846,11 +851,23 @@ let editId = null;
 let hariAktif = null;
 let filterBelanja = 'belum';
 let filterRekening = 'semua';
+let daftarRekeningCustom = [];
+let semuaRekening = [];
 const HARI_URUT = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
 function getHariIni() { return HARI_URUT[new Date().getDay()]; }
 
-// Style per rekening
-const REK_STYLE = {
+const WARNA_CUSTOM = {
+  'biru':   { bg: 'linear-gradient(135deg,#1e40af,#1e3a8a)', shadow: 'rgba(30,64,175,0.35)' },
+  'hijau':  { bg: 'linear-gradient(135deg,#16a34a,#15803d)', shadow: 'rgba(22,163,74,0.35)' },
+  'merah':  { bg: 'linear-gradient(135deg,#dc2626,#991b1b)', shadow: 'rgba(220,38,38,0.35)' },
+  'ungu':   { bg: 'linear-gradient(135deg,#7c3aed,#6d28d9)', shadow: 'rgba(124,58,237,0.35)' },
+  'oranye': { bg: 'linear-gradient(135deg,#ea580c,#c2410c)', shadow: 'rgba(234,88,12,0.35)' },
+  'cyan':   { bg: 'linear-gradient(135deg,#0ea5e9,#0284c7)', shadow: 'rgba(14,165,233,0.35)' },
+  'pink':   { bg: 'linear-gradient(135deg,#ec4899,#be185d)', shadow: 'rgba(236,72,153,0.35)' },
+  'abu':    { bg: 'linear-gradient(135deg,#64748b,#475569)', shadow: 'rgba(100,116,139,0.35)' }
+};
+
+const REK_STYLE_DEFAULT = {
   'Tunai':      { icon: '💵', bg: 'linear-gradient(135deg,#48bb78,#38a169)', shadow: 'rgba(72,187,120,0.35)' },
   'BCA':        { icon: '🏦', bg: 'linear-gradient(135deg,#1e40af,#1e3a8a)', shadow: 'rgba(30,64,175,0.35)' },
   'Mandiri':    { icon: '🏦', bg: 'linear-gradient(135deg,#0369a1,#075985)', shadow: 'rgba(3,105,161,0.35)' },
@@ -865,9 +882,18 @@ const REK_STYLE = {
   'OVO':        { icon: '📱', bg: 'linear-gradient(135deg,#7c3aed,#6d28d9)', shadow: 'rgba(124,58,237,0.35)' },
   'GoPay':      { icon: '📱', bg: 'linear-gradient(135deg,#0ea5e9,#0369a1)', shadow: 'rgba(14,165,233,0.35)' },
   'ShopeePay':  { icon: '📱', bg: 'linear-gradient(135deg,#f97316,#ea580c)', shadow: 'rgba(249,115,22,0.35)' },
-  'LinkAja':    { icon: '📱', bg: 'linear-gradient(135deg,#dc2626,#b91c1c)', shadow: 'rgba(220,38,38,0.35)' },
-  'Lainnya':    { icon: '📝', bg: 'linear-gradient(135deg,#64748b,#475569)', shadow: 'rgba(100,116,139,0.35)' }
+  'LinkAja':    { icon: '📱', bg: 'linear-gradient(135deg,#dc2626,#b91c1c)', shadow: 'rgba(220,38,38,0.35)' }
 };
+
+function getRekStyle(rek) {
+  if (REK_STYLE_DEFAULT[rek]) return REK_STYLE_DEFAULT[rek];
+  const custom = daftarRekeningCustom.find(r => r.nama === rek);
+  if (custom) {
+    const warna = WARNA_CUSTOM[custom.warna] || WARNA_CUSTOM['abu'];
+    return { icon: custom.icon || '🏦', bg: warna.bg, shadow: warna.shadow };
+  }
+  return { icon: '🏦', bg: 'linear-gradient(135deg,#64748b,#475569)', shadow: 'rgba(100,116,139,0.35)' };
+}
 
 const toast = document.getElementById('toast');
 window.showToast = function(msg, type='success') {
@@ -899,6 +925,114 @@ async function softDelete(koleksi, id, data, label) {
   }
 }
 
+async function loadRekeningCustom() {
+  try {
+    const snap = await getDocs(collection(db, 'rekening_custom'));
+    daftarRekeningCustom = [];
+    snap.forEach(docSnap => {
+      daftarRekeningCustom.push({ id: docSnap.id, ...docSnap.data() });
+    });
+    updateSemuaRekening();
+  } catch (e) { console.error('Load rekening gagal:', e); }
+}
+
+function updateSemuaRekening() {
+  const defaultRek = ['Tunai','BCA','Mandiri','BRI','BNI','BSI','CIMB','Permata','Danamon','BTN','Dana','OVO','GoPay','ShopeePay','LinkAja'];
+  const customNama = daftarRekeningCustom.map(r => r.nama);
+  semuaRekening = [...defaultRek];
+  customNama.forEach(n => {
+    if (!semuaRekening.includes(n)) semuaRekening.push(n);
+  });
+}
+
+window.bukaModalTambahRekening = function() {
+  currentMenu = 'keuangan';
+  editId = null;
+  document.getElementById('modalTitle').textContent = '🏦 Tambah Rekening Baru';
+  const formFields = document.getElementById('formFields');
+  formFields.innerHTML = `
+    <div class="form-group">
+      <label>Nama Rekening / Bank *</label>
+      <input type="text" name="nama_rekening" required placeholder="Contoh: Jenius, Blu BCA, Kartu Kredit...">
+    </div>
+    <div class="form-group">
+      <label>Icon (emoji, opsional)</label>
+      <input type="text" name="icon_rekening" placeholder="Contoh: 🏦 atau 💳 (default: 🏦)" maxlength="4">
+    </div>
+    <div class="form-group">
+      <label>Warna (opsional)</label>
+      <select name="warna_rekening">
+        <option value="auto">🎨 Otomatis</option>
+        <option value="biru">🔵 Biru</option>
+        <option value="hijau">🟢 Hijau</option>
+        <option value="merah">🔴 Merah</option>
+        <option value="ungu">🟣 Ungu</option>
+        <option value="oranye">🟠 Oranye</option>
+        <option value="cyan">💠 Cyan</option>
+        <option value="pink">🌸 Pink</option>
+        <option value="abu">⚫ Abu-abu</option>
+      </select>
+    </div>
+  `;
+  document.getElementById('modal').classList.add('active');
+};
+
+async function simpanRekeningBaru(e) {
+  e.preventDefault();
+  const formData = new FormData(e.target);
+  const nama = (formData.get('nama_rekening') || '').trim();
+  const icon = (formData.get('icon_rekening') || '🏦').trim() || '🏦';
+  const warna = formData.get('warna_rekening') || 'auto';
+
+  if (!nama) {
+    showToast('❌ Nama rekening wajib diisi!', 'error');
+    return;
+  }
+  if (semuaRekening.includes(nama)) {
+    showToast('⚠️ Rekening "' + nama + '" sudah ada!', 'error');
+    return;
+  }
+
+  try {
+    await addDoc(collection(db, 'rekening_custom'), {
+      nama, icon, warna,
+      createdAt: serverTimestamp()
+    });
+    showToast('✅ Rekening "' + nama + '" ditambahkan!');
+    tutupModal();
+    await loadRekeningCustom();
+    await loadKeuangan();
+  } catch (err) {
+    showToast('❌ Gagal: ' + err.message, 'error');
+  }
+}
+
+window.hapusRekening = async function(namaRek) {
+  if (!confirm(`Hapus rekening "${namaRek}"?\n\nTransaksi lama dengan rekening ini akan tetap ada, tapi tidak bisa difilter lagi.`)) return;
+  try {
+    const snap = await getDocs(collection(db, 'rekening_custom'));
+    let deleted = false;
+    for (const docSnap of snap.docs) {
+      if (docSnap.data().nama === namaRek) {
+        await deleteDoc(doc(db, 'rekening_custom', docSnap.id));
+        deleted = true;
+      }
+    }
+    if (deleted) {
+      showToast('🗑️ Rekening "' + namaRek + '" dihapus!');
+    } else {
+      showToast('⚠️ Rekening default tidak bisa dihapus', 'error');
+      return;
+    }
+    if (filterRekening === namaRek) filterRekening = 'semua';
+    await loadRekeningCustom();
+    await loadKeuangan();
+    await lihatSemuaKeuangan();
+  } catch (e) {
+    showToast('❌ Gagal: ' + e.message, 'error');
+  }
+};
+
 window.bukaHalaman = async function(namaMenu, el) {
   try {
     if (el) {
@@ -928,6 +1062,7 @@ window.bukaHalaman = async function(namaMenu, el) {
       const filterBulan = document.getElementById('filterBulanKeuangan');
       if (!filterBulan.value) filterBulan.value = today;
       filterBulan.onchange = () => loadKeuangan();
+      await loadRekeningCustom();
       await loadKeuangan();
     } else if (namaMenu === 'arsip') {
       document.getElementById('pageTitle').textContent = '🗃️ Arsip';
@@ -1470,6 +1605,12 @@ document.getElementById('modal').addEventListener('click', function(e) {
 
 window.simpanData = async function(e) {
   e.preventDefault();
+
+  const modalTitle = document.getElementById('modalTitle').textContent;
+  if (modalTitle.includes('Tambah Rekening')) {
+    return simpanRekeningBaru(e);
+  }
+
   if (!currentMenu) return;
   const formData = new FormData(e.target);
   const data = {};
@@ -1726,28 +1867,17 @@ window.bukaModalKeuangan = function(jenis) {
   editId = null;
   document.getElementById('modalTitle').textContent = jenis === 'pemasukan' ? '📥 Pemasukan' : '📤 Pengeluaran';
   const formFields = document.getElementById('formFields');
+  
+  const opsiRekening = semuaRekening.map(r => {
+    const style = getRekStyle(r);
+    return `<option value="${r}">${style.icon} ${r}</option>`;
+  }).join('');
+  
   formFields.innerHTML = `
     <input type="hidden" name="jenis" value="${jenis}">
     <div class="form-group">
       <label>Rekening / Tujuan *</label>
-      <select name="rekening" required>
-        <option value="Tunai">💵 Tunai</option>
-        <option value="BCA">🏦 BCA</option>
-        <option value="Mandiri">🏦 Mandiri</option>
-        <option value="BRI">🏦 BRI</option>
-        <option value="BNI">🏦 BNI</option>
-        <option value="BSI">🏦 BSI</option>
-        <option value="CIMB">🏦 CIMB Niaga</option>
-        <option value="Permata">🏦 Permata</option>
-        <option value="Danamon">🏦 Danamon</option>
-        <option value="BTN">🏦 BTN</option>
-        <option value="Dana">📱 DANA</option>
-        <option value="OVO">📱 OVO</option>
-        <option value="GoPay">📱 GoPay</option>
-        <option value="ShopeePay">📱 ShopeePay</option>
-        <option value="LinkAja">📱 LinkAja</option>
-        <option value="Lainnya">📝 Lainnya</option>
-      </select>
+      <select name="rekening" required>${opsiRekening}</select>
     </div>
     <div class="form-group"><label>Keterangan *</label><input type="text" name="keterangan" required placeholder="Contoh: Gaji bulanan..."></div>
     <div class="form-group"><label>Jumlah (Rp) *</label><input type="text" name="jumlah" required placeholder="Contoh: 800000" class="input-currency" inputmode="numeric"></div>
@@ -1851,7 +1981,6 @@ async function loadKeuangan() {
     document.getElementById('labelBarMasuk').textContent = 'Rp ' + masuk.toLocaleString('id-ID');
     document.getElementById('labelBarKeluar').textContent = 'Rp ' + keluar.toLocaleString('id-ID');
 
-    // Render filter rekening buttons
     const containerRek = document.getElementById('filterRekeningContainer');
     if (containerRek) {
       const listRek = Object.keys(perRekening).sort();
@@ -1871,7 +2000,6 @@ async function loadKeuangan() {
       containerRek.innerHTML = html;
     }
 
-    // Render kartu per rekening
     const grid = document.getElementById('ringkasanRekeningGrid');
     const countEl = document.getElementById('totalRekeningCount');
     if (!grid) return;
@@ -1898,7 +2026,7 @@ async function loadKeuangan() {
     listRekSort.forEach(rek => {
       const data = perRekening[rek];
       const sld = data.masuk - data.keluar;
-      const style = REK_STYLE[rek] || REK_STYLE['Lainnya'];
+      const style = getRekStyle(rek);
       const isActive = filterRekening === rek;
 
       const card = document.createElement('div');
@@ -1911,12 +2039,13 @@ async function loadKeuangan() {
 
       card.innerHTML = `
         <div class="rek-card-click" onclick="setFilterRekening('${rek}')"></div>
+        <button onclick="event.stopPropagation(); hapusRekening('${rek}')" style="position:absolute;top:10px;right:10px;z-index:5;background:rgba(255,255,255,0.25);border:1px solid rgba(255,255,255,0.4);color:white;width:28px;height:28px;border-radius:8px;cursor:pointer;font-size:13px;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(10px);transition:.3s;" onmouseover="this.style.background='rgba(220,38,38,0.6)'" onmouseout="this.style.background='rgba(255,255,255,0.25)'" title="Hapus rekening">🗑️</button>
         <div style="position:relative;z-index:2;pointer-events:none;">
           <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
             <div style="width:42px;height:42px;border-radius:12px;background:rgba(255,255,255,0.25);display:flex;align-items:center;justify-content:center;font-size:20px;backdrop-filter:blur(10px);">
               ${style.icon}
             </div>
-            <div style="min-width:0;flex:1;">
+            <div style="min-width:0;flex:1;padding-right:30px;">
               <div style="font-size:15px;font-weight:800;letter-spacing:-0.3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${escapeHtml(rek)}</div>
               <div style="font-size:10px;opacity:0.8;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;">Saldo Rekening</div>
             </div>
@@ -2061,6 +2190,9 @@ if ('Notification' in window && Notification.permission === 'default') {
 
 setInterval(cekPengingat, 5000);
 setTimeout(cekPengingat, 2000);
+
+// Load rekening custom saat halaman dibuka
+loadRekeningCustom();
 </script>
 </body>
 </html>
